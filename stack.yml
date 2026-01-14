@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+
+  sql-server:
+    image: sql-server-with-tools
+    environment:
+      - TZ=Asia/Baghdad
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 15s
+        max_attempts: 3
+        window: 120s
+    env_file: ../../../_env/sql-server.env
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver:/var/opt/mssql
+    networks:
+      - backend-network
+
+  sikalaty-api-service:
+    image: sikalaty-api-service
+    depends_on:
+      - sql-server
+    environment:
+      - TZ=Asia/Baghdad
+    ports:
+      - published: 8005
+        target: 8005
+        mode: host
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 15s
+        max_attempts: 3
+        window: 120s
+    env_file: ../../../_env/sikalaty-api-service.env
+    volumes:
+      - resources:/app/Resources
+    networks:
+      - backend-network
+
+volumes:
+  sqlserver: {}
+  resources: {}
+
+networks:
+  backend-network:
+    driver: overlay

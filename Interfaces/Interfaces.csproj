@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackAsTool>false</PackAsTool>
+        <IsPackable>true</IsPackable>
+        <TemplateVisible>true</TemplateVisible>
+        <TemplateName>NoonNewProject</TemplateName>
+        <TemplateDescription>This template used for Noon co. new projects</TemplateDescription>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.1.66"/>
+        <PackageReference Include="FluentMigrator.Runner" Version="7.1.0"/>
+        <PackageReference Include="NLog" Version="5.5.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Entities\Entities.csproj"/>
+        <ProjectReference Include="..\Shared\Shared.csproj"/>
+    </ItemGroup>
+
+</Project>
