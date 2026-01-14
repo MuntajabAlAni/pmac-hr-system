@@ -10,6 +10,7 @@ public class MapperConfig
         {
             mc.AddProfile(new UserProfile());
             mc.AddProfile(new PermissionProfile());
+            mc.AddProfile(new EmployeeProfile());
         });
 
         return mappingConfig.CreateMapper();

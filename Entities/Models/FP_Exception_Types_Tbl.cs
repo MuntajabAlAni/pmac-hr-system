@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace HRN.Models
+namespace Entities.Models
 {
     public class FP_Exception_Types_Tbl
     {
