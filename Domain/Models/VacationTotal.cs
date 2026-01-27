@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Vacation_Totals_Tbl
+    public class VacationTotal
     {
 
 

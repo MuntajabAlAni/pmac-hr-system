@@ -9,13 +9,13 @@ namespace Domain.Models
 {
     public class AdministrativeOrderType
     {
-        [DisplayName("Order_Type_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Order_Type_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("نوع الامر")]
-        public string Order_Type { get; set; }
+        public required string OrderType { get; set; }
 
-        public virtual ICollection<Orders_Tbl> Order_Type_To_Order_rel { get; set; }
+        public virtual required ICollection<Order> Orders { get; set; }
     }
 }

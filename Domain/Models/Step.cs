@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Step_Tbl
+    public class Step
     {
 
         [DisplayName("Step_Id")]
@@ -16,7 +16,7 @@ namespace Domain.Models
 
 
         [DisplayName("Step")]
-        public string Step { get; set; }
+        public string Description { get; set; }
 
 
 

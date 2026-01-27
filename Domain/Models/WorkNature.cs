@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Work_Nature_Tbl
+    public class WorkNature
     {
 
         [DisplayName("Work_Nature_Id")]

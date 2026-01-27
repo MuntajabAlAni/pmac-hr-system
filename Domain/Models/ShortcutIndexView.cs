@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class ShortcutsIndexViewModel
+    public class ShortcutIndexView
     {
         public IEnumerable<Shortcut> Shortcuts { get; set; }
         public string Search { get; set; }

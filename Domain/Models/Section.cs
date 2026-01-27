@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Section_tbl
+    public class Section
     {
 
 

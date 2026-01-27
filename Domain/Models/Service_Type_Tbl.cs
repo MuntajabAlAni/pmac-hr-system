@@ -17,7 +17,7 @@ namespace Domain.Models
         [DisplayName("Service_Type")]
         public string Service_Type { get; set; }
 
-        public virtual ICollection<Add_Service_Tbl> Service_Type_To_Add_Service_rel { get; set; }
+        public virtual ICollection<AddedService> Service_Type_To_Add_Service_rel { get; set; }
 
     }
 }

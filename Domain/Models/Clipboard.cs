@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Clip_Board_Tbl
+    public class Clipboard
     {
 
 

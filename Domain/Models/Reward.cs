@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Rewards_Tbl
+    public class Reward
     {
 
         [DisplayName("Reward_Id")]

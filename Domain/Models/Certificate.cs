@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Certifications_Tbl
+    public class Certificate
     {
 
         [DisplayName("Certificate_Id")]
@@ -17,7 +17,7 @@ namespace Domain.Models
 
 
         [DisplayName("Certificate_Id")]
-        public string Certificate { get; set; }
+        public string Description { get; set; }
 
 
 
@@ -29,7 +29,7 @@ namespace Domain.Models
 
 
 
-        public virtual ICollection<Education_Cert_Tbl> Cert_Type_To_Edu_rel { get; set; }
+        public virtual ICollection<EducationCertificate> Cert_Type_To_Edu_rel { get; set; }
 
 
     }

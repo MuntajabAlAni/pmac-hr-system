@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Education_Cert_Tbl
+    public class EducationCertificate
     {
         [DisplayName("Education_Id")]
         [Key]
@@ -19,7 +19,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Emp_Id")]
-        public virtual Employee_Tbl Educ_To_Emp_rel { get; set; }
+        public virtual Employee Educ_To_Emp_rel { get; set; }
         //---------------------------------------------------------------------------
 
         [DisplayName("اسم الموظف")]

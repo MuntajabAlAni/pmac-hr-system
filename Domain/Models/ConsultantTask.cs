@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Consultants_Tasks_Tbl
+    public class ConsultantTask
     {
 
         [DisplayName("Task_Id")]
@@ -94,23 +94,23 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Emp_Id")]
-        public virtual Employee_Tbl Tasks_To_Emp_rel { get; set; }
+        public virtual Employee Tasks_To_Emp_rel { get; set; }
 
 
         [ForeignKey("Task_Description")]
-        public virtual Task_Description_Tbl Tasks_To_Task_Desc_rel { get; set; }
+        public virtual TaskDescription Tasks_To_Task_Desc_rel { get; set; }
 
 
         [ForeignKey("Work_Nature")]
-        public virtual Work_Nature_Tbl Tasks_To_Work_Nature_rel { get; set; }
+        public virtual WorkNature Tasks_To_Work_Nature_rel { get; set; }
 
 
         [ForeignKey("Task_Status")]
-        public virtual Task_Status_Tbl Tasks_To_Task_Status_rel { get; set; }
+        public virtual TaskStatus Tasks_To_Task_Status_rel { get; set; }
 
 
         [ForeignKey("Pocedure_Description")]
-        public virtual Procedure_Desc_Tbl Task_To_Procedure_Desc_rel { get; set; }
+        public virtual ProcedureDescription Task_To_Procedure_Desc_rel { get; set; }
 
 
 

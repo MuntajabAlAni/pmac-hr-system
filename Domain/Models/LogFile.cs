@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Log_File_Tbl
+    public class LogFile
     {
         [DisplayName("Log_Id")]
         [Key]

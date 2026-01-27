@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Department_tbl
+    public class Department
     {
 
         [DisplayName("Deptartment_ID")]
@@ -51,13 +51,13 @@ namespace Domain.Models
 
         //public virtual ICollection<Items_Cats_tbl> Deptartment_Items_rel { get; set; }
 
-        public virtual ICollection<Section_tbl> Deptartment_To_Section_rel { get; set; }
+        public virtual ICollection<Section> Deptartment_To_Section_rel { get; set; }
 
         public virtual ICollection<Career> Department_To_Career_rel { get; set; }
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Directorate_Id")]
-        public virtual Directorate_tbl Department_Directorate_rel { get; set; }
+        public virtual Directorate Department_Directorate_rel { get; set; }
         //---------------------------------------------------------------------------
 
 

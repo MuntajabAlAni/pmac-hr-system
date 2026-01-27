@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class ThanksType
+    public class ThankType
     {
 
 

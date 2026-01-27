@@ -8,18 +8,18 @@ namespace Infrastructure;
 
 public class EmployeeRepository(DapperContext context) : IEmployeeRepository
 {
-    public async Task<Employee_Tbl?> FindById(int id)
+    public async Task<Employee?> FindById(int id)
     {
         const string query = EmployeeQueries.FindByIdQuery;
         
         using var connection = context.CreateConnection();
         connection.Open();
         
-        var employee = await connection.QueryFirstOrDefaultAsync<Employee_Tbl>(query, new { Id = id });
+        var employee = await connection.QueryFirstOrDefaultAsync<Employee>(query, new { Id = id });
         return employee;
     }
 
-    public async Task<(IEnumerable<Employee_Tbl>, int)> FindByParameters(PaginationParameters parameters)
+    public async Task<(IEnumerable<Employee>, int)> FindByParameters(PaginationParameters parameters)
     {
         const string query = EmployeeQueries.FindAllQuery;
         const string countQuery = EmployeeQueries.CountQuery;
@@ -35,12 +35,12 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
         connection.Open();
         
         var count = await connection.QueryFirstOrDefaultAsync<int>(countQuery);
-        var employees = await connection.QueryAsync<Employee_Tbl>(query, param);
+        var employees = await connection.QueryAsync<Employee>(query, param);
         
         return (employees, count);
     }
 
-    public async Task<(IEnumerable<Employee_Tbl>, int)> Search(string searchTerm, PaginationParameters parameters)
+    public async Task<(IEnumerable<Employee>, int)> Search(string searchTerm, PaginationParameters parameters)
     {
         const string query = EmployeeQueries.SearchQuery;
         const string countQuery = EmployeeQueries.CountQuery;
@@ -57,12 +57,12 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
         connection.Open();
         
         var count = await connection.QueryFirstOrDefaultAsync<int>(countQuery);
-        var employees = await connection.QueryAsync<Employee_Tbl>(query, param);
+        var employees = await connection.QueryAsync<Employee>(query, param);
         
         return (employees, count);
     }
 
-    public async Task<int> Create(Employee_Tbl employee)
+    public async Task<int> Create(Employee employee)
     {
         const string query = EmployeeQueries.InsertQuery;
         
@@ -73,7 +73,7 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
         return id;
     }
 
-    public async Task Update(Employee_Tbl employee)
+    public async Task Update(Employee employee)
     {
         const string query = EmployeeQueries.UpdateQuery;
         

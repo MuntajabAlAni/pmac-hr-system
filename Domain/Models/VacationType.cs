@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Vacation_Type_Tbl
+    public class VacationType
     {
 
 

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Job_Title_Tbl
+    public class JobTitle
     {
 
         [DisplayName("Job_Title_Id")]
@@ -30,7 +30,7 @@ namespace Domain.Models
 
         public virtual ICollection<Career> Job_To_Career_rel { get; set; }
 
-        public virtual ICollection<Raise_Tbl> Job_To_Raise_rel { get; set; }
+        public virtual ICollection<Raise> Job_To_Raise_rel { get; set; }
 
 
     }

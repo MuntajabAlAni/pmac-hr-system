@@ -8,9 +8,9 @@ public class EmployeeProfile : Profile
 {
     public EmployeeProfile()
     {
-        CreateMap<Employee_Tbl, EmployeeDto>();
-        CreateMap<Employee_Tbl, EmployeeDetailsDto>();
-        CreateMap<EmployeeForCreationDto, Employee_Tbl>();
-        CreateMap<EmployeeForUpdateDto, Employee_Tbl>();
+        CreateMap<Employee, EmployeeDto>();
+        CreateMap<Employee, EmployeeDetailsDto>();
+        CreateMap<EmployeeForCreationDto, Employee>();
+        CreateMap<EmployeeForUpdateDto, Employee>();
     }
 }

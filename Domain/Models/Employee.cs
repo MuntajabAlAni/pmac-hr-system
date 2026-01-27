@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Employee_Tbl
+    public class Employee
     {
         [DisplayName("Emp_Id")]
         [Key]
@@ -75,7 +75,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Gender_Id")]
-        public virtual Gender_Tbl Emp_To_Gender_rel { get; set; }
+        public virtual Gender Emp_To_Gender_rel { get; set; }
         //---------------------------------------------------------------------------
 
 
@@ -111,7 +111,7 @@ namespace Domain.Models
         public int? Marital_Status { get; set; }
 
         [ForeignKey("Marital_Status")]
-        public virtual Marital_Status_Tbl Emp_To_Marital_St_rel { get; set; }
+        public virtual MaritalStatus Emp_To_Marital_St_rel { get; set; }
 
 
         //-----------------------------------------------------------
@@ -333,23 +333,23 @@ namespace Domain.Models
 
         //---------------------------relatioships
         public virtual ICollection<Career> Emp_To_Career_rel { get; set; }
-        public virtual ICollection<Orders_Tbl> Emp_To_Orders_rel { get; set; }
-        public virtual ICollection<Thanks_Tbl> Emp_To_Thanks_rel { get; set; }
-        public virtual ICollection<Vacation_Totals_Tbl> Emp_To_Vac_Totals_rel { get; set; }
-        public virtual ICollection<Vacation_Tbl> Emp_To_Vacation_rel { get; set; }
+        public virtual ICollection<Order> Emp_To_Orders_rel { get; set; }
+        public virtual ICollection<Thank> Emp_To_Thanks_rel { get; set; }
+        public virtual ICollection<VacationTotal> Emp_To_Vac_Totals_rel { get; set; }
+        public virtual ICollection<Vacation> Emp_To_Vacation_rel { get; set; }
         public virtual ICollection<ConsultantTask> Emp_To_Consults_Tasks_rel { get; set; }
-        public virtual ICollection<Training_Courses_Tbl> Emp_To_Training_rel { get; set; }
+        public virtual ICollection<TrainingCourse> Emp_To_Training_rel { get; set; }
         public virtual ICollection<Committee> Emp_To_Comm_rel { get; set; }
         public virtual ICollection<Deligation> Emp_To_Deligation_rel { get; set; }
-        public virtual ICollection<Rewards_Tbl> Emp_To_Rewards_rel { get; set; }
-        public virtual ICollection<Raise_Tbl> Emp_To_Raise_rel { get; set; }
+        public virtual ICollection<Reward> Emp_To_Rewards_rel { get; set; }
+        public virtual ICollection<Raise> Emp_To_Raise_rel { get; set; }
         public virtual ICollection<AddedService> Emp_To_Add_Service_rel { get; set; }
         public virtual ICollection<EducationCertificate> Emp_To_Educ_rel { get; set; }
-        public virtual ICollection<Punishment_Tbl> Emp_To_Punishment_rel { get; set; }
+        public virtual ICollection<Punishment> Emp_To_Punishment_rel { get; set; }
 
         //public virtual ICollection<Punish_Types_Tbl> Emp_To_Punish_Type_rel { get; set; }
 
-        public virtual ICollection<Letters_Tbl> Emp_To_Letters_rel { get; set; }
+        public virtual ICollection<Letter> Emp_To_Letters_rel { get; set; }
 
 
 

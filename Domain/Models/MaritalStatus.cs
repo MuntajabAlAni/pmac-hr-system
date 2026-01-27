@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Marital_Status_Tbl
+    public class MaritalStatus
     {
 
         [DisplayName("Marital_Status_Id")]

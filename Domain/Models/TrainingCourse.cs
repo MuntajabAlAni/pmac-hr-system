@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Training_Courses_Tbl
+    public class TrainingCourse
     {
 
 

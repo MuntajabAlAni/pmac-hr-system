@@ -41,7 +41,7 @@ public class EmployeeService(IRepositoryManager repositoryManager, IMapper mappe
 
     public async Task<int> Create(EmployeeForCreationDto employeeDto)
     {
-        var employee = mapper.Map<Employee_Tbl>(employeeDto);
+        var employee = mapper.Map<Employee>(employeeDto);
         
         // Set defaults
         employee.IsSelected = false;

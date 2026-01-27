@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Certificat_publisher
+    public class CertificatPublisher
     {
 
         [DisplayName("تسلسل الجهة المانحة")]

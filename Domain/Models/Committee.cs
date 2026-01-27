@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Committees
+    public class Committee
     {
 
 
@@ -60,7 +60,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Emp_Id")]
-        public virtual Employee_Tbl Orders_To_Emp_rel { get; set; }
+        public virtual Employee Orders_To_Emp_rel { get; set; }
         //---------------------------------------------------------------------------
 
 

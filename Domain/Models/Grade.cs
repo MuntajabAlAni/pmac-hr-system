@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Grade_Tbl
+    public class Grade
     {
 
         [DisplayName("Grade_Id")]
@@ -16,11 +16,11 @@ namespace Domain.Models
 
 
         [DisplayName("Grade")]
-        public string Grade { get; set; }
+        public string Description { get; set; }
 
 
 
-        public virtual ICollection<Raise_Tbl> Grade_To_Raise_rel { get; set; }
+        public virtual ICollection<Raise> Grade_To_Raise_rel { get; set; }
 
         public virtual ICollection<Career> Grade_To_Career_rel { get; set; }
 

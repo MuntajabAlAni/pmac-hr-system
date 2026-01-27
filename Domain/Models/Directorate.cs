@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Directorate_tbl
+    public class Directorate
     {
 
         [DisplayName("Directorate_Id")]

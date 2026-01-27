@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Vacation_Tbl
+    public class Vacation
     {
 
 
@@ -46,7 +46,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Vacation_Type_Id")]
-        public virtual Vacation_Type_Tbl Vacation_To_Vac_Type_rel { get; set; }
+        public virtual VacationType Vacation_To_Vac_Type_rel { get; set; }
         //---------------------------------------------------------------------------
 
 

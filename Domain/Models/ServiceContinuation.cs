@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Serv_Continuation_Tbl
+    public class ServiceContinuation
     {
 
 

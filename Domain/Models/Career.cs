@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Career_Tbl
+    public class Career
     {
         [DisplayName("Career_Emp_Id")]
         [Key]
@@ -44,7 +44,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Continuation")]
-        public virtual Serv_Continuation_Tbl Career_To_Serv_Con_rel { get; set; }
+        public virtual ServiceContinuation CareerToServiceConRel { get; set; }
         //---------------------------------------------------------------------------
 
 
@@ -65,13 +65,13 @@ namespace Domain.Models
 
 
         [ForeignKey("Grade")]
-        public virtual Grade_Tbl Career_To_Grade_rel { get; set; }
+        public virtual Grade Career_To_Grade_rel { get; set; }
 
         [DisplayName("المرحلة")]
         public int? Step { get; set; }
 
         [ForeignKey("Step")]
-        public virtual Step_Tbl Career_To_Step_rel { get; set; }
+        public virtual Step Career_To_Step_rel { get; set; }
         //--------------------------------
 
         [DisplayName("الحالة الوظيفية")]
@@ -140,7 +140,7 @@ namespace Domain.Models
         //---------------------------------
 
         [ForeignKey("Work_Career_Type_Id")]
-        public virtual Work_Career_Type_Tbl Career_To_Work_Career_Type_rel { get; set; }
+        public virtual WorkCareerType Career_To_Work_Career_Type_rel { get; set; }
 
         //---------------------------------
 
@@ -344,7 +344,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Emp_Id")]
-        public virtual Employee_Tbl Career_To_Emp_rel { get; set; }
+        public virtual Employee Career_To_Emp_rel { get; set; }
 
 
 
@@ -353,12 +353,12 @@ namespace Domain.Models
 
 
         [ForeignKey("Job_Title_Id")]
-        public virtual Job_Title_Tbl Career_To_Job_rel { get; set; }
+        public virtual JobTitle Career_To_Job_rel { get; set; }
 
 
 
         [ForeignKey("Position_Id")]
-        public virtual Position_Tbl Career_To_Position_rel { get; set; }
+        public virtual Position Career_To_Position_rel { get; set; }
 
 
 
@@ -366,13 +366,13 @@ namespace Domain.Models
 
 
         [ForeignKey("Directorate_Id")]
-        public virtual Directorate_tbl Career_To_Dir_rel { get; set; }
+        public virtual Directorate Career_To_Dir_rel { get; set; }
 
         [ForeignKey("Department_Id")]
-        public virtual Department_tbl Career_To_Dept_rel { get; set; }
+        public virtual Department Career_To_Dept_rel { get; set; }
 
         [ForeignKey("Section_Id")]
-        public virtual Section_tbl Career_To_Sec_rel { get; set; }
+        public virtual Section Career_To_Sec_rel { get; set; }
 
         //---------------------------------------------------------------------------
 
@@ -384,7 +384,7 @@ namespace Domain.Models
 
 
         [ForeignKey("Rank_Id")]
-        public virtual Ranks_Tbl Career_To_Ranks_rel { get; set; }
+        public virtual Rank Career_To_Ranks_rel { get; set; }
 
 
 
@@ -395,7 +395,7 @@ namespace Domain.Models
 
 
         [ForeignKey("Side_Id")]
-        public virtual Comming_From_Tbl Career_To_CommingFrom_rel { get; set; }
+        public virtual CommingFrom Career_To_CommingFrom_rel { get; set; }
 
 
         [DisplayName("لديه بصمة الكترونية")]
@@ -425,7 +425,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Exception_Type_Id")]
-        public virtual FP_Exception_Types_Tbl Career_To_Excep_rel { get; set; }
+        public virtual FingerPrintExceptionType Career_To_Excep_rel { get; set; }
         //---------------------------------------------------------------------------
         //------------------------------------------------Personal info
 

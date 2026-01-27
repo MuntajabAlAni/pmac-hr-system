@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Thanks
+    public class Thank
     {
         [DisplayName("Thanks_Id")]
         [Key]
@@ -97,7 +97,7 @@ namespace Domain.Models
 
 
         [ForeignKey("Thanks_Type_Id")]
-        public virtual ThanksType Thanks_To_Thanks_Type_rel { get; set; }
+        public virtual ThankType ThankToThankTypeRel { get; set; }
         //---------------------------------------------------------------------------
 
     }

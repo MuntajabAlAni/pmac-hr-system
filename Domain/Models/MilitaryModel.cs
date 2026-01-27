@@ -39,7 +39,7 @@ namespace Domain.Models
 
 
         [ForeignKey("rank_id")]
-        public virtual Ranks_Tbl Military_To_Ranks_rel { get; set; }
+        public virtual Rank Military_To_Ranks_rel { get; set; }
 
 
 
@@ -151,7 +151,7 @@ namespace Domain.Models
 
 
         [ForeignKey("Side_Id")]
-        public virtual Comming_From_Tbl military_To_CommingFrom_rel { get; set; }
+        public virtual CommingFrom military_To_CommingFrom_rel { get; set; }
 
 
 

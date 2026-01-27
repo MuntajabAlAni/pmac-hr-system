@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Ranks_Tbl
+    public class Rank
     {
 
 
@@ -17,7 +17,7 @@ namespace Domain.Models
         public int Job_Title_Id { get; set; }
 
         [DisplayName("الرتبة")]
-        public string Rank { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<MilitaryModel> Rank_to_Career_rel { get; set; }
 

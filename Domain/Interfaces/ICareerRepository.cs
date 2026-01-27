@@ -4,9 +4,9 @@ namespace Domain.Interfaces;
 
 public interface ICareerRepository
 {
-    Task<Career_Tbl?> FindByEmployeeId(int employeeId);
-    Task<Career_Tbl?> FindById(int id);
-    Task<int> Create(Career_Tbl career);
-    Task Update(Career_Tbl career);
+    Task<Career?> FindByEmployeeId(int employeeId);
+    Task<Career?> FindById(int id);
+    Task<int> Create(Career career);
+    Task Update(Career career);
     Task Delete(int id);
 }

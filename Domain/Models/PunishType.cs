@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Punish_Types_Tbl
+    public class PunishType
     {
 
         [DisplayName("Punish_Type_Id")]
@@ -27,13 +27,13 @@ namespace Domain.Models
 
 
         [DisplayName("يؤثر على العلاوة؟")]
-        
+
         [DefaultValue(false)]
         public Boolean? Raise_Affected { get; set; }
 
 
 
-        public virtual ICollection<Punishment_Tbl> Punish_Type_To_Punishments_rel { get; set; }
+        public virtual ICollection<Punishment> Punish_Type_To_Punishments_rel { get; set; }
 
     }
 }

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Orders
+    public class Order
     {
 
         [DisplayName("Order_Id")]
@@ -41,7 +41,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Order_Type")]
-        public virtual Administrative_Order_Types Orders_To_OrdersType_rel { get; set; }
+        public virtual AdministrativeOrderType Orders_To_OrdersType_rel { get; set; }
         //---------------------------------------------------------------------------
 
 

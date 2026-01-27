@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Raise_Type_Tbl
+    public class RaiseType
     {
 
         [DisplayName("Raise_Type_Id")]

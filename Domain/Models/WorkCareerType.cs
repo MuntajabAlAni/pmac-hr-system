@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Work_Career_Type_Tbl
+    public class WorkCareerType
     {
 
 

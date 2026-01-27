@@ -5,7 +5,7 @@ namespace Domain.Models
 {
     public class BasicSalary
     {
-        [DisplayName("Salary_Id")]
+        [DisplayName("Id")]
         [Key]
         public Guid Id { get; set; }
 

@@ -6,21 +6,21 @@ namespace Domain.Models
 {
     public class AddedService
     {
-        [DisplayName("Order_Id")]
+        [DisplayName("Id")]
         [Key]
-        public Guid OrderId { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("اسم الموظف")]
         public Guid EmployeeId { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public string EmployeeName { get; set; }
+        public required string EmployeeName { get; set; }
 
         [DisplayName("رقم الامر")]
-        public string OrderNumber { get; set; }
+        public required string OrderNumber { get; set; }
 
         [DisplayName("رقم الكتاب")]
-        public string BookNumber { get; set; }
+        public required string BookNumber { get; set; }
 
         [DisplayName("تاريخ الامر")]
         [DataType(DataType.Date)]
@@ -28,7 +28,7 @@ namespace Domain.Models
         public DateTime? OrderDate { get; set; }
 
         [DisplayName("نوع الامر")]
-        public int OrderTypeId { get; set; }
+        public Guid OrderTypeId { get; set; }
 
         [DisplayName("من تاريخ")]
         [DataType(DataType.Date)]
@@ -70,11 +70,11 @@ namespace Domain.Models
         //------------relationship to employee && service typ------------------
 
         //--------------------------rRelation----------------------------------------
-        [ForeignKey("Emp_Id")]
-        public virtual Employee_Tbl Add_Service_To_Emp_rel { get; set; }
+        [ForeignKey("EmployeeId")]
+        public virtual required Employee Employee { get; set; }
 
-        [ForeignKey("Order_Type_Id")]
-        public virtual Service_Type_Tbl Add_Service_To_Service_Type_rel { get; set; }
+        [ForeignKey("ServiceTypeId")]
+        public virtual required Service_Type_Tbl ServiceType { get; set; }
         //---------------------------------------------------------------------------
     }
 }

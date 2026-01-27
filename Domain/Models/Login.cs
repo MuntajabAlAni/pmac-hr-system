@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Logins
+    public class Login
     {
         [DisplayName("Login_Id")]
         [Key]

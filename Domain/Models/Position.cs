@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Position_Tbl
+    public class Position
     {
 
 

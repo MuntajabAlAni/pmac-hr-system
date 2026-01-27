@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Comming_From_Tbl
+    public class CommingFrom
     {
 
 

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Procedure_Desc_Tbl
+    public class ProcedureDescription
     {
 
 

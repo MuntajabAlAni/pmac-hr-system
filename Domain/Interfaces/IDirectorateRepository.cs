@@ -4,9 +4,9 @@ namespace Domain.Interfaces;
 
 public interface IDirectorateRepository
 {
-    Task<IEnumerable<Directorate_tbl>> FindAll();
-    Task<Directorate_tbl?> FindById(int id);
-    Task<int> Create(Directorate_tbl directorate);
-    Task Update(Directorate_tbl directorate);
+    Task<IEnumerable<Directorate>> FindAll();
+    Task<Directorate?> FindById(int id);
+    Task<int> Create(Directorate directorate);
+    Task Update(Directorate directorate);
     Task Delete(int id);
 }

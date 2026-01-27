@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Task_Status_Tbl
+    public class TaskStatus
     {
 
         [DisplayName("Task_Status_Id")]

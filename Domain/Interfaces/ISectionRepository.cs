@@ -4,10 +4,10 @@ namespace Domain.Interfaces;
 
 public interface ISectionRepository
 {
-    Task<IEnumerable<Section_tbl>> FindAll();
-    Task<IEnumerable<Section_tbl>> FindByDepartmentId(int departmentId);
-    Task<Section_tbl?> FindById(int id);
-    Task<int> Create(Section_tbl section);
-    Task Update(Section_tbl section);
+    Task<IEnumerable<Section>> FindAll();
+    Task<IEnumerable<Section>> FindByDepartmentId(int departmentId);
+    Task<Section?> FindById(int id);
+    Task<int> Create(Section section);
+    Task Update(Section section);
     Task Delete(int id);
 }

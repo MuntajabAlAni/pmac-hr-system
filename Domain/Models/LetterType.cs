@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Letter_Types_Tbl
+    public class LetterType
     {
 
 
@@ -21,7 +21,7 @@ namespace Domain.Models
         public string Letter_Type { get; set; }
 
 
-        public virtual ICollection<Letters_Tbl> Letter_Types_To_Letters_rel { get; set; }
+        public virtual ICollection<Letter> Letter_Types_To_Letters_rel { get; set; }
 
 
 

@@ -5,10 +5,10 @@ namespace Domain.Interfaces;
 
 public interface IVacationRepository
 {
-    Task<(IEnumerable<Vacation_Tbl>, int)> FindAll(PaginationParameters parameters);
-    Task<IEnumerable<Vacation_Tbl>> FindByEmployeeId(int employeeId);
-    Task<Vacation_Tbl?> FindById(int id);
-    Task<int> Create(Vacation_Tbl vacation);
-    Task Update(Vacation_Tbl vacation);
+    Task<(IEnumerable<Vacation>, int)> FindAll(PaginationParameters parameters);
+    Task<IEnumerable<Vacation>> FindByEmployeeId(int employeeId);
+    Task<Vacation?> FindById(int id);
+    Task<int> Create(Vacation vacation);
+    Task Update(Vacation vacation);
     Task Delete(int id);
 }

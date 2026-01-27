@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Raise_Tbl
+    public class Raise
     {
 
 
@@ -205,7 +205,7 @@ namespace Domain.Models
 
 
         [ForeignKey("Raise_Type_Id")]
-        public virtual Raise_Type_Tbl Raise_To_Raise_Type_rel { get; set; }
+        public virtual RaiseType Raise_To_Raise_Type_rel { get; set; }
 
 
 
@@ -214,7 +214,7 @@ namespace Domain.Models
 
 
         [ForeignKey("Step_Id")]
-        public virtual Step_Tbl Raise_To_Step_rel { get; set; }
+        public virtual Step Raise_To_Step_rel { get; set; }
 
 
         [ForeignKey("Job_Title_Id")]

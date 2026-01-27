@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Universities_Tbl
+    public class University
     {
 
         [DisplayName("رقم الجامعة")]

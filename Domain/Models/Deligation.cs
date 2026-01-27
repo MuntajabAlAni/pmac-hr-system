@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Deligations_Tbl
+    public class Deligation
     {
 
 
@@ -88,7 +88,7 @@ namespace Domain.Models
 
         //--------------------------rRelation----------------------------------------
         [ForeignKey("Emp_Id")]
-        public virtual Employee_Tbl Deligation_To_Emp_rel { get; set; }
+        public virtual Employee Deligation_To_Emp_rel { get; set; }
         //---------------------------------------------------------------------------
 
     }

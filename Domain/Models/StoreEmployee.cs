@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class Store_Employee_Tbl
+    public class StoreEmployee
     {
 
         [DisplayName("الرقم")]
