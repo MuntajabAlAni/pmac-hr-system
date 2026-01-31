@@ -2,26 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class ProcedureDescription
     {
-
-
-        [DisplayName("Pocedure_Desc_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Pocedure_Desc_Id { get; set; }
-
+        public Guid Id { get; set; }
 
         [DisplayName("توصيف الاجراء")]
-        public string Procedure_Description { get; set; }
+        public required string Description { get; set; }
 
-
-        public virtual ICollection<ConsultantTask> Pocedure_Description_To_Tasks_rel { get; set; }
-
-
+        public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
     }
 }

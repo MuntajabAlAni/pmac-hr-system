@@ -9,12 +9,8 @@ using NLog;
 using Infrastructure;
 using Application.Services;
 using Application.Interfaces;
-using Application.Email;
 using Infrastructure.Email;
-using Infrastructure.Services;
 using Domain.Helpers;
-using Authentication;
-using Infrastructure.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 

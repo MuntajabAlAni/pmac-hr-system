@@ -1,53 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class Reward
     {
-
-        [DisplayName("Reward_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Reward_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public int Emp_Id { get; set; }
+        public Guid EmployeeId { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public string Emp_Name { get; set; }
-
+        public string? EmployeeName { get; set; }
 
         [DisplayName("الجهة المانحة")]
-        public string Reward_Giver { get; set; }
+        public string? RewardGiver { get; set; }
 
         [DisplayName("مبلغ المكافأة")]
-        public string Reward_Amount { get; set; }
+        public string? RewardAmount { get; set; }
 
         [DisplayName("سبب المكافئة")]
-        public string Reward_Reason { get; set; }
+        public string? RewardReason { get; set; }
 
         [DisplayName("نوع الامر")]
-        public string Order_Type { get; set; }
+        public string? OrderType { get; set; }
 
         [DisplayName("رقم الامر الاداري")]
-        public string Order_No { get; set; }
+        public string? OrderNumber { get; set; }
 
         [DisplayName("تاريخ الامر الاداري")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Order_Date { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         [DisplayName("رابط ملف المرفقات")]
-        public string File_Path { get; set; }
+        public string? FilePath { get; set; }
 
-
-        [ForeignKey("Emp_Id")]
-        public virtual Employee Tasks_To_Emp_rel { get; set; }
-
+        [ForeignKey("EmployeeId")]
+        public virtual Employee? Employee { get; set; }
     }
 }

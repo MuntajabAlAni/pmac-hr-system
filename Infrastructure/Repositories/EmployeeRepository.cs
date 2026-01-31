@@ -4,17 +4,17 @@ using Domain.Interfaces;
 using Infrastructure.Queries;
 using Domain.RequestFeatures;
 
-namespace Infrastructure;
+namespace Infrastructure.Repositories;
 
 public class EmployeeRepository(DapperContext context) : IEmployeeRepository
 {
-    public async Task<Employee?> FindById(int id)
+    public async Task<Employee?> FindById(Guid id)
     {
         const string query = EmployeeQueries.FindByIdQuery;
-        
+
         using var connection = context.CreateConnection();
         connection.Open();
-        
+
         var employee = await connection.QueryFirstOrDefaultAsync<Employee>(query, new { Id = id });
         return employee;
     }
@@ -23,20 +23,20 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
     {
         const string query = EmployeeQueries.FindAllQuery;
         const string countQuery = EmployeeQueries.CountQuery;
-        
+
         var skip = (parameters.PageNumber - 1) * parameters.PageSize;
         var param = new
         {
             Skip = skip,
             PageSize = parameters.PageSize
         };
-        
+
         using var connection = context.CreateConnection();
         connection.Open();
-        
+
         var count = await connection.QueryFirstOrDefaultAsync<int>(countQuery);
         var employees = await connection.QueryAsync<Employee>(query, param);
-        
+
         return (employees, count);
     }
 
@@ -44,7 +44,7 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
     {
         const string query = EmployeeQueries.SearchQuery;
         const string countQuery = EmployeeQueries.CountQuery;
-        
+
         var skip = (parameters.PageNumber - 1) * parameters.PageSize;
         var param = new
         {
@@ -52,44 +52,46 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
             Skip = skip,
             PageSize = parameters.PageSize
         };
-        
+
         using var connection = context.CreateConnection();
         connection.Open();
-        
+
         var count = await connection.QueryFirstOrDefaultAsync<int>(countQuery);
         var employees = await connection.QueryAsync<Employee>(query, param);
-        
+
         return (employees, count);
     }
 
-    public async Task<int> Create(Employee employee)
+    public async Task<Guid> Create(Employee employee)
     {
         const string query = EmployeeQueries.InsertQuery;
-        
+
+        employee.Id = Guid.CreateVersion7();
+
         using var connection = context.CreateConnection();
         connection.Open();
-        
-        var id = await connection.QueryFirstAsync<int>(query, employee);
-        return id;
+
+        await connection.ExecuteAsync(query, employee);
+        return employee.Id;
     }
 
     public async Task Update(Employee employee)
     {
         const string query = EmployeeQueries.UpdateQuery;
-        
+
         using var connection = context.CreateConnection();
         connection.Open();
-        
+
         await connection.ExecuteAsync(query, employee);
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(Guid id)
     {
         const string query = EmployeeQueries.DeleteQuery;
-        
+
         using var connection = context.CreateConnection();
         connection.Open();
-        
+
         await connection.ExecuteAsync(query, new { Id = id });
     }
 }

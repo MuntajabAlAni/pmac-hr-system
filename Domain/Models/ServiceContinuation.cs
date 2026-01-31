@@ -2,27 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class ServiceContinuation
     {
-
-
-
-        [DisplayName("Serv_Con_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Serv_Con_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("حالة استمرارية الخدمة")]
-        public string Serv_Con_Type { get; set; }
+        public required string Name { get; set; }
 
-
-        public virtual ICollection<Career> Serv_Con_To_Career_rel { get; set; }
-
-
-
+        public virtual ICollection<Career>? Careers { get; set; }
     }
 }

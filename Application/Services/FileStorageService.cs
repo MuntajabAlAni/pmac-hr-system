@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Application.Interfaces;
 
-namespace Infrastructure.Services;
+namespace Application.Services;
 
 public class FileStorageService(IConfiguration configuration, IAmazonS3 s3) : IFileStorageService
 {

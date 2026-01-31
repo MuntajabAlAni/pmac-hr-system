@@ -7,15 +7,13 @@ using System.Web;
 
 namespace Domain.Models
 {
-    public class AdministrativeOrderType
+    public class CertificatePublisher
     {
         [DisplayName("Id")]
         [Key]
         public Guid Id { get; set; }
 
-        [DisplayName("نوع الامر")]
-        public required string OrderType { get; set; }
-
-        public virtual required ICollection<Order> Orders { get; set; }
+        [DisplayName("الجهة المانحة للشهادة")]
+        public required string Name { get; set; }
     }
 }

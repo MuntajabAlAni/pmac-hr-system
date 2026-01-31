@@ -1,134 +1,94 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class EducationCertificate
     {
-        [DisplayName("Education_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Education_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public int Emp_Id { get; set; }
-
-        //--------------------------rRelation----------------------------------------
-        [ForeignKey("Emp_Id")]
-        public virtual Employee Educ_To_Emp_rel { get; set; }
-        //---------------------------------------------------------------------------
+        public Guid EmployeeId { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public string Emp_Name { get; set; }
-
+        public string? EmployeeName { get; set; }
 
         [DisplayName("التحصيل الدراسي")]
-        public int Educ_Id { get; set; }
-
+        public Guid CertificateId { get; set; }
 
         [DisplayName("عدد أشهر الخدمة المضافة")]
         [DefaultValue(0)]
-        public int No_Of_Months { get; set; }
-
-
-        //--------------------------rRelation----------------------------------------
-        [ForeignKey("Educ_Id")]
-        public virtual Certificate Educ_To_Cert_Type_rel { get; set; }
-        //---------------------------------------------------------------------------
-
+        public int NumberOfMonths { get; set; }
 
         [DisplayName("اسم الجامعة/ المعهد")]
-        public string Institute_Name { get; set; }
-
+        public string? InstituteName { get; set; }
 
         [DisplayName("اسم الكلية")]
-        public string College_Name { get; set; }
-
+        public string? CollegeName { get; set; }
 
         [DisplayName("اسم القسم")]
-        public string Department_Name { get; set; }
-
-
+        public string? DepartmentName { get; set; }
 
         [DisplayName("التخصص")]
-        public string Major { get; set; }
-
-
-
-        //[DisplayName("سنة التخرج")]
-        //public string Grad_Year { get; set; }
-
-
+        public string? Major { get; set; }
 
         [DisplayName("رقم الوثيقة")]
-        public string Cert_No { get; set; }
-
+        public string? CertificateNumber { get; set; }
 
         [DisplayName("تأريخ اصدار الوثيقة ")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Order_Date { get; set; }
-
+        public DateTime? OrderDate { get; set; }
 
         [DisplayName("سنة التخرج")]
-        public string Year_Of_Graduate { get; set; }
-
+        public string? YearOfGraduate { get; set; }
 
         [DisplayName("رقم صحة الصدور")]
-        public string Approve_Cert_No { get; set; }
-
-
-
+        public string? ApproveCertificateNumber { get; set; }
 
         [DisplayName("تأريخ صحة الصدور")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Approve_Cert_Date { get; set; }
-
-
+        public DateTime? ApproveCertificateDate { get; set; }
 
         [DisplayName("البلد المانح للشهادة")]
-        public string Country_Of_Graduate { get; set; }
-
+        public string? CountryOfGraduate { get; set; }
 
         [DisplayName("التسلسل")]
-        public string Sequence { get; set; }
-
+        public string? Sequence { get; set; }
 
         [DisplayName("المعدل")]
-        public string Average { get; set; }
+        public string? Average { get; set; }
 
         [DisplayName("يؤثر على العلاوة")]
         [Required]
-        public string Affect_Raise { get; set; }
-
+        public string? AffectRaise { get; set; }
 
         [DisplayName("تأريخ احتساب الشهادة")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Consideration_Date { get; set; }
-
+        public DateTime? ConsiderationDate { get; set; }
 
         [DisplayName("الملاحظات")]
         [DataType(DataType.MultilineText)]
-        public string Education_Notes { get; set; }
-
+        public string? EducationNotes { get; set; }
 
         [DisplayName("سارية التأثير على الاستحقاق الحالي؟")]
         [DefaultValue(1)]
         public int Running { get; set; }
 
-
-
-
-
         [DisplayName("رابط ملف المرفقات")]
-        //[Required]
-        public string File_Path { get; set; }
+        public string? FilePath { get; set; }
 
+        //--------------------------Relationships----------------------------------------
+        [ForeignKey("EmployeeId")]
+        public virtual Employee? Employee { get; set; }
+
+        [ForeignKey("CertificateId")]
+        public virtual Certificate? Certificate { get; set; }
     }
 }

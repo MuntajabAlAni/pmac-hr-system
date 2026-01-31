@@ -2,57 +2,40 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class StoreEmployee
     {
-
         [DisplayName("الرقم")]
         [Key]
-        public int Emp_Id { get; set; }
-
-
+        public Guid Id { get; set; }
 
         [DisplayName("رقم الموظف في نظام الافراد")]
-        public int HR_Emp_Id { get; set; }
-
+        public int HREmployeeId { get; set; }
 
         [DisplayName("اسم الموظف الكامل")]
-        public string Fname { get; set; }
-
+        public string? FullName { get; set; }
 
         [DisplayName("الدائرة")]
-        public string Dir { get; set; }
-
+        public string? Directorate { get; set; }
 
         [DisplayName("القسم")]
-        public string Dep { get; set; }
-
-
+        public string? Department { get; set; }
 
         [DisplayName("تأريخ التعيين ")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? DateT { get; set; }
-
-
+        public DateTime? DateOfEmployment { get; set; }
 
         [DisplayName("تأريخ المباشرة ")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? DateM { get; set; }
-
-
+        public DateTime? DateOfInitiation { get; set; }
 
         [DisplayName("الملاك")]
-        public string Malak { get; set; }
+        public string? Malak { get; set; }
 
-
-        public int? continuation { get; set; }
-
-
+        public int? Continuation { get; set; }
     }
 }

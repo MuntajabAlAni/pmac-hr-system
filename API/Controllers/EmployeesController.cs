@@ -18,11 +18,11 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetAll([FromQuery] PaginationParameters parameters)
     {
         var (employees, totalCount) = await serviceManager.EmployeeService.GetAll(parameters);
-        
+
         Response.Headers.Add("X-Total-Count", totalCount.ToString());
         Response.Headers.Add("X-Page-Number", parameters.PageNumber.ToString());
         Response.Headers.Add("X-Page-Size", parameters.PageSize.ToString());
-        
+
         return Ok(employees);
     }
 
@@ -35,17 +35,17 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
         [FromQuery] PaginationParameters parameters)
     {
         var (employees, totalCount) = await serviceManager.EmployeeService.Search(searchTerm, parameters);
-        
+
         Response.Headers.Add("X-Total-Count", totalCount.ToString());
-        
+
         return Ok(employees);
     }
 
     /// <summary>
     /// Get employee by ID with full details
     /// </summary>
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<EmployeeDetailsDto>> GetById(int id)
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<EmployeeDetailsDto>> GetById(Guid id)
     {
         var employee = await serviceManager.EmployeeService.GetById(id);
         return Ok(employee);
@@ -56,37 +56,37 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     /// </summary>
     [HttpPost]
     [Authorize(Policy = "RequireAddUserPermission")]
-    public async Task<ActionResult<int>> Create([FromBody] EmployeeForCreationDto employeeDto)
+    public async Task<ActionResult<Guid>> Create([FromBody] EmployeeForCreationDto employeeDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
+
         var id = await serviceManager.EmployeeService.Create(employeeDto);
-        
+
         return CreatedAtAction(nameof(GetById), new { id }, new { id });
     }
 
     /// <summary>
     /// Update an existing employee
     /// </summary>
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:guid}")]
     [Authorize(Policy = "RequireEditUserPermission")]
-    public async Task<ActionResult> Update(int id, [FromBody] EmployeeForUpdateDto employeeDto)
+    public async Task<ActionResult> Update(Guid id, [FromBody] EmployeeForUpdateDto employeeDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
+
         await serviceManager.EmployeeService.Update(id, employeeDto);
-        
+
         return NoContent();
     }
 
     /// <summary>
     /// Delete an employee (soft delete)
     /// </summary>
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id:guid}")]
     [Authorize(Policy = "RequireDeleteUserPermission")]
-    public async Task<ActionResult> Delete(int id)
+    public async Task<ActionResult> Delete(Guid id)
     {
         await serviceManager.EmployeeService.Delete(id);
         return NoContent();

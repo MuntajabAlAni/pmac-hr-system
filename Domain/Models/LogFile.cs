@@ -1,60 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class LogFile
     {
-        [DisplayName("Log_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Log_Id { get; set; }
-
+        public Guid Id { get; set; }
 
         [DisplayName("مستخدم النظام")]
-        public string User_Name { get; set; }
-
+        public string? UserName { get; set; }
 
         [DisplayName("وقت الحركة")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime Entry_Time { get; set; }
-
-
+        public DateTime EntryTime { get; set; }
 
         [DisplayName("نوع الحركة")]
-        public string Entry_Type { get; set; }
-
-
+        public string? EntryType { get; set; }
 
         [DisplayName("نوع البيانات")]
-        public string Entry_Table { get; set; }
-
+        public string? EntryTable { get; set; }
 
         [DisplayName("رقم القيد المعدل")]
-        public int Record_Id { get; set; }
-
+        public Guid RecordId { get; set; }
 
         [DisplayName("وصف الحركة")]
-        public string Notification_String { get; set; }
-
+        public string? NotificationString { get; set; }
 
         [DisplayName("الموظف المعدلة بياناته")]
-        public string Emp_Name { get; set; }
+        public string? EmployeeName { get; set; }
 
         [DisplayName("رابط الحركة")]
-        public string Link { get; set; }
-
-
+        public string? Link { get; set; }
 
         [DisplayName("Military")]
         [DefaultValue(0)]
         public int Military { get; set; }
-
-
-
-
     }
 }

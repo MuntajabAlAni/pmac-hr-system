@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class TaskStatus
     {
-
-        [DisplayName("Task_Status_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Task_Status_Id { get; set; }
-
+        public Guid Id { get; set; }
 
         [DisplayName("حالة الاجراء")]
-        public string Task_Status { get; set; }
+        public required string Status { get; set; }
 
-
-        public virtual ICollection<ConsultantTask> Task_Status_To_Tasks_rel { get; set; }
-
+        public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
     }
 }

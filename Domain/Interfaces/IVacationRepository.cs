@@ -7,8 +7,8 @@ public interface IVacationRepository
 {
     Task<(IEnumerable<Vacation>, int)> FindAll(PaginationParameters parameters);
     Task<IEnumerable<Vacation>> FindByEmployeeId(int employeeId);
-    Task<Vacation?> FindById(int id);
+    Task<Vacation?> FindById(Guid id);
     Task<int> Create(Vacation vacation);
     Task Update(Vacation vacation);
-    Task Delete(int id);
+    Task Delete(Guid id);
 }

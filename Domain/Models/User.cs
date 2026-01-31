@@ -6,12 +6,12 @@ namespace Domain.Models;
 public class User
 {
     [IgnoreChange] public Guid Id { get; set; }
-    [DisplayName("Full Name")] public string FullName { get; set; } = null!;
-    [DisplayName("Specialty")] public string? Specialty { get; set; }
+    [System.ComponentModel.DisplayName("Full Name")] public string FullName { get; set; } = null!;
+    [System.ComponentModel.DisplayName("Specialty")] public string? Specialty { get; set; }
     [IgnoreChange] public Guid RoleId { get; set; }
-    [DisplayName("Role")] public Role Role { get; set; } = null!;
-    [DisplayName("Phone Number")] public string PhoneNumber { get; set; } = null!;
-    [DisplayName("Email")] public string Email { get; set; } = null!;
+    [System.ComponentModel.DisplayName("Role")] public Role Role { get; set; } = null!;
+    [System.ComponentModel.DisplayName("Phone Number")] public string PhoneNumber { get; set; } = null!;
+    [System.ComponentModel.DisplayName("Email")] public string Email { get; set; } = null!;
 
     [IgnoreChange] public string? Password { get; set; }
     [IgnoreChange] public string? AccessToken { get; set; }

@@ -1,71 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class Committee
     {
-
-
-        [DisplayName("Committee_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Order_Id { get; set; }
-
-
-        [DisplayName("اسم الموظف")]
-        public int Emp_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public string Emp_Name { get; set; }
+        public Guid EmployeeId { get; set; }
 
+        [DisplayName("اسم الموظف")]
+        public string? EmployeeName { get; set; }
 
         [DisplayName("نوع اللجنة")]
-        public string Comm_Type { get; set; }
-
+        public required string CommitteeType { get; set; }
 
         [DisplayName("رقم امر اللجنة")]
-        public string Comm_Order_No { get; set; }
-
+        public required string CommitteeOrderNumber { get; set; }
 
         [DisplayName("تأريخ الامر ")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Order_Date { get; set; }
-
-
-
+        public DateTime? OrderDate { get; set; }
 
         [DisplayName("نوع مدة اللجنة")]
-        public string Comm_Duration_Type { get; set; }
-
+        public string? CommitteeDurationType { get; set; }
 
         [DisplayName("عدد أيام اللجنة")]
-        public string No_Of_Days { get; set; }
-
+        public string? NumberOfDays { get; set; }
 
         [DisplayName("الملاحظات")]
         [DataType(DataType.MultilineText)]
-        public string Comm_Notes { get; set; }
-
-
+        public string? CommitteeNotes { get; set; }
 
         [DisplayName("رابط ملف المرفقات")]
-        public string File_Path { get; set; }
+        public string? FilePath { get; set; }
 
-
-        //--------------------------rRelation----------------------------------------
-        [ForeignKey("Emp_Id")]
-        public virtual Employee Orders_To_Emp_rel { get; set; }
-        //---------------------------------------------------------------------------
-
-
-
-
-
+        //--------------------------Relationships----------------------------------------
+        [ForeignKey("EmployeeId")]
+        public virtual Employee? Employee { get; set; }
     }
 }

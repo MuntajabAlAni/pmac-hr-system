@@ -10,13 +10,13 @@ namespace Application.Services;
 
 public class EmployeeService(IRepositoryManager repositoryManager, IMapper mapper) : IEmployeeService
 {
-    public async Task<EmployeeDetailsDto> GetById(int id)
+    public async Task<EmployeeDetailsDto> GetById(Guid id)
     {
         var employee = await repositoryManager.Employee.FindById(id);
-        
+
         if (employee is null)
             throw new EntityNotFoundException("Employee", "Id", id);
-        
+
         return mapper.Map<EmployeeDetailsDto>(employee);
     }
 
@@ -24,7 +24,7 @@ public class EmployeeService(IRepositoryManager repositoryManager, IMapper mappe
     {
         var (employees, count) = await repositoryManager.Employee.FindByParameters(parameters);
         var employeeDtos = mapper.Map<IEnumerable<EmployeeDto>>(employees);
-        
+
         return (employeeDtos, count);
     }
 
@@ -32,46 +32,46 @@ public class EmployeeService(IRepositoryManager repositoryManager, IMapper mappe
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
             return await GetAll(parameters);
-        
+
         var (employees, count) = await repositoryManager.Employee.Search(searchTerm, parameters);
         var employeeDtos = mapper.Map<IEnumerable<EmployeeDto>>(employees);
-        
+
         return (employeeDtos, count);
     }
 
-    public async Task<int> Create(EmployeeForCreationDto employeeDto)
+    public async Task<Guid> Create(EmployeeForCreationDto employeeDto)
     {
         var employee = mapper.Map<Employee>(employeeDto);
-        
+
         // Set defaults
         employee.IsSelected = false;
-        employee.IsSelected_Thanks = false;
-        employee.IsSelected_Letters = false;
-        
+        employee.IsSelectedThanks = false;
+        employee.IsSelectedLetters = false;
+
         var id = await repositoryManager.Employee.Create(employee);
         return id;
     }
 
-    public async Task Update(int id, EmployeeForUpdateDto employeeDto)
+    public async Task Update(Guid id, EmployeeForUpdateDto employeeDto)
     {
         var employee = await repositoryManager.Employee.FindById(id);
-        
+
         if (employee is null)
             throw new EntityNotFoundException("Employee", "Id", id);
-        
+
         mapper.Map(employeeDto, employee);
-        employee.Emp_Id = id;
-        
+        employee.Id = id;
+
         await repositoryManager.Employee.Update(employee);
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(Guid id)
     {
         var employee = await repositoryManager.Employee.FindById(id);
-        
+
         if (employee is null)
             throw new EntityNotFoundException("Employee", "Id", id);
-        
+
         await repositoryManager.Employee.Delete(id);
     }
 }

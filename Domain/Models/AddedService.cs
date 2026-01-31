@@ -74,7 +74,7 @@ namespace Domain.Models
         public virtual required Employee Employee { get; set; }
 
         [ForeignKey("ServiceTypeId")]
-        public virtual required Service_Type_Tbl ServiceType { get; set; }
+        public virtual required ServiceType ServiceType { get; set; }
         //---------------------------------------------------------------------------
     }
 }

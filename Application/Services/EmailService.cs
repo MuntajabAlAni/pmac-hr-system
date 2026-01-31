@@ -5,7 +5,7 @@ using Application.Interfaces;
 using Application.Email;
 using Infrastructure.Email;
 
-namespace Infrastructure.Services;
+namespace Application.Services;
 
 public class EmailService(EmailServiceConfiguration mailServiceConfiguration) : IEmailService
 {

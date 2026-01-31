@@ -3,8 +3,8 @@
 public class UserQueries
 {
     public const string InsertQuery = """
-                                      INSERT INTO Users (FullName, RoleId, PhoneNumber, Specialty, Email, Password, AddedByUserId, ProviderId)
-                                        OUTPUT inserted.Id VALUES (@FullName, @RoleId, @PhoneNumber, @Specialty, @Email, @Password, @AddedByUserId, @ProviderId)
+                                      INSERT INTO Users (Id, FullName, RoleId, PhoneNumber, Specialty, Email, Password, AddedByUserId, ProviderId)
+                                        VALUES (@Id, @FullName, @RoleId, @PhoneNumber, @Specialty, @Email, @Password, @AddedByUserId, @ProviderId)
                                       """;
 
     public const string UpdateByIdQuery = """
@@ -94,7 +94,7 @@ public class UserQueries
                                                     WHERE RP.RoleId = @Id
                                                    """;
 
-    public const string InsertRoleQuery = "INSERT INTO Roles (Description) OUTPUT inserted.Id VALUES (@Description)";
+    public const string InsertRoleQuery = "INSERT INTO Roles (Id, Description) VALUES (@Id, @Description)";
 
     public const string InsertRolePermissionsQuery =
         "INSERT INTO RolePermissions (RoleId, Permission) VALUES (@RoleId, @Permission)";
@@ -129,8 +129,8 @@ public class UserQueries
                                             """;
 
     public const string InsertLocationQuery = """
-                                              INSERT INTO UserLocations (UserId, Title, Description, Longitude, Latitude)
-                                               OUTPUT inserted.Id VALUES (@UserId, @Title, @Description, @Longitude, @Latitude)
+                                              INSERT INTO UserLocations (Id, UserId, Title, Description, Longitude, Latitude)
+                                               VALUES (@Id, @UserId, @Title, @Description, @Longitude, @Latitude)
                                               """;
 
     public const string UpdateLocationByIdQuery = """

@@ -1,122 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class ConsultantTask
     {
-
-        [DisplayName("Task_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Task_Id { get; set; }
-
-
+        public Guid Id { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public int Emp_Id { get; set; }
+        public Guid EmployeeId { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public string Emp_Name { get; set; }
-
-
+        public string? EmployeeName { get; set; }
 
         [DisplayName("الموضوع")]
         [DataType(DataType.MultilineText)]
-
-        public string Task_Subject { get; set; }
-
-
+        public string? Subject { get; set; }
 
         [DisplayName("وصف المهمة")]
-        //public string Task_Description { get; set; }//------------------------------------------------------
-        public int Task_Description { get; set; }
-
+        public Guid? TaskDescriptionId { get; set; }
 
         [DisplayName("تاريخ الاحالة")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Task_Date { get; set; }
-
-
+        public DateTime? TaskDate { get; set; }
 
         [DisplayName("طبيعة العمل")]
-        //public string Work_Nature { get; set; }//----------------------------------------------------------
-        public int Work_Nature { get; set; }
-
-
+        public Guid? WorkNatureId { get; set; }
 
         [DisplayName("حالة الاجراء")]
-        //public string Task_Status { get; set; }//----------------------------------------------------------
-        public int Task_Status { get; set; }
-
-
+        public Guid? TaskStatusId { get; set; }
 
         [DisplayName("توصيف الاجراء")]
-        //public string Pocedure_Description { get; set; }//-------------------------------------------------
-        public int Pocedure_Description { get; set; }
-
-
-
+        public Guid? ProcedureDescriptionId { get; set; }
 
         [DisplayName("وصف تقدم العمل")]
         [DataType(DataType.MultilineText)]
-
-        public string Progress_Description { get; set; }
-
+        public string? ProgressDescription { get; set; }
 
         [DisplayName("التوصيات")]
         [DataType(DataType.MultilineText)]
-
-        public string Task_Recommendations { get; set; }
-
-
-
+        public string? TaskRecommendations { get; set; }
 
         [DisplayName("الملاحظات")]
         [DataType(DataType.MultilineText)]
-
-        public string Task_Notes { get; set; }
-
-
-
+        public string? TaskNotes { get; set; }
 
         [DisplayName("رابط ملف المرفقات")]
-        //[Required]
-        public string File_Path { get; set; }
+        public string? FilePath { get; set; }
 
+        //--------------------------Relationships----------------------------------------
+        [ForeignKey("EmployeeId")]
+        public virtual Employee? Employee { get; set; }
 
+        [ForeignKey("TaskDescriptionId")]
+        public virtual TaskDescription? TaskDescription { get; set; }
 
+        [ForeignKey("WorkNatureId")]
+        public virtual WorkNature? WorkNature { get; set; }
 
-        //--------------------------rRelation----------------------------------------
-        [ForeignKey("Emp_Id")]
-        public virtual Employee Tasks_To_Emp_rel { get; set; }
+        [ForeignKey("TaskStatusId")]
+        public virtual TaskStatus? TaskStatus { get; set; }
 
-
-        [ForeignKey("Task_Description")]
-        public virtual TaskDescription Tasks_To_Task_Desc_rel { get; set; }
-
-
-        [ForeignKey("Work_Nature")]
-        public virtual WorkNature Tasks_To_Work_Nature_rel { get; set; }
-
-
-        [ForeignKey("Task_Status")]
-        public virtual TaskStatus Tasks_To_Task_Status_rel { get; set; }
-
-
-        [ForeignKey("Pocedure_Description")]
-        public virtual ProcedureDescription Task_To_Procedure_Desc_rel { get; set; }
-
-
-
-        //---------------------------------------------------------------------------
-
-
-
+        [ForeignKey("ProcedureDescriptionId")]
+        public virtual ProcedureDescription? ProcedureDescription { get; set; }
     }
 }

@@ -2,41 +2,30 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class VacationType
     {
-
-
-        [DisplayName("Vacation_Type_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Vacation_Type_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("نوع الاجازة ")]
-        public string Vacation_Type { get; set; }
-
-
+        public required string Name { get; set; }
 
         [DisplayName("Is_Condition")]
         [DefaultValue(false)]
-        public Boolean? Is_Condition { get; set; }
-
+        public bool? IsCondition { get; set; }
 
         [DisplayName("خدمة فعلية مع تفعيل عداد الرصيد؟")]
         [DefaultValue(false)]
-        public Boolean? Rsed { get; set; }
+        public bool? Rsed { get; set; }
 
         [DisplayName("يؤثر على العلاوة؟")]
         [DefaultValue(false)]
-        public Boolean? Raise_Affected { get; set; }
+        public bool? RaiseAffected { get; set; }
 
-
-
-        public virtual ICollection<Vacation> Vac_Type_To_Vacs_rel { get; set; }
-
-
+        public virtual ICollection<Vacation>? Vacations { get; set; }
     }
 }

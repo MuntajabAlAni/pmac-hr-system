@@ -2,26 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class WorkCareerType
     {
-
-
-        [DisplayName("Work_Career_Type_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Work_Career_Type_Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("نوع العمل ")]
-        public string Work_Career_Type { get; set; }
+        public required string Name { get; set; }
 
-
-        public virtual ICollection<Career> Work_Career_Type_To_Career_rel { get; set; }
-
-
-
+        public virtual ICollection<Career>? Careers { get; set; }
     }
 }

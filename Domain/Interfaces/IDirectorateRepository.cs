@@ -5,8 +5,8 @@ namespace Domain.Interfaces;
 public interface IDirectorateRepository
 {
     Task<IEnumerable<Directorate>> FindAll();
-    Task<Directorate?> FindById(int id);
+    Task<Directorate?> FindById(Guid id);
     Task<int> Create(Directorate directorate);
     Task Update(Directorate directorate);
-    Task Delete(int id);
+    Task Delete(Guid id);
 }

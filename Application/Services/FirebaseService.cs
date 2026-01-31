@@ -4,7 +4,7 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Configuration;
 using Application.Interfaces;
 
-namespace Infrastructure.Services;
+namespace Application.Services;
 
 public class FirebaseService : IFirebaseService
 {

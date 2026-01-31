@@ -9,7 +9,7 @@ using LoggerService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Infrastructure;
+using Infrastructure.Repositories;
 using Application.Services;
 using Application.Interfaces;
 using Application.Mapping;

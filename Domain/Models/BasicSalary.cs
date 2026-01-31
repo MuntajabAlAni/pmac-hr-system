@@ -12,6 +12,6 @@ namespace Domain.Models
         [DisplayName("Salary")]
         public required string Salary { get; set; }
 
-        //public virtual ICollection<Raise_Tbl> Salary_To_Raise_rel { get; set; }
+        //public virtual ICollection<Raise> Salary_To_Raise_rel { get; set; }
     }
 }

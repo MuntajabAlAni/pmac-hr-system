@@ -6,8 +6,8 @@ public interface IDepartmentRepository
 {
     Task<IEnumerable<Department>> FindAll();
     Task<IEnumerable<Department>> FindByDirectorateId(int directorateId);
-    Task<Department?> FindById(int id);
+    Task<Department?> FindById(Guid id);
     Task<int> Create(Department department);
     Task Update(Department department);
-    Task Delete(int id);
+    Task Delete(Guid id);
 }

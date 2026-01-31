@@ -2,26 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class MaritalStatus
     {
-
-        [DisplayName("Marital_Status_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Marital_Status_Id { get; set; }
-
+        public Guid Id { get; set; }
 
         [DisplayName("الحالة الزوجية")]
-        public string Marital_Status { get; set; }
+        public required string Name { get; set; }
 
-
-        public virtual ICollection<Employee> Marital_St_To_Employee_rel { get; set; }
-
-
-
+        public virtual ICollection<Employee>? Employees { get; set; }
     }
 }

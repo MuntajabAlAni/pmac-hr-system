@@ -1,228 +1,141 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using Domain.Enums;
 
 namespace Domain.Models
 {
     public class Raise
     {
-
-
-        [DisplayName("Raise_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Raise_Id { get; set; }
-
-
-        [DisplayName("اسم الموظف")]
-        public int Emp_Id { get; set; }
-
-
+        public Guid Id { get; set; }
 
         [DisplayName("اسم الموظف")]
-        public string Emp_Name { get; set; }
+        public Guid EmployeeId { get; set; }
 
 
 
         [DisplayName("رقم الامر")]
-        public string Order_No { get; set; }
-
+        public string? OrderNumber { get; set; }
 
         [DisplayName("العدد")]
-        public string Order_Count_No { get; set; }
-
+        public string? OrderCountNumber { get; set; }
 
         [DisplayName("تاريخ الامر")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Order_Date { get; set; }
-
-
-
+        public DateTime? OrderDate { get; set; }
 
         [DisplayName("نوع الامر")]
-        public int Raise_Type_Id { get; set; }
-
-
+        public Guid RaiseTypeId { get; set; }
 
         [DisplayName("الدرجة السابقة")]
-        public int Grade_Id { get; set; }
-
+        public Guid GradeId { get; set; }
 
         [DisplayName("المرحلة السابقة")]
-        public int Step_Id { get; set; }
-
+        public Guid StepId { get; set; }
 
         [DisplayName("الراتب السابق")]
-        public string Salary { get; set; }
-
-
-
+        public string? Salary { get; set; }
 
         [DisplayName("العنوان الوظيفي السابق")]
-        public int Job_Title_Id { get; set; }
-
-
-
-
+        public Guid JobTitleId { get; set; }
 
         [DisplayName("تاريخ الاستحقاق السابق")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Last_Raise_Date { get; set; }
-
-
-
-
+        public DateTime? LastRaiseDate { get; set; }
 
         [DisplayName("الدرجة الحالية")]
-        public int New_Grade { get; set; }
+        public int NewGrade { get; set; }
 
         [DisplayName("الدرجة الحالية")]
-        public string New_Grade_String { get; set; }
-
-
-        [DisplayName("المرحلة الحالية")]
-        public int New_Step { get; set; }
+        public string? NewGradeString { get; set; }
 
         [DisplayName("المرحلة الحالية")]
-        public string New_Step_string { get; set; }
+        public int NewStep { get; set; }
+
+        [DisplayName("المرحلة الحالية")]
+        public string? NewStepString { get; set; }
 
         //----------------
-
         [DisplayName("الدرجة القادمة")]
-        public string Next_Grade_String { get; set; }
-
+        public string? NextGradeString { get; set; }
 
         [DisplayName("المرحلة القادمة")]
-        public string Next_Step_string { get; set; }
+        public string? NextStepString { get; set; }
 
         //-------------------
         [DisplayName("الراتب الحالي")]
-        public string New_Salary { get; set; }
-
-
+        public string? NewSalary { get; set; }
 
         [DisplayName("العنوان الوظيفي الحالي")]
-        public int New_Job_Title_Id { get; set; }
+        public Guid NewJobTitleId { get; set; }
 
         [DisplayName("العنوان الوظيفي الحالي")]
-        public string New_Job_Title_string { get; set; }
-
+        public string? NewJobTitleString { get; set; }
 
         [DisplayName("العنوان الوظيفي القادم")]
-        public string Next_Job_Title_string { get; set; }
-
-
+        public string? NextJobTitleString { get; set; }
 
         [DisplayName("تاريخ الاستحقاق الحالي")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Current_Raise_Date { get; set; }
-
-
-
-
+        public DateTime? CurrentRaiseDate { get; set; }
 
         [DisplayName("تاريخ الاستحقاق القادم")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Next_Raise_Date { get; set; }
-
-
-
+        public DateTime? NextRaiseDate { get; set; }
 
         [DisplayName("احتساب يدوي/ تلقائي")]
         [DefaultValue("تلقائي")]
-        public string Auto_Manual { get; set; }
-
+        public string? AutoManual { get; set; }
 
         [DisplayName("الاستحقاق القادم (علاوة/ ترفيع)")]
-        public string Next_Raise_Promotion { get; set; }
-
+        public string? NextRaisePromotion { get; set; }
 
         [DisplayName("عدد الايام المدورة")]
-        public string Cycled_Days { get; set; }
-
-
-
-
+        public string? CycledDays { get; set; }
 
         [DisplayName("الملاحظات")]
         [DataType(DataType.MultilineText)]
-
-        public string Notes { get; set; }
-
-
-        //[DisplayName("Added_Service_Id")]
-        //public int? Added_Service_Id { get; set; }
-
-
+        public string? Notes { get; set; }
 
         [DisplayName("رابط ملف المرفقات")]
-        public string File_Path { get; set; }
-
-
-
-
+        public string? FilePath { get; set; }
 
         [DisplayName("اخر علاوة أو ترفيع")]
         [DefaultValue(false)]
-        //[Required]
-        public bool Is_Last_RP { get; set; }
-
-
-
-
+        public bool IsLastRP { get; set; }
 
         [DisplayName("يطبع في المحضر القادم؟")]
         [DefaultValue(false)]
-        //[Required]
         public bool IsRecord { get; set; }
-
-
-
-
 
         [DisplayName("العلاوة أة الترقية معلقة؟")]
         [DefaultValue(false)]
-        //[Required]
         public bool IsSuspended { get; set; }
 
-
-
         [DisplayName("الشهادة لهذه الترقية")]
-        public string Education { get; set; }
+        public string? Education { get; set; }
 
+        //--------------------------Relationships----------------------------------------
+        [ForeignKey("EmployeeId")]
+        public virtual Employee? Employee { get; set; }
 
+        [ForeignKey("RaiseTypeId")]
+        public virtual RaiseType? RaiseType { get; set; }
 
-        //--------------------------rRelation----------------------------------------
-        [ForeignKey("Emp_Id")]
-        public virtual Employee Raise_To_Emp_rel { get; set; }
+        [ForeignKey("GradeId")]
+        public virtual Grade? Grade { get; set; }
 
+        [ForeignKey("StepId")]
+        public virtual Step? Step { get; set; }
 
-        [ForeignKey("Raise_Type_Id")]
-        public virtual RaiseType Raise_To_Raise_Type_rel { get; set; }
-
-
-
-        [ForeignKey("Grade_Id")]
-        public virtual Grade Raise_To_Grade_rel { get; set; }
-
-
-        [ForeignKey("Step_Id")]
-        public virtual Step Raise_To_Step_rel { get; set; }
-
-
-        [ForeignKey("Job_Title_Id")]
-        public virtual JobTitle Raise_To_Job_Title_rel { get; set; }
-        //---------------------------------------------------------------------------
-
-
-
-
+        [ForeignKey("JobTitleId")]
+        public virtual JobTitle? JobTitle { get; set; }
     }
 }

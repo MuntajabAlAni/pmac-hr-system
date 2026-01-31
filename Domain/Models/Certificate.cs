@@ -9,28 +9,18 @@ namespace Domain.Models
 {
     public class Certificate
     {
-
-        [DisplayName("Certificate_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Certificate_Id { get; set; }
+        public Guid Id { get; set; }
 
-
-
-        [DisplayName("Certificate_Id")]
-        public string Description { get; set; }
-
-
+        [DisplayName("الوصف")]
+        public string? Description { get; set; }
 
         [DisplayName("عدد الاشهر")]
         [Required]
         [DefaultValue(0)]
-        public int No_Of_Months { get; set; }
+        public int NoOfMonths { get; set; }
 
-
-
-
-        public virtual ICollection<EducationCertificate> Cert_Type_To_Edu_rel { get; set; }
-
-
+        public virtual ICollection<EducationCertificate> EducationCertificates { get; set; } = new List<EducationCertificate>();
     }
 }

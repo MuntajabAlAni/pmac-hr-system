@@ -2,28 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class Position
     {
-
-
-        [DisplayName("Position_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int? Position_Id { get; set; }
-
+        public Guid Id { get; set; }
 
         [DisplayName("المنصب")]
-        public string Position_Title { get; set; }
+        public required string Title { get; set; }
 
-
-
-        public virtual ICollection<Career> Position_To_Career_rel { get; set; }
-
-
-
+        public virtual ICollection<Career>? Careers { get; set; }
     }
 }

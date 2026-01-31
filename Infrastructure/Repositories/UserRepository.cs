@@ -5,7 +5,7 @@ using Domain.Interfaces;
 using Infrastructure.Queries;
 using Domain.RequestFeatures;
 
-namespace Infrastructure;
+namespace Infrastructure.Repositories;
 
 public class UserRepository(DapperContext context) : IUserRepository
 {
@@ -39,13 +39,15 @@ public class UserRepository(DapperContext context) : IUserRepository
         const string query = UserQueries.InsertQuery;
         const string permissionsQuery = UserQueries.InsertUserAdditionalPermissionsQuery;
 
-        var param = new DynamicParameters(user);
-
         using var connection = context.CreateConnection();
         connection.Open();
 
+        user.Id = Guid.CreateVersion7();
+        var param = new DynamicParameters(user);
+
         using var trans = connection.BeginTransaction();
-        var id = await connection.ExecuteScalarAsync<Guid>(query, param, transaction: trans);
+        await connection.ExecuteAsync(query, param, transaction: trans);
+        var id = user.Id;
 
         foreach (var permission in user.AdditionalPermissions)
         {
@@ -192,8 +194,12 @@ public class UserRepository(DapperContext context) : IUserRepository
         using var connection = context.CreateConnection();
         connection.Open();
 
+        roleForCreation.Id = Guid.CreateVersion7();
+        param.Add("Id", roleForCreation.Id);
+
         using var trans = connection.BeginTransaction();
-        var id = await connection.ExecuteScalarAsync<Guid>(query, param, transaction: trans);
+        await connection.ExecuteAsync(query, param, transaction: trans);
+        var id = roleForCreation.Id;
 
         foreach (var permission in roleForCreation.Permissions)
         {
@@ -317,8 +323,9 @@ public class UserRepository(DapperContext context) : IUserRepository
         const string query = UserQueries.InsertLocationQuery;
         using var connection = context.CreateConnection();
         connection.Open();
-        var id = await connection.ExecuteScalarAsync<Guid>(query, userLocation);
-        return id;
+        userLocation.Id = Guid.CreateVersion7();
+        await connection.ExecuteAsync(query, userLocation);
+        return userLocation.Id;
     }
 
     public async Task UpdateLocation(UserLocation userLocation)

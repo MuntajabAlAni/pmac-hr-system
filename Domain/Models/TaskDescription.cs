@@ -2,25 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Domain.Models
 {
     public class TaskDescription
     {
-
-        [DisplayName("Task_Des_Id")]
+        [DisplayName("Id")]
         [Key]
-        public int Task_Des_Id { get; set; }
-
+        public Guid Id { get; set; }
 
         [DisplayName("وصف المهمة")]
-        public string Task_Description { get; set; }
+        public required string Description { get; set; }
 
-
-        public virtual ICollection<ConsultantTask> Task_Description_To_Tasks_rel { get; set; }
-
-
+        public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
     }
 }

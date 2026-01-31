@@ -3,359 +3,206 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using Domain.Enums;
 
 namespace Domain.Models
 {
     public class Employee
     {
-        [DisplayName("Emp_Id")]
+        [DisplayName("Id")]
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Emp_Id { get; set; }
-
-
-
+        public Guid Id { get; set; }
 
         [DisplayName("Store_Emp_Id")]
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Store_Emp_Id { get; set; }
+        public Guid StoreEmployeeId { get; set; }
 
-
-
-        //[DisplayName("PID")]
-
-        //public int PID { get; set; }
-
-
-        [DisplayName("اسم الموظف الكامل")]
-        //[Required]
-        public string Employee_F_Name { get; set; }
-
+        [DisplayName("الاسم الكامل")]
+        public string? FullName { get; set; } // Kept as cached full name usually needed
 
         //------------------------------------------------Personal info
-        [DisplayName("اسم الموظف الاول")]
+        [DisplayName("الاسم الاول")]
         [Required]
-        public string Employee_First_Name { get; set; }
+        public required string FirstName { get; set; }
 
+        [DisplayName("الاسم الثاني")]
+        public string? SecondName { get; set; }
 
-        [DisplayName("اسم الموظف الثاني")]
-        //[Required]
-        public string Employee_Second_Name { get; set; }
+        [DisplayName("الاسم الثالث")]
+        public string? ThirdName { get; set; }
 
+        [DisplayName("الاسم الرابع")]
+        public string? FourthName { get; set; }
 
-        [DisplayName("اسم الموظف الثالث")]
-        //[Required]
-        public string Employee_Third_Name { get; set; }
-
-
-        [DisplayName("اسم الموظف الرابع")]
-        //[Required]
-        public string Employee_Forth_Name { get; set; }
-
-
-        [DisplayName("لقب الموظف ")]
-        //[Required]
-        public string Employee_Last_Name { get; set; }
+        [DisplayName("اللقب")]
+        public string? LastName { get; set; }
 
         [DisplayName("اسم الام الثلاثي")]
-        //[Required]
-        public string Mother_Name { get; set; }
+        public string? MotherName { get; set; }
 
         [DisplayName("اسم الموظف الثلاثي  باللغة الانكليزية")]
-        //[Required]
-        public string Mother_Name_English { get; set; }
+        public string? MotherNameEnglish { get; set; }
 
         [DisplayName("الجنس")]
-        //[Required]
-        public int? Gender_Id { get; set; }
+        public Guid? GenderId { get; set; }
 
-
-
-        //--------------------------rRelation----------------------------------------
-        [ForeignKey("Gender_Id")]
-        public virtual Gender Emp_To_Gender_rel { get; set; }
-        //---------------------------------------------------------------------------
-
-
-
+        //--------------------------Relationships----------------------------------------
+        [ForeignKey("GenderId")]
+        public virtual Gender? Gender { get; set; }
 
         [DisplayName("فصيلة الدم")]
-        //[Required]
-        public string Blood_Group { get; set; }
-
+        public string? BloodGroup { get; set; }
 
         [DisplayName("القومية")]
-        //[Required]
-        public string Nationality { get; set; }
-
+        public string? Nationality { get; set; }
 
         [DisplayName("الديانة")]
-        //[Required]
-        public string Relegion { get; set; }
-
+        public string? Religion { get; set; }
 
         [DisplayName("محل الولادة")]
-        //[Required]
-        public string Place_Of_Birth { get; set; }
+        public string? PlaceOfBirth { get; set; }
 
         [DisplayName("تأريخ الولادة")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Birth_Date { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         //----------------------------------------------------------
         [DisplayName("الحالة الزوجية")]
-        //[Required]
-        public int? Marital_Status { get; set; }
+        public Guid? MaritalStatusId { get; set; }
 
-        [ForeignKey("Marital_Status")]
-        public virtual MaritalStatus Emp_To_Marital_St_rel { get; set; }
-
+        [ForeignKey("MaritalStatusId")]
+        public virtual MaritalStatus? MaritalStatus { get; set; }
 
         //-----------------------------------------------------------
 
         [DisplayName("عدد الاطفال")]
-        //[Required]
-        public string No_Of_Children { get; set; }
-
+        public string? NumberOfChildren { get; set; }
 
         [DisplayName("اسم الزوج/ الزوجة")]
-        //[Required]
-        public string Hus_Wif_Name { get; set; }
-
+        public string? SpouseName { get; set; }
 
         [DisplayName("عمل الزوج/ الزوجة")]
-        //[Required]
-        public string Hus_Wif_Job { get; set; }
+        public string? SpouseJob { get; set; }
 
         [DisplayName("رقم الهاتف")]
         [DataType(DataType.PhoneNumber)]
-        //[Required(ErrorMessage = "رقم الهاتف مطلوب")]
-        //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "رقم الهاتف غير صحيح")]
-        //^(\d{10})$
-        //[RegularExpression(@"^(\d{11})$", ErrorMessage = "رقم الهاتف غير صحيح")]
+        public string? PhoneNumber { get; set; }
 
-        public string Phone_No { get; set; }
-
-        [DisplayName("عنوان السكن")]
-        //[Required]
-        public string Address { get; set; }
-
-        [DisplayName("المحلة")]
-        //[Required]
-        public string District { get; set; }
-
-        [DisplayName("الزقاق")]
-        //[Required]
-        public string Alley { get; set; }
-
-        [DisplayName("رقم الدار")]
-        //[Required]
-        public string House_No { get; set; }
+        [DisplayName("العنوان الكامل")]
+        public string? FullAddress { get; set; } // Merged address fields
 
         //-------------------------معلومات هوية الاحوال او البطاقة الوطنية
 
-
-
         [DisplayName("رقم هوية الاحوال المدنية")]
-        //[Required]
-        public string Civil_Id_No { get; set; }
-
+        public string? CivilIdNumber { get; set; }
 
         [DisplayName("رقم السجل")]
-        //[Required]
-        public string Record_No { get; set; }
-
-
-
+        public string? RecordNumber { get; set; }
 
         [DisplayName("رقم الصحيفة")]
-        //[Required]
-        public string Page_No { get; set; }
-
-
+        public string? PageNumber { get; set; }
 
         [DisplayName("جهة الاصدار")]
-        //[Required]
-        public string Publisher { get; set; }
-
-
-
+        public string? Publisher { get; set; }
 
         [DisplayName("تأريخ الاصدار")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Date_Of_Issuance { get; set; }
-
+        public DateTime? DateOfIssuance { get; set; }
 
         [DisplayName("رقم البطاقة الوطنية")]
-        //[Required]
-        public string Nat_Card_No { get; set; }
-
-
-
+        public string? NationalCardNumber { get; set; }
 
         [DisplayName("تأريخ الاصدار")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Nat_Issuance_Date { get; set; }
-
+        public DateTime? NationalCardIssuanceDate { get; set; }
 
         //------------------------معلومات شهادة الجنسية
 
         [DisplayName("رقم الشهادة")]
-        //[Required]
-        public string Id_Cert_No { get; set; }
-
+        public string? CertificateNumber { get; set; }
 
         [DisplayName("رقم المحفظة")]
-        //[Required]
-        public string Pocket_No { get; set; }
-
+        public string? PocketNumber { get; set; }
 
         [DisplayName("جهة الاصدار")]
-        //[Required]
-        public string Cert_Publisher { get; set; }
-
-
+        public string? CertificatePublisher { get; set; }
 
         [DisplayName("تأريخ الاصدار")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? Cert_Issuance_Date { get; set; }
+        public DateTime? CertificateIssuanceDate { get; set; }
 
         //------------------------------------Housing info-----------------
 
         [DisplayName("اسم مكتب المعلومات")]
-        //[Required]
-        public string Info_Office_Name { get; set; }
-
+        public string? InformationOfficeName { get; set; }
 
         [DisplayName("رقم البطاقة")]
-        //[Required]
-        public string Housing_Card_No { get; set; }
-
-
+        public string? HousingCardNumber { get; set; }
 
         [DisplayName("تأريخ التنظيم")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? HCard_Issuance_Date { get; set; }
+        public DateTime? HousingCardIssuanceDate { get; set; }
 
         //-----------------------------supplying card info
 
-
-
         [DisplayName("رقم البطاقة")]
-        //[Required]
-        public string Supp_Card_No { get; set; }
-
-
+        public string? SupplyingCardNumber { get; set; }
 
         [DisplayName("اسم مركز التموين")]
-        //[Required]
-        public string Sup_Center_Name { get; set; }
-
-
+        public string? SupplyCenterName { get; set; }
 
         [DisplayName("رقم مركز التموين")]
-        //[Required]
-        public string Sup_Center_No { get; set; }
-
-
-
+        public string? SupplyCenterNumber { get; set; }
 
         [DisplayName("الملاحظات")]
-        //[Required]
-        public string Sup_Notes { get; set; }
-
+        public string? SupplyNotes { get; set; }
 
         //--------------------------------------file path-------------------------
 
-
         [DisplayName("رابط ملف المرفقات")]
-        //[Required]
-        public string File_Path { get; set; }
+        public string? FilePath { get; set; }
 
         //--------------------------------------Prof_Pic-------------------------
 
-
         [DisplayName("الصورة الشخصية")]
-        //[Required]
-        public string Prof_Pic { get; set; }
-
+        public string? ProfilePicture { get; set; }
 
         [DisplayName("البريد الالكتروني")]
-        //[Required]
-        public string Email { get; set; }
-
-
+        public string? Email { get; set; }
 
         [DisplayName("IsSelected")]
         [DefaultValue(false)]
-        //[Required]
         public bool IsSelected { get; set; }
-
-
-
-
 
         [DisplayName("IsSelected_Thanks")]
         [DefaultValue(false)]
-        //[Required]
-        public bool IsSelected_Thanks { get; set; }
-
-
-
-
+        public bool IsSelectedThanks { get; set; }
 
         [DisplayName("IsSelected_Letters")]
         [DefaultValue(false)]
-        //[Required]
-        public bool IsSelected_Letters { get; set; }
-
-
-
-
-
+        public bool IsSelectedLetters { get; set; }
 
         [DisplayName("Military")]
-        [Required]
         [DefaultValue(0)]
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Military { get; set; }
 
-
-
-
-
-        //---------------------------relatioships
-        public virtual ICollection<Career> Emp_To_Career_rel { get; set; }
-        public virtual ICollection<Order> Emp_To_Orders_rel { get; set; }
-        public virtual ICollection<Thank> Emp_To_Thanks_rel { get; set; }
-        public virtual ICollection<VacationTotal> Emp_To_Vac_Totals_rel { get; set; }
-        public virtual ICollection<Vacation> Emp_To_Vacation_rel { get; set; }
-        public virtual ICollection<ConsultantTask> Emp_To_Consults_Tasks_rel { get; set; }
-        public virtual ICollection<TrainingCourse> Emp_To_Training_rel { get; set; }
-        public virtual ICollection<Committee> Emp_To_Comm_rel { get; set; }
-        public virtual ICollection<Deligation> Emp_To_Deligation_rel { get; set; }
-        public virtual ICollection<Reward> Emp_To_Rewards_rel { get; set; }
-        public virtual ICollection<Raise> Emp_To_Raise_rel { get; set; }
-        public virtual ICollection<AddedService> Emp_To_Add_Service_rel { get; set; }
-        public virtual ICollection<EducationCertificate> Emp_To_Educ_rel { get; set; }
-        public virtual ICollection<Punishment> Emp_To_Punishment_rel { get; set; }
-
-        //public virtual ICollection<Punish_Types_Tbl> Emp_To_Punish_Type_rel { get; set; }
-
-        public virtual ICollection<Letter> Emp_To_Letters_rel { get; set; }
-
-
-
-
-
-
-
+        //---------------------------relationships
+        public virtual ICollection<Career>? Careers { get; set; }
+        public virtual ICollection<VacationTotal>? VacationTotals { get; set; }
+        public virtual ICollection<Vacation>? Vacations { get; set; }
+        public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
+        public virtual ICollection<TrainingCourse>? TrainingCourses { get; set; }
+        public virtual ICollection<Committee>? Committees { get; set; }
+        public virtual ICollection<Deligation>? Deligations { get; set; }
+        public virtual ICollection<Reward>? Rewards { get; set; }
+        public virtual ICollection<Raise>? Raises { get; set; }
+        public virtual ICollection<AddedService>? AddedServices { get; set; }
+        public virtual ICollection<EducationCertificate>? EducationCertificates { get; set; }
+        public virtual ICollection<AdministrativeAction>? AdministrativeActions { get; set; }
+        public virtual ICollection<OfficialDocument>? OfficialDocuments { get; set; }
     }
 }
