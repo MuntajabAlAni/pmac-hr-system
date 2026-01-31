@@ -22,8 +22,8 @@ services:
     networks:
       - backend-network
 
-  sikalaty-api-service:
-    image: sikalaty-api-service
+  pmac-hr-system-api-service:
+    image: pmac-hr-system-api-service
     depends_on:
       - sql-server
     environment:
@@ -40,7 +40,7 @@ services:
         delay: 15s
         max_attempts: 3
         window: 120s
-    env_file: ../../../_env/sikalaty-api-service.env
+    env_file: ../../../_env/pmac-hr-system-api-service.env
     volumes:
       - resources:/app/Resources
     networks:

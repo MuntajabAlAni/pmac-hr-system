@@ -1,33 +1,29 @@
 # Base stage
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
 EXPOSE 5000
 
 # Build stage
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
-COPY ["Sikalaty/Sikalaty.csproj", "Sikalaty/"]
-COPY ["Entities/Entities.csproj", "Entities/"]
-COPY ["Interfaces/Interfaces.csproj", "Interfaces/"]
-COPY ["Shared/Shared.csproj", "Shared/"]
-COPY ["LoggerService/LoggerService.csproj", "LoggerService/"]
-COPY ["Sikalaty.Presentation/Sikalaty.Presentation.csproj", "Sikalaty.Presentation/"]
-COPY ["Services.Interfaces/Services.Interfaces.csproj", "Services.Interfaces/"]
-COPY ["Repositories/Repositories.csproj", "Repositories/"]
-COPY ["Services/Services.csproj", "Services/"]
-RUN dotnet restore "Sikalaty/Sikalaty.csproj"
+COPY ["API/API.csproj", "API/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+COPY ["Authentication/Authentication.csproj", "Authentication/"]
+RUN dotnet restore "API/API.csproj"
 COPY . .
-WORKDIR "/src/Sikalaty"
-RUN dotnet build "Sikalaty.csproj" -c Release -o /app/build
+WORKDIR "/src/API"
+RUN dotnet build "API.csproj" -c Release -o /app/build
 
 # Publish stage
 FROM build AS publish
-RUN dotnet publish "Sikalaty.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Final stage
 FROM base AS final
 WORKDIR /app
-COPY ["Shared/Email/EmailContent.html", "/app/Shared/Email/EmailContent.html"]
+COPY ["Infrastructure/Email/EmailContent.html", "/app/Infrastructure/Email/EmailContent.html"]
 COPY --from=publish /app/publish .
 
 # Install NGINX
@@ -50,4 +46,4 @@ ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
 
 # Start NGINX and your application
-CMD ["sh", "-c", "nginx && dotnet Sikalaty.dll"]
+CMD ["sh", "-c", "nginx && dotnet API.dll"]
