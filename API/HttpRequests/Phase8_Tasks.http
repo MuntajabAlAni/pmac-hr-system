@@ -1,0 +1,35 @@
+@HostAddress = https://localhost:5001/be/api
+
+### ConsultantTasks - Get All
+GET {{HostAddress}}/consultanttasks
+Accept: application/json
+
+###
+
+### ConsultantTasks - Create
+POST {{HostAddress}}/consultanttasks
+Content-Type: application/json
+
+{
+  "employeeId": "REPLACE-WITH-VALID-EMPLOYEE-ID",
+  "subject": "System Upgrade Analysis",
+  "taskDate": "2026-03-01T00:00:00Z",
+  "progressDescription": "Initial phase started",
+  "taskRecommendations": "Upgrade servers before proceeding",
+  "taskNotes": "Critical priority task"
+}
+
+###
+
+### AddedService - Get All
+GET {{HostAddress}}/addedservices
+Accept: application/json
+
+###
+
+### LogFiles - Get All
+# Useful for viewing the history of tracked system actions
+GET {{HostAddress}}/logfiles
+Accept: application/json
+
+###

@@ -12,7 +12,7 @@ namespace Domain.Models
         public Guid Id { get; set; }
 
         [DisplayName("حالة الاجراء")]
-        public required string Status { get; set; }
+        public required string Name { get; set; }
 
         public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
     }

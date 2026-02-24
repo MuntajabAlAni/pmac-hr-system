@@ -20,7 +20,7 @@ namespace API.Migrations
             var records = connection.Query(query, parameters);
 
             if (!records.Any())
-                connection.Execute($"CREATE DATABASE {dbName}");
+                connection.Execute($"CREATE DATABASE [{dbName}]");
         }
     }
 }

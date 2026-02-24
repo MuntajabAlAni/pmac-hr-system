@@ -5,107 +5,120 @@ namespace Application.DataTransferObjects;
 public class EmployeeForCreationDto
 {
     [Required(ErrorMessage = "Full name is required")]
-    [MaxLength(250)]
-    public string Employee_F_Name { get; set; } = null!;
-    
+    [MaxLength(500)]
+    public string? FullName { get; set; }
+
     [Required(ErrorMessage = "First name is required")]
     [MaxLength(100)]
-    public string Employee_First_Name { get; set; } = null!;
-    
+    public string FirstName { get; set; } = null!;
+
     [MaxLength(100)]
-    public string? Employee_Second_Name { get; set; }
-    
+    public string? SecondName { get; set; }
+
     [MaxLength(100)]
-    public string? Employee_Third_Name { get; set; }
-    
+    public string? ThirdName { get; set; }
+
     [MaxLength(100)]
-    public string? Employee_Forth_Name { get; set; }
-    
+    public string? FourthName { get; set; }
+
     [MaxLength(100)]
-    public string? Employee_Last_Name { get; set; }
-    
+    public string? LastName { get; set; }
+
     [MaxLength(200)]
-    public string? Mother_Name { get; set; }
-    
+    public string? MotherName { get; set; }
+
     [MaxLength(200)]
-    public string? Mother_Name_English { get; set; }
-    
-    public int? Gender_Id { get; set; }
-    
+    public string? MotherNameEnglish { get; set; }
+
+    public Guid? GenderId { get; set; }
+
     [MaxLength(10)]
-    public string? Blood_Group { get; set; }
-    
+    public string? BloodGroup { get; set; }
+
     [MaxLength(100)]
     public string? Nationality { get; set; }
-    
+
     [MaxLength(100)]
-    public string? Relegion { get; set; }
-    
+    public string? Religion { get; set; }
+
     [MaxLength(200)]
-    public string? Place_Of_Birth { get; set; }
-    
-    public DateTime? Birth_Date { get; set; }
-    
-    public int? Marital_Status { get; set; }
-    
-    [MaxLength(10)]
-    public string? No_Of_Children { get; set; }
-    
+    public string? PlaceOfBirth { get; set; }
+
+    public DateTime? BirthDate { get; set; }
+
+    public Guid? MaritalStatusId { get; set; }
+
+    [MaxLength(50)]
+    public string? NumberOfChildren { get; set; }
+
     [MaxLength(200)]
-    public string? Hus_Wif_Name { get; set; }
-    
+    public string? SpouseName { get; set; }
+
     [MaxLength(200)]
-    public string? Hus_Wif_Job { get; set; }
-    
+    public string? SpouseJob { get; set; }
+
     [Phone]
-    [MaxLength(20)]
-    public string? Phone_No { get; set; }
-    
+    [MaxLength(50)]
+    public string? PhoneNumber { get; set; }
+
     [EmailAddress]
     [MaxLength(250)]
     public string? Email { get; set; }
-    
-    [MaxLength(500)]
-    public string? Address { get; set; }
-    
-    [MaxLength(100)]
-    public string? District { get; set; }
-    
-    [MaxLength(100)]
-    public string? Alley { get; set; }
-    
+
+    public string? FullAddress { get; set; }
+
     [MaxLength(50)]
-    public string? House_No { get; set; }
-    
+    public string? CivilIdNumber { get; set; }
+
     [MaxLength(50)]
-    public string? Civil_Id_No { get; set; }
-    
+    public string? RecordNumber { get; set; }
+
     [MaxLength(50)]
-    public string? Record_No { get; set; }
-    
-    [MaxLength(50)]
-    public string? Page_No { get; set; }
-    
+    public string? PageNumber { get; set; }
+
     [MaxLength(200)]
     public string? Publisher { get; set; }
-    
-    public DateTime? Date_Of_Issuance { get; set; }
-    
+
+    public DateTime? DateOfIssuance { get; set; }
+
     [MaxLength(50)]
-    public string? Nat_Card_No { get; set; }
-    
-    public DateTime? Nat_Issuance_Date { get; set; }
-    
-    [MaxLength(50)]
-    public string? Id_Cert_No { get; set; }
-    
-    [MaxLength(50)]
-    public string? Pocket_No { get; set; }
-    
+    public string? NationalCardNumber { get; set; }
+
+    public DateTime? NationalCardIssuanceDate { get; set; }
+
+    [MaxLength(100)]
+    public string? CertificateNumber { get; set; }
+
+    [MaxLength(100)]
+    public string? PocketNumber { get; set; }
+
     [MaxLength(200)]
-    public string? Cert_Publisher { get; set; }
-    
-    public DateTime? Cert_Issuance_Date { get; set; }
-    
+    public string? CertificatePublisher { get; set; }
+
+    public DateTime? CertificateIssuanceDate { get; set; }
+
+    [MaxLength(200)]
+    public string? InformationOfficeName { get; set; }
+
+    [MaxLength(100)]
+    public string? HousingCardNumber { get; set; }
+
+    public DateTime? HousingCardIssuanceDate { get; set; }
+
+    [MaxLength(100)]
+    public string? SupplyingCardNumber { get; set; }
+
+    [MaxLength(200)]
+    public string? SupplyCenterName { get; set; }
+
+    [MaxLength(100)]
+    public string? SupplyCenterNumber { get; set; }
+
+    public string? SupplyNotes { get; set; }
+
+    public string? FilePath { get; set; }
+
+    public string? ProfilePicture { get; set; }
+
     public int Military { get; set; } = 0;
 }

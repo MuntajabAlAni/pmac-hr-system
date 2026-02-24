@@ -47,12 +47,28 @@ public class InitialTables_202601310001 : Migration
              .WithColumn("IsDeleted").AsBoolean().NotNullable().WithDefaultValue(0)
              .WithColumn("RecordDate").AsDateTime2().WithDefault(SystemMethods.CurrentDateTime);
 
-        Create.Table("JobTitles")
-             .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
-             .WithColumn("Title").AsString(100).NotNullable();
+        Create.Table("Gender")
+             .WithColumn("Gender_Id").AsGuid().NotNullable().PrimaryKey()
+             .WithColumn("Gender_Name").AsString(50).NotNullable();
+
+        Create.Table("Marital_Status")
+             .WithColumn("Marital_Status_Id").AsGuid().NotNullable().PrimaryKey()
+             .WithColumn("Marital_Status_Name").AsString(100).NotNullable();
+
+        Create.Table("Grade")
+             .WithColumn("Grade_Id").AsGuid().NotNullable().PrimaryKey()
+             .WithColumn("Grade_Name").AsString(100).NotNullable();
+
+        Create.Table("Step")
+             .WithColumn("Step_Id").AsGuid().NotNullable().PrimaryKey()
+             .WithColumn("Step_Name").AsString(100).NotNullable();
+
+        Create.Table("Job_Title")
+             .WithColumn("Job_Title_Id").AsGuid().NotNullable().PrimaryKey()
+             .WithColumn("Job_Title_Name").AsString(100).NotNullable();
 
         Create.Table("Position")
-             .WithColumn("Id").AsGuid().NotNullable().PrimaryKey()
+             .WithColumn("Position_Id").AsGuid().NotNullable().PrimaryKey()
              .WithColumn("Title").AsString(100).NotNullable();
 
         Create.Table("Ranks")
@@ -132,7 +148,7 @@ public class InitialTables_202601310001 : Migration
             .WithColumn("Last_Raise_Date").AsDateTime().Nullable()
             .WithColumn("Next_Raise_Date").AsDateTime().Nullable()
             .WithColumn("Basic_Salary").AsString(50).Nullable()
-            .WithColumn("Work_Career_Type_Id").AsGuid().Nullable() //.ForeignKey("Work_Career_Type", "Id") // Inferring table exists
+            .WithColumn("Work_Career_Type_Id").AsGuid().Nullable().ForeignKey("Work_Career_Type", "Id")
             .WithColumn("Rank_Id").AsGuid().Nullable().ForeignKey("Ranks", "Rank_Id")
             .WithColumn("Initiation_Actual_Date").AsDateTime().Nullable()
             .WithColumn("EntryDate").AsDateTime().WithDefault(SystemMethods.CurrentDateTime);

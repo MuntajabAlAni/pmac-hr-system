@@ -1,0 +1,35 @@
+@HostAddress = https://localhost:5001/be/api
+
+### Grades - Get All
+GET {{HostAddress}}/grades
+Accept: application/json
+
+###
+
+### Steps - Get All
+GET {{HostAddress}}/steps
+Accept: application/json
+
+###
+
+### MaritalStatus - Get All
+GET {{HostAddress}}/maritalstatuses
+Accept: application/json
+
+###
+
+### ServiceType - Get All
+GET {{HostAddress}}/servicetypes
+Accept: application/json
+
+###
+
+### TaskStatus - Get All
+GET {{HostAddress}}/taskstatuses
+Accept: application/json
+
+###
+
+### FingerPrintExceptionTypes - Get All
+GET {{HostAddress}}/fingerprintexceptiontypes
+Accept: application/json

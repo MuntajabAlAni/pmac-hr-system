@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
-using System.Text;
 using Amazon;
 using Amazon.S3;
-using Authentication;
+// using Authentication; // Removed - will integrate with SSO later
 using FluentMigrator.Runner;
 using Domain.Interfaces;
 using LoggerService;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+// using Microsoft.AspNetCore.Authentication.JwtBearer; // Removed
+// using Microsoft.IdentityModel.Tokens; // Removed  
 using Microsoft.OpenApi.Models;
+using Infrastructure;
 using Infrastructure.Repositories;
 using Application.Services;
 using Application.Interfaces;
@@ -38,7 +38,7 @@ public static class ServiceExtensions
         .AddFluentMigratorCore().ConfigureRunner(c =>
             c.AddSqlServer2016().WithGlobalConnectionString(configuration
                     .GetConnectionString("sqlConnection"))
-                .ScanIn(Assembly.GetExecutingAssembly())
+                .ScanIn(typeof(DapperContext).Assembly)
                 .For.Migrations());
 
     public static void ConfigureRepositoryManager(this IServiceCollection services) =>
@@ -46,8 +46,7 @@ public static class ServiceExtensions
     public static void ConfigureServiceManager(this IServiceCollection services) =>
         services.AddScoped<IServiceManager, ServiceManager>();
 
-    public static void ConfigureAuthenticationService(this IServiceCollection services) =>
-        services.AddScoped<IAuthenticationService, AuthenticationService>();
+    // Authentication removed - will integrate with external SSO later
 
     public static void ConfigureMapper(this IServiceCollection services) =>
         services.AddSingleton(MapperConfig.GetMapperConfigs());
@@ -81,57 +80,19 @@ public static class ServiceExtensions
         });
     }
 
-    public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
-    {
-        var jwtSettings = configuration.GetSection("JwtSettings");
-        var secretKey = jwtSettings["secretKey"];
-
-        services.AddAuthentication(opt =>
-        {
-            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-
-                ValidIssuer = jwtSettings["validIssuer"],
-                ValidAudience = jwtSettings["validAudience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!))
-            };
-        });
-    }
+    // ConfigureJwt removed - will integrate with external SSO later
 
     public static void ConfigureSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(s =>
         {
-            s.SwaggerDoc("v1", new OpenApiInfo { Title = "PMAC-HR System API", Version = "v1" });
-            s.AddSecurityDefinition("Bearer",
-                new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Place to add JWT with Bearer",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    Scheme = "Bearer"
-                });
-            s.AddSecurityRequirement(new OpenApiSecurityRequirement()
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
-                        Name = "Bearer",
-                    },
-                    []
-                }
+            s.SwaggerDoc("v1", new OpenApiInfo 
+            { 
+                Title = "PMAC-HR System API", 
+                Version = "v1",
+                Description = "Iraqi Governmental HR Management System - Backend API (No Authentication)"
             });
+            // Security definition removed - no authentication required
         });
     }
 }

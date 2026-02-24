@@ -20,7 +20,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return id != Guid.Empty ? Ok(id) : BadRequest();
     }
 
-    [Authorize(Roles = "Add.Users, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPost]
     public async Task<ActionResult<Guid>> CreateUser(UserForAdminManipulationDto userForAdminManipulation)
     {
@@ -52,7 +52,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(tokens);
     }
 
-    [Authorize(Roles = "View.Roles, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet("permissions")]
     public ActionResult<IEnumerable<PermissionDto>> GetAllPermissions()
     {
@@ -60,7 +60,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(permissions);
     }
 
-    [Authorize(Roles = "View.Roles, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet("roles")]
     public async Task<ActionResult<IEnumerable<RoleDto>>> GetAllRoles()
     {
@@ -68,7 +68,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(roles);
     }
 
-    [Authorize(Roles = "View.Roles, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet("role")]
     public async Task<ActionResult<RoleDto>> GetRoleByIdOrDescription(Guid? id, string? description)
     {
@@ -76,7 +76,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(role);
     }
 
-    [Authorize(Roles = "Add.Roles, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPost("role")]
     public async Task<ActionResult<int>> CreateRole([FromBody] RoleForManipulationDto roleForManipulation)
     {
@@ -85,7 +85,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return id != Guid.Empty ? Ok(id) : BadRequest();
     }
 
-    [Authorize(Roles = "Edit.Roles, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("role/{id:Guid}")]
     public async Task<IActionResult> UpdateRole(Guid id, [FromBody] RoleForManipulationDto roleForManipulation)
     {
@@ -94,7 +94,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize(Roles = "Delete.Roles, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpDelete("role/{id:Guid}")]
     public async Task<IActionResult> DeleteRole(Guid id)
     {
@@ -103,7 +103,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize(Roles = "View.Users, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersByParameters(
         [FromQuery] UsersParameters usersParameters)
@@ -113,7 +113,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(users);
     }
 
-    [Authorize(Roles = "View.Users, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet("{id:Guid}")]
     public async Task<ActionResult<UserDetailsDto>> GetUserById(Guid id)
     {
@@ -121,7 +121,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(user);
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet("logged-in-user")]
     public async Task<ActionResult<UserDetailsDto>> GetLoggedInUserDto()
     {
@@ -130,7 +130,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(user);
     }
 
-    [Authorize(Roles = "Edit.Users, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("{id:Guid}")]
     public async Task<ActionResult> UpdateUser(Guid id, UserForAdminManipulationDto userForAdminManipulation)
     {
@@ -139,7 +139,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("logged-in-user")]
     public async Task<ActionResult> UpdateUser(UserForManipulationDto userForManipulationDto)
     {
@@ -148,7 +148,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize(Roles = "Edit.Users, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("{id:Guid}/change-password")]
     public async Task<ActionResult> ChangeUserPassword(Guid id, ChangePasswordDto changePasswordDto)
     {
@@ -164,7 +164,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize(Roles = "Set.Password, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("set-password")]
     public async Task<ActionResult> SetUserPassword(string newPassword)
     {
@@ -173,7 +173,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("logged-in-change-password")]
     public async Task<ActionResult> ChangeLoggedInUserPassword(ChangePasswordDto changePasswordDto)
     {
@@ -182,7 +182,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize(Roles = "Delete.Users, SuperAdmin")]
+    // [Authorize] removed - will integrate with SSO later
     [HttpDelete("{id:Guid}")]
     public async Task<ActionResult> DeleteUser(Guid id)
     {
@@ -191,7 +191,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPost("my-locations")]
     public async Task<ActionResult<IEnumerable<UserLocationDto>>> CreateLocation(UserLocationForManipulationDto userLocationForManipulation)
     {
@@ -200,7 +200,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return id != Guid.Empty ? Ok(id) : BadRequest();
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpGet("my-locations")]
     public async Task<ActionResult<IEnumerable<UserLocationDto>>> GetMyLocations()
     {
@@ -209,7 +209,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return Ok(locations);
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpPut("my-locations/{id:Guid}")]
     public async Task<ActionResult<IEnumerable<UserLocationDto>>> UpdateMyLocation(Guid id, UserLocationForManipulationDto userLocationForManipulation)
     {
@@ -218,7 +218,7 @@ public class UsersController(IServiceManager service, IAuthenticationService aut
         return NoContent();
     }
 
-    [Authorize]
+    // [Authorize] removed - will integrate with SSO later
     [HttpDelete("my-locations/{id:Guid}")]
     public async Task<ActionResult<IEnumerable<UserLocationDto>>> DeleteMyLocation(Guid id)
     {

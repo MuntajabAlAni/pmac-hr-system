@@ -3,14 +3,14 @@ namespace Infrastructure.Queries;
 public class DirectorateQueries
 {
     public const string FindAllQuery = """
-        SELECT Directorate_Id, Directorate_Name, Exception
+        SELECT Directorate_Id AS Id, Directorate_Name AS Name, Exception
         FROM Directorate
         WHERE hidden = 0
         ORDER BY Directorate_Name
         """;
 
     public const string FindByIdQuery = """
-        SELECT Directorate_Id, Directorate_Name, Exception
+        SELECT Directorate_Id AS Id, Directorate_Name AS Name, Exception
         FROM Directorate
         WHERE Directorate_Id = @Id
         """;

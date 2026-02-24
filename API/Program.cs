@@ -26,18 +26,17 @@ builder.Services.AddSingleton<IEmailService, EmailService>();
 builder.Services.ConfigureFluentMigrator(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureAuthenticationService();
+// Authentication services removed - will integrate with external SSO later
 builder.Services.ConfigureMapper();
 builder.Services.ConfigureSwagger();
 builder.Services.ConfigureAwsS3();
-builder.Services.AddAuthentication();
 
 var instance =
     builder.Configuration.GetSection(nameof(EmailServiceConfiguration)).Get<EmailServiceConfiguration>() ??
     throw new Exception($"Missing config for {nameof(EmailServiceConfiguration)}");
 builder.Services.AddSingleton(instance);
 
-builder.Services.ConfigureJwt(builder.Configuration);
+// JWT configuration removed - will integrate with external SSO later
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(AssemblyReference).Assembly).AddJsonOptions(options =>
@@ -91,11 +90,11 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.UseCors("CorsPolicy");
 
-app.UseMiddleware<SwaggerAuthenticationMiddleware>();
+// SwaggerAuthenticationMiddleware removed - no auth required
 app.UseMiddleware<RequestLockMiddleware>();
 
 app.UseSwagger();
-app.MapSwagger().RequireAuthorization();
+app.MapSwagger(); // RequireAuthorization removed
 
 app.UseSwaggerUI(s =>
 {
@@ -104,10 +103,11 @@ app.UseSwaggerUI(s =>
     s.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
 });
 
-app.UseAuthentication();
-app.UseMiddleware<ExpiredOrMissedTokenMiddleware>();
-app.UseMiddleware<SessionLimiterMiddleware>();
-app.UseAuthorization();
+// Authentication and Authorization middleware removed - no auth required
+// app.UseAuthentication(); 
+// app.UseMiddleware<ExpiredOrMissedTokenMiddleware>();
+// app.UseMiddleware<SessionLimiterMiddleware>();
+// app.UseAuthorization();
 app.UseRateLimiter();
 
 app.MapControllers().RequireRateLimiting("fixed");

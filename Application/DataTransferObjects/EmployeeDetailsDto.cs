@@ -2,59 +2,69 @@ namespace Application.DataTransferObjects;
 
 public class EmployeeDetailsDto
 {
-    public int Emp_Id { get; set; }
-    
+    public Guid Id { get; set; }
+    public Guid StoreEmployeeId { get; set; }
+    public string? FullName { get; set; }
+
     // Personal Information
-    public string Employee_F_Name { get; set; } = null!;
-    public string? Employee_First_Name { get; set; }
-    public string? Employee_Second_Name { get; set; }
-    public string? Employee_Third_Name { get; set; }
-    public string? Employee_Forth_Name { get; set; }
-    public string? Employee_Last_Name { get; set; }
-    public string? Mother_Name { get; set; }
-    public string? Mother_Name_English { get; set; }
-    
+    public string? FirstName { get; set; }
+    public string? SecondName { get; set; }
+    public string? ThirdName { get; set; }
+    public string? FourthName { get; set; }
+    public string? LastName { get; set; }
+    public string? MotherName { get; set; }
+    public string? MotherNameEnglish { get; set; }
+
     // Demographics
-    public int? Gender_Id { get; set; }
-    public string? Blood_Group { get; set; }
+    public Guid? GenderId { get; set; }
+    public string? GenderName { get; set; }
+    public string? BloodGroup { get; set; }
     public string? Nationality { get; set; }
-    public string? Relegion { get; set; }
-    public string? Place_Of_Birth { get; set; }
-    public DateTime? Birth_Date { get; set; }
-    
+    public string? Religion { get; set; }
+    public string? PlaceOfBirth { get; set; }
+    public DateTime? BirthDate { get; set; }
+
     // Marital Status
-    public int? Marital_Status { get; set; }
-    public string? No_Of_Children { get; set; }
-    public string? Hus_Wif_Name { get; set; }
-    public string? Hus_Wif_Job { get; set; }
-    
+    public Guid? MaritalStatusId { get; set; }
+    public string? MaritalStatusName { get; set; }
+    public string? NumberOfChildren { get; set; }
+    public string? SpouseName { get; set; }
+    public string? SpouseJob { get; set; }
+
     // Contact Information
-    public string? Phone_No { get; set; }
+    public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
-    public string? Address { get; set; }
-    public string? District { get; set; }
-    public string? Alley { get; set; }
-    public string? House_No { get; set; }
-    
-    // Civil ID Information
-    public string? Civil_Id_No { get; set; }
-    public string? Record_No { get; set; }
-    public string? Page_No { get; set; }
+    public string? FullAddress { get; set; }
+
+    // Identification Information
+    public string? CivilIdNumber { get; set; }
+    public string? RecordNumber { get; set; }
+    public string? PageNumber { get; set; }
     public string? Publisher { get; set; }
-    public DateTime? Date_Of_Issuance { get; set; }
-    
-    // National Card
-    public string? Nat_Card_No { get; set; }
-    public DateTime? Nat_Issuance_Date { get; set; }
-    
+    public DateTime? DateOfIssuance { get; set; }
+    public string? NationalCardNumber { get; set; }
+    public DateTime? NationalCardIssuanceDate { get; set; }
+
     // Nationality Certificate
-    public string? Id_Cert_No { get; set; }
-    public string? Pocket_No { get; set; }
-    public string? Cert_Publisher { get; set; }
-    public DateTime? Cert_Issuance_Date { get; set; }
-    
+    public string? CertificateNumber { get; set; }
+    public string? PocketNumber { get; set; }
+    public string? CertificatePublisher { get; set; }
+    public DateTime? CertificateIssuanceDate { get; set; }
+
+    // Housing & Supplying
+    public string? InformationOfficeName { get; set; }
+    public string? HousingCardNumber { get; set; }
+    public DateTime? HousingCardIssuanceDate { get; set; }
+    public string? SupplyingCardNumber { get; set; }
+    public string? SupplyCenterName { get; set; }
+    public string? SupplyCenterNumber { get; set; }
+    public string? SupplyNotes { get; set; }
+
     // Additional
-    public string? Prof_Pic { get; set; }
-    public string? File_Path { get; set; }
+    public string? FilePath { get; set; }
+    public string? ProfilePicture { get; set; }
+    public bool IsSelected { get; set; }
+    public bool IsSelectedThanks { get; set; }
+    public bool IsSelectedLetters { get; set; }
     public int Military { get; set; }
 }

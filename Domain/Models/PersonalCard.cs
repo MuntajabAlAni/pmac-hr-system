@@ -1,95 +1,35 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Models
+namespace Domain.Models;
+
+public class PersonalCard
 {
-    public class PersonalCard
-    {
-        public string? Pic { get; set; }
+    [Key]
+    public Guid Id { get; set; }
 
-        [DisplayName("اسم الموظف")]
-        public string? EmployeeName { get; set; }
+    [ForeignKey("EmployeeId")]
+    public Guid EmployeeId { get; set; }
 
-        [DisplayName("تأريخ الولادة")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? BirthDate { get; set; }
+    public string? EmployeeName { get; set; } // Not mapped to DB, used for display
 
-        [DisplayName("الدرجة الوظيفية")]
-        public string? Grade { get; set; }
+    [DisplayName("رقم الهوية")]
+    public string? CardNumber { get; set; }
 
-        [DisplayName("المرحلة")]
-        public string? Step { get; set; }
+    [DisplayName("تأريخ الاصدار")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    public DateTime? IssuanceDate { get; set; }
 
-        [DisplayName("العنوان الوظيفي")]
-        public string? JobTitle { get; set; }
+    [DisplayName("تأريخ النفاذ")]
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    public DateTime? ExpiryDate { get; set; }
 
-        [DisplayName("اسم الدائرة")]
-        public string? Directorate { get; set; }
+    [DisplayName("مسار الملف")]
+    public string? FilePath { get; set; }
 
-        [DisplayName("اسم القسم")]
-        public string? Department { get; set; }
-
-        [DisplayName("رقم الموظف الوطني")]
-        public string? EmployeeNationalNumber { get; set; }
-
-        [DisplayName("الحالة الوظيفية")]
-        public string? EmploymentStatus { get; set; }
-
-        [DisplayName("المنصب")]
-        public string? PositionId { get; set; }
-
-        [DisplayName("تاريخ كتاب التعيين")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? AssignBookDate { get; set; }
-
-        [DisplayName("تأريخ المباشرة في الوظيفة العامة")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? InitiationActualDate { get; set; }
-
-        [DisplayName("تأريخ  المباشرة في المكتب")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? InitiationAtOfficeBookDate { get; set; }
-
-        [DisplayName("تأريخ  المباشرة في المكتب")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? EndOfServiceDate { get; set; }
-
-        [DisplayName("التحصيل الدراسي")]
-        public string? Education { get; set; }
-
-        [DisplayName("الجهة المانحة")]
-        public string? CertificatePublisherId { get; set; }
-
-        [DisplayName("التخصص")]
-        [DefaultValue("لم يذكر")]
-        public string? Major { get; set; }
-
-        [DisplayName("سنة التخرج")]
-        public string? YearOfGraduate { get; set; }
-
-        [DisplayName("نوع العمل")]
-        public string? WorkCareerTypeId { get; set; }
-
-        //مدة الخدمة يوم-شهر-سنة
-        [DisplayName("سنوات")]
-        public int? Years { get; set; }
-
-        [DisplayName("أشهر")]
-        public int? Months { get; set; }
-
-        [DisplayName("أيام")]
-        public int? Days { get; set; }
-
-        [DisplayName("عدد كتب الشكر من السيد رئيس مجلس الوزراء")]
-        public int? ThanksPM { get; set; }
-
-        [DisplayName("عدد كتب الشكر من السيد مدير المكتب")]
-        public int? ThanksOM { get; set; }
-    }
+    // Navigation property
+    public virtual Employee? Employee { get; set; }
 }

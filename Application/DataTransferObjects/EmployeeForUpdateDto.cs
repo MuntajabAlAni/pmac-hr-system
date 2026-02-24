@@ -5,48 +5,73 @@ namespace Application.DataTransferObjects;
 public class EmployeeForUpdateDto
 {
     [Required(ErrorMessage = "Full name is required")]
-    [MaxLength(250)]
-    public string Employee_F_Name { get; set; } = null!;
-    
+    [MaxLength(500)]
+    public string? FullName { get; set; }
+
     [Required(ErrorMessage = "First name is required")]
     [MaxLength(100)]
-    public string Employee_First_Name { get; set; } = null!;
-    
+    public string FirstName { get; set; } = null!;
+
     [MaxLength(100)]
-    public string? Employee_Second_Name { get; set; }
-    
+    public string? SecondName { get; set; }
+
     [MaxLength(100)]
-    public string? Employee_Third_Name { get; set; }
-    
+    public string? ThirdName { get; set; }
+
     [MaxLength(100)]
-    public string? Employee_Forth_Name { get; set; }
-    
+    public string? FourthName { get; set; }
+
     [MaxLength(100)]
-    public string? Employee_Last_Name { get; set; }
-    
+    public string? LastName { get; set; }
+
     [MaxLength(200)]
-    public string? Mother_Name { get; set; }
-    
-    public int? Gender_Id { get; set; }
-    
-    public DateTime? Birth_Date { get; set; }
-    
-    public int? Marital_Status { get; set; }
-    
+    public string? MotherName { get; set; }
+
+    public Guid? GenderId { get; set; }
+
+    public DateTime? BirthDate { get; set; }
+
+    public Guid? MaritalStatusId { get; set; }
+
     [Phone]
-    [MaxLength(20)]
-    public string? Phone_No { get; set; }
-    
+    [MaxLength(50)]
+    public string? PhoneNumber { get; set; }
+
     [EmailAddress]
     [MaxLength(250)]
     public string? Email { get; set; }
-    
-    [MaxLength(500)]
-    public string? Address { get; set; }
-    
+
+    public string? FullAddress { get; set; }
+
     [MaxLength(50)]
-    public string? Civil_Id_No { get; set; }
-    
+    public string? CivilIdNumber { get; set; }
+
     [MaxLength(50)]
-    public string? Nat_Card_No { get; set; }
+    public string? NationalCardNumber { get; set; }
+
+    [MaxLength(50)]
+    public string? RecordNumber { get; set; }
+
+    [MaxLength(50)]
+    public string? PageNumber { get; set; }
+
+    [MaxLength(200)]
+    public string? Publisher { get; set; }
+
+    public DateTime? DateOfIssuance { get; set; }
+
+    public DateTime? NationalCardIssuanceDate { get; set; }
+
+    [MaxLength(100)]
+    public string? CertificateNumber { get; set; }
+
+    [MaxLength(100)]
+    public string? PocketNumber { get; set; }
+
+    [MaxLength(200)]
+    public string? CertificatePublisher { get; set; }
+
+    public DateTime? CertificateIssuanceDate { get; set; }
+
+    public int Military { get; set; } = 0;
 }

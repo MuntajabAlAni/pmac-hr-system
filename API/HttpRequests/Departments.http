@@ -1,0 +1,46 @@
+@HostAddress = https://localhost:5001/be/api
+
+### Get All Departments (Requires DirectorateId as it's a nested resource ideally, or generic)
+# GET {{HostAddress}}/departments is available currently
+GET {{HostAddress}}/departments
+Accept: application/json
+
+###
+
+### Get Department By Id
+@DepartmentId = 00000000-0000-0000-0000-000000000000
+GET {{HostAddress}}/departments/{{DepartmentId}}
+Accept: application/json
+
+###
+
+### Create Department
+POST {{HostAddress}}/departments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "directorateId": "REPLACE-WITH-VALID-DIRECTORATE-ID",
+  "name": "Software Development Department",
+  "number": "DEV-200",
+  "isDeleted": false
+}
+
+###
+
+### Update Department
+PUT {{HostAddress}}/departments/{{DepartmentId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "directorateId": "REPLACE-WITH-VALID-DIRECTORATE-ID",
+  "name": "Software Engineering Department",
+  "number": "DEV-201",
+  "isDeleted": false
+}
+
+###
+
+### Delete Department
+DELETE {{HostAddress}}/departments/{{DepartmentId}}

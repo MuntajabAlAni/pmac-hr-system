@@ -8,7 +8,6 @@ namespace API.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
 public class EmployeesController(IServiceManager serviceManager) : ControllerBase
 {
     /// <summary>
@@ -19,9 +18,9 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     {
         var (employees, totalCount) = await serviceManager.EmployeeService.GetAll(parameters);
 
-        Response.Headers.Add("X-Total-Count", totalCount.ToString());
-        Response.Headers.Add("X-Page-Number", parameters.PageNumber.ToString());
-        Response.Headers.Add("X-Page-Size", parameters.PageSize.ToString());
+        Response.Headers.Append("X-Total-Count", totalCount.ToString());
+        Response.Headers.Append("X-Page-Number", parameters.PageNumber.ToString());
+        Response.Headers.Append("X-Page-Size", parameters.PageSize.ToString());
 
         return Ok(employees);
     }
@@ -36,7 +35,7 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     {
         var (employees, totalCount) = await serviceManager.EmployeeService.Search(searchTerm, parameters);
 
-        Response.Headers.Add("X-Total-Count", totalCount.ToString());
+        Response.Headers.Append("X-Total-Count", totalCount.ToString());
 
         return Ok(employees);
     }
@@ -55,7 +54,7 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     /// Create a new employee
     /// </summary>
     [HttpPost]
-    [Authorize(Policy = "RequireAddUserPermission")]
+    // [Authorize(Policy)] removed - no authentication required
     public async Task<ActionResult<Guid>> Create([FromBody] EmployeeForCreationDto employeeDto)
     {
         if (!ModelState.IsValid)
@@ -70,7 +69,7 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     /// Update an existing employee
     /// </summary>
     [HttpPut("{id:guid}")]
-    [Authorize(Policy = "RequireEditUserPermission")]
+    // [Authorize(Policy)] removed - no authentication required
     public async Task<ActionResult> Update(Guid id, [FromBody] EmployeeForUpdateDto employeeDto)
     {
         if (!ModelState.IsValid)
@@ -85,7 +84,7 @@ public class EmployeesController(IServiceManager serviceManager) : ControllerBas
     /// Delete an employee (soft delete)
     /// </summary>
     [HttpDelete("{id:guid}")]
-    [Authorize(Policy = "RequireDeleteUserPermission")]
+    // [Authorize(Policy)] removed - no authentication required
     public async Task<ActionResult> Delete(Guid id)
     {
         await serviceManager.EmployeeService.Delete(id);

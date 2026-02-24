@@ -1,0 +1,73 @@
+@HostAddress = https://localhost:5001/be/api
+
+### Get All Employees (Paginated)
+GET {{HostAddress}}/employees?pageNumber=1&pageSize=10
+Accept: application/json
+
+###
+
+### Get Employee By Id
+# Replace with a valid Guid after running Get All
+@EmployeeId = 00000000-0000-0000-0000-000000000000
+GET {{HostAddress}}/employees/{{EmployeeId}}
+Accept: application/json
+
+###
+
+### Create a new Employee
+POST {{HostAddress}}/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Ahmed",
+  "secondName": "Ali",
+  "thirdName": "Hussein",
+  "surname": "Al-Baghdadi",
+  "motherName": "Fatima",
+  "dateOfBirth": "1990-01-01",
+  "gender": 1,
+  "bloodGroup": "O+",
+  "nationalNumber": "199012345678",
+  "civilIdNumber": "123456789012",
+  "personalIdNumber": "9876543210",
+  "nationalCardNumber": "N12345678",
+  "workNature": "Permanent",
+  "employeeNumber": "EMP-001",
+  "fingerprintNumber": "FP-001",
+  "directorateId": null,
+  "departmentId": null,
+  "sectionId": null,
+  "positionId": null,
+  "jobTitleId": null,
+  "rankId": null,
+  "isDeleted": false
+}
+
+###
+
+### Update an existing Employee
+# Replace with a valid Guid
+PUT {{HostAddress}}/employees/{{EmployeeId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Ahmed (Updated)",
+  "secondName": "Ali",
+  "thirdName": "Hussein",
+  "surname": "Al-Baghdadi",
+  "motherName": "Fatima",
+  "dateOfBirth": "1990-01-01",
+  "gender": 1,
+  "workNature": "Permanent",
+  "employeeNumber": "EMP-001",
+  "fingerprintNumber": "FP-001",
+  "isDeleted": false
+}
+
+###
+
+### Delete an Employee
+# Replace with a valid Guid
+DELETE {{HostAddress}}/employees/{{EmployeeId}}

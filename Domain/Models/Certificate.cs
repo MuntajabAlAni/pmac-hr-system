@@ -13,8 +13,8 @@ namespace Domain.Models
         [Key]
         public Guid Id { get; set; }
 
-        [DisplayName("الوصف")]
-        public string? Description { get; set; }
+        [DisplayName("الشهادة")]
+        public string? Name { get; set; }
 
         [DisplayName("عدد الاشهر")]
         [Required]

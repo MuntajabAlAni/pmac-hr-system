@@ -3,8 +3,8 @@ namespace Infrastructure.Queries;
 public class DepartmentQueries
 {
     public const string FindAllQuery = """
-        SELECT D.Deptartment_Id, D.Deptartment_Name, D.Directorate_Id,
-               Dir.Directorate_Name, D.Exception
+        SELECT D.Deptartment_Id AS Id, D.Deptartment_Name AS Name, D.Directorate_Id AS DirectorateId,
+               Dir.Directorate_Name AS DirectorateName, D.Exception
         FROM Department D
         LEFT JOIN Directorate Dir ON D.Directorate_Id = Dir.Directorate_Id
         WHERE D.hidden = 0
@@ -12,15 +12,15 @@ public class DepartmentQueries
         """;
 
     public const string FindByIdQuery = """
-        SELECT D.Deptartment_Id, D.Deptartment_Name, D.Directorate_Id,
-               Dir.Directorate_Name, D.Exception
+        SELECT D.Deptartment_Id AS Id, D.Deptartment_Name AS Name, D.Directorate_Id AS DirectorateId,
+               Dir.Directorate_Name AS DirectorateName, D.Exception
         FROM Department D
         LEFT JOIN Directorate Dir ON D.Directorate_Id = Dir.Directorate_Id
         WHERE D.Deptartment_Id = @Id
         """;
 
     public const string FindByDirectorateIdQuery = """
-        SELECT Deptartment_Id, Deptartment_Name, Directorate_Id, Exception
+        SELECT Deptartment_Id AS Id, Deptartment_Name AS Name, Directorate_Id AS DirectorateId, Exception
         FROM Department
         WHERE Directorate_Id = @DirectorateId AND hidden = 0
         ORDER BY Deptartment_Name

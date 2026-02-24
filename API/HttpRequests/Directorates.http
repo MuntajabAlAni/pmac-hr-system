@@ -1,0 +1,43 @@
+@HostAddress = https://localhost:5001/be/api
+
+### Get All Directorates
+GET {{HostAddress}}/directorates
+Accept: application/json
+
+###
+
+### Get Directorate By Id
+@DirectorateId = 00000000-0000-0000-0000-000000000000
+GET {{HostAddress}}/directorates/{{DirectorateId}}
+Accept: application/json
+
+###
+
+### Create Directorate
+POST {{HostAddress}}/directorates
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "General Directorate of IT",
+  "number": "IT-100",
+  "isDeleted": false
+}
+
+###
+
+### Update Directorate
+PUT {{HostAddress}}/directorates/{{DirectorateId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "General Directorate of IT and Communications",
+  "number": "IT-101",
+  "isDeleted": false
+}
+
+###
+
+### Delete Directorate
+DELETE {{HostAddress}}/directorates/{{DirectorateId}}

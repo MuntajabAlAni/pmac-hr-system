@@ -5,9 +5,9 @@ namespace Domain.Interfaces;
 public interface IDepartmentRepository
 {
     Task<IEnumerable<Department>> FindAll();
-    Task<IEnumerable<Department>> FindByDirectorateId(int directorateId);
+    Task<IEnumerable<Department>> FindByDirectorateId(Guid directorateId);
     Task<Department?> FindById(Guid id);
-    Task<int> Create(Department department);
+    Task<Guid> Create(Department department);
     Task Update(Department department);
     Task Delete(Guid id);
 }
