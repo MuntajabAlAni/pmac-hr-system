@@ -1,0 +1,145 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "HR_PMAC_BACK.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "HR_PMAC_BACK.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HR_PMAC_BACK.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HR_PMAC_BACK.Application.dll": {}
+        }
+      },
+      "HR_PMAC_BACK.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/HR_PMAC_BACK.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HR_PMAC_BACK.Domain.dll": {}
+        }
+      },
+      "HR_PMAC_BACK.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "HR_PMAC_BACK.Application": "1.0.0",
+          "HR_PMAC_BACK.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HR_PMAC_BACK.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HR_PMAC_BACK.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "HR_PMAC_BACK.Application/1.0.0": {
+      "type": "project",
+      "path": "../HR_PMAC_BACK.Application/HR_PMAC_BACK.Application.csproj",
+      "msbuildProject": "../HR_PMAC_BACK.Application/HR_PMAC_BACK.Application.csproj"
+    },
+    "HR_PMAC_BACK.Domain/1.0.0": {
+      "type": "project",
+      "path": "../HR_PMAC_BACK.Domain/HR_PMAC_BACK.Domain.csproj",
+      "msbuildProject": "../HR_PMAC_BACK.Domain/HR_PMAC_BACK.Domain.csproj"
+    },
+    "HR_PMAC_BACK.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../HR_PMAC_BACK.Infrastructure/HR_PMAC_BACK.Infrastructure.csproj",
+      "msbuildProject": "../HR_PMAC_BACK.Infrastructure/HR_PMAC_BACK.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "HR_PMAC_BACK.Application >= 1.0.0",
+      "HR_PMAC_BACK.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\lenovo-a\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Presentation\\HR_PMAC_BACK.Presentation.csproj",
+      "projectName": "HR_PMAC_BACK.Presentation",
+      "projectPath": "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Presentation\\HR_PMAC_BACK.Presentation.csproj",
+      "packagesPath": "C:\\Users\\lenovo-a\\.nuget\\packages\\",
+      "outputPath": "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Presentation\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\lenovo-a\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Application\\HR_PMAC_BACK.Application.csproj": {
+              "projectPath": "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Application\\HR_PMAC_BACK.Application.csproj"
+            },
+            "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Infrastructure\\HR_PMAC_BACK.Infrastructure.csproj": {
+              "projectPath": "E:\\هيئة المستشارين\\HR\\HR_PMAC_NEW\\HR_PMAC_BACK5\\HR_PMAC_BACK.Infrastructure\\HR_PMAC_BACK.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
