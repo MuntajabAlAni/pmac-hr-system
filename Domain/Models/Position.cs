@@ -1,19 +1,81 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using HR_PMAC_BACK.Domain.Entities.EmploymentStructure.Enums;
 
-namespace Domain.Models
+namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
 {
-    public class Position
+    /// <summary>
+    /// يمثل المنصب الإداري داخل النظام
+    /// (وزير، مستشار، مدير عام، ...)
+    /// </summary>
+    public class Position : Base<int>
     {
-        [DisplayName("Id")]
-        [Key]
-        public Guid Id { get; set; }
+        /// <summary>
+        /// اسم المنصب
+        /// </summary>
+        public string PositionName { get; private set; }
 
-        [DisplayName("المنصب")]
-        public required string Title { get; set; }
+        /// <summary>
+        /// مستوى المنصب الإداري (Enum رسمي)
+        /// كلما كان الرقم أصغر كان المنصب أعلى
+        /// </summary>
+        public PositionLevel PositionLevel { get; private set; }
 
-        public virtual ICollection<Career>? Careers { get; set; }
+        private Position() { }
+
+        // ======================================================
+        // Constructor
+        // ======================================================
+
+        public Position(
+            string positionName,
+            PositionLevel positionLevel,
+            Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(positionName))
+                throw new ArgumentException("اسم المنصب لا يمكن أن يكون فارغاً.");
+
+            if (!Enum.IsDefined(typeof(PositionLevel), positionLevel))
+                throw new ArgumentException("مستوى المنصب غير صالح.");
+
+            PositionName = positionName.Trim();
+            PositionLevel = positionLevel;
+
+            SetCreated(userGuid);
+        }
+
+        // ======================================================
+        // Update
+        // ======================================================
+
+        public void Update(
+            string positionName,
+            PositionLevel positionLevel,
+            Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(positionName))
+                throw new ArgumentException("اسم المنصب لا يمكن أن يكون فارغاً.");
+
+            if (!Enum.IsDefined(typeof(PositionLevel), positionLevel))
+                throw new ArgumentException("مستوى المنصب غير صالح.");
+
+            PositionName = positionName.Trim();
+            PositionLevel = positionLevel;
+
+            Touch(userGuid);
+        }
+
+        // ======================================================
+        // تغيير المستوى فقط
+        // ======================================================
+
+        public void ChangeLevel(PositionLevel positionLevel, Guid userGuid)
+        {
+            if (!Enum.IsDefined(typeof(PositionLevel), positionLevel))
+                throw new ArgumentException("مستوى المنصب غير صالح.");
+
+            PositionLevel = positionLevel;
+            Touch(userGuid);
+        }
     }
 }

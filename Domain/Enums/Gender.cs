@@ -1,7 +1,8 @@
-namespace Domain.Enums;
-
-public enum Gender // الجنس
+﻿namespace HR_PMAC_BACK.Domain.Entities.Employees.Enums
 {
-    Female,
-    Male
+    public enum Gender
+    {
+        Male = 1,      // ذكر
+        Female = 2     // أنثى
+    }
 }

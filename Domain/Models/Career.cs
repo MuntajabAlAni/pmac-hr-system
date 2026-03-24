@@ -1,313 +1,157 @@
 ﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Domain.Enums;
+using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using HR_PMAC_BACK.Domain.Entities.Employees;
 
-namespace Domain.Models
+namespace HR_PMAC_BACK.Domain.Entities.Career
 {
-    public class Career
+    /// <summary>
+    /// يمثل السيرة الوظيفية للموظف
+    /// //خلاصة الخدمة
+    /// يسجل كل حركة أو تغيير تنظيمي أو وظيفي
+    /// Snapshot كامل للهيكل الوظيفي وقت الحركة
+    /// </summary>
+    public class Career : Base<int>
     {
-        [DisplayName("Id")]
-        [Key]
-        public Guid Id { get; set; }
+        // =====================================================
+        // العلاقة مع الموظف
+        // =====================================================
+
+        public Guid EmployeeId { get; private set; }
+        public Employee Employee { get; private set; }
+
+        // =====================================================
+        // معلومات الحركة
+        // =====================================================
+
+        /// <summary>
+        /// تاريخ الحركة الوظيفية
+        /// </summary>
+        public DateTime MovementDate { get; private set; }
+
+        /// <summary>
+        /// نوع الحركة (تعيين، نقل، ترفيع، إعادة توزيع...)
+        /// </summary>
+        public string MovementType { get; private set; }
+
+        public string? Notes { get; private set; }
+
+        // =====================================================
+        // Snapshot الهيكل التنظيمي
+        // =====================================================
+
+        public string AuthorityName { get; private set; }
+        public string? SubAuthorityName { get; private set; }
+
+        public string DirectorateName { get; private set; }
+        public string? SubDirectorateName { get; private set; }
 
-        [DisplayName("اسم الموظف")]
-        public Guid EmployeeId { get; set; }
+        public string DepartmentName { get; private set; }
+        public string SectionName { get; private set; }
+        public string? UnitName { get; private set; }
 
+        // =====================================================
+        // Snapshot الوظيفة
+        // =====================================================
+
+        /// <summary>
+        /// العنوان الوظيفي وقت الحركة
+        /// </summary>
+        public string JobTitle { get; private set; }
+
+        /// <summary>
+        /// اسم الدرجة الوظيفية
+        /// </summary>
+        public string GradeName { get; private set; }
+
+        /// <summary>
+        /// الراتب الاسمي وقت الحركة
+        /// </summary>
+        public decimal BasicSalary { get; private set; }
+
+        private Career() { }
+
+        // =====================================================
+        // Constructor
+        // =====================================================
+
+        public Career(
+            Guid employeeId,
+            DateTime movementDate,
+            string movementType,
+            string authorityName,
+            string directorateName,
+            string departmentName,
+            string sectionName,
+            string jobTitle,
+            string gradeName,
+            decimal basicSalary,
+            Guid userGuid,
+            string? subAuthorityName = null,
+            string? subDirectorateName = null,
+            string? unitName = null,
+            string? notes = null)
+        {
+            if (employeeId == Guid.Empty)
+                throw new ArgumentException("رقم الموظف غير صالح.");
+
+            if (movementDate == default)
+                throw new ArgumentException("تاريخ الحركة مطلوب.");
+
+            if (string.IsNullOrWhiteSpace(movementType))
+                throw new ArgumentException("نوع الحركة مطلوب.");
+
+            if (string.IsNullOrWhiteSpace(authorityName))
+                throw new ArgumentException("اسم الجهة العليا مطلوب.");
+
+            if (string.IsNullOrWhiteSpace(directorateName))
+                throw new ArgumentException("اسم الدائرة مطلوب.");
+
+            if (string.IsNullOrWhiteSpace(departmentName))
+                throw new ArgumentException("اسم القسم مطلوب.");
+
+            if (string.IsNullOrWhiteSpace(sectionName))
+                throw new ArgumentException("اسم الشعبة مطلوب.");
+
+            if (string.IsNullOrWhiteSpace(jobTitle))
+                throw new ArgumentException("العنوان الوظيفي مطلوب.");
 
+            if (string.IsNullOrWhiteSpace(gradeName))
+                throw new ArgumentException("اسم الدرجة مطلوب.");
 
-        //------------------------------------------------Career info
+            if (basicSalary < 0)
+                throw new ArgumentException("الراتب الاسمي غير صحيح.");
 
-        [DisplayName("رقم الموظف الوطني")]
-        public string? EmployeeNationalNumber { get; set; }
+            EmployeeId = employeeId;
 
-        [DisplayName("اسم الدائرة")]
-        public Guid? DirectorateId { get; set; }
+            MovementDate = movementDate;
+            MovementType = movementType.Trim();
+            Notes = notes?.Trim();
 
-        [DisplayName("اسم القسم")]
-        public Guid? DepartmentId { get; set; }
+            AuthorityName = authorityName.Trim();
+            SubAuthorityName = subAuthorityName?.Trim();
 
-        [DisplayName("اسم الشعبة")]
-        public Guid? SectionId { get; set; }
+            DirectorateName = directorateName.Trim();
+            SubDirectorateName = subDirectorateName?.Trim();
 
-        [DisplayName("استمرارية الخدمة")]
-        public Guid? ContinuationId { get; set; }
+            DepartmentName = departmentName.Trim();
+            SectionName = sectionName.Trim();
+            UnitName = unitName?.Trim();
 
-        [DisplayName("التحصيل الدراسي")]
-        public string? Education { get; set; }
+            JobTitle = jobTitle.Trim();
+            GradeName = gradeName.Trim();
+            BasicSalary = basicSalary;
 
-        [DisplayName("العنوان الوظيفي")]
-        public Guid? JobTitleId { get; set; }
+            SetCreated(userGuid);
+        }
 
-        [DisplayName("الدرجة الوظيفية")]
-        public Guid? GradeId { get; set; }
+        // =====================================================
+        // تحديث الملاحظات فقط
+        // =====================================================
 
-        [DisplayName("المرحلة")]
-        public Guid? StepId { get; set; }
-
-        [DisplayName("الحالة الوظيفية")]
-        public string? EmploymentStatus { get; set; }
-
-        [DisplayName("المنصب")]
-        public Guid? PositionId { get; set; }
-
-        [DisplayName("تأريخ اخر ترفيع")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? LastPromotionDate { get; set; }
-
-        [DisplayName("تأريخ أخر علاوة")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? LastRaiseDate { get; set; }
-
-        [DisplayName("تأريخ الاستحقاق القادم")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? NextRaiseDate { get; set; }
-
-        [DisplayName("Dead_Line_Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? DeadLineDate { get; set; }
-
-        [DisplayName("No_Deserver_Months")]
-        [DefaultValue(0)]
-        public int NoDeserverMonths { get; set; }
-
-        [DisplayName("No_Deserved_Thanks")]
-        [DefaultValue(0)]
-        public int NoDeservedThanks { get; set; }
-
-        [DisplayName("الراتب الاسمي")]
-        public string? BasicSalary { get; set; }
-
-        [DisplayName("دائرة المستشارين")]
-        public string? ConsultantAgency { get; set; }
-
-        [DisplayName("نوع العمل")]
-        public Guid? WorkCareerTypeId { get; set; }
-
-        [DisplayName("المهام")]
-        [DataType(DataType.MultilineText)]
-        public string? WorkType { get; set; }
-
-        [DisplayName("ملاحظات خلاصة الخدمة")]
-        [DataType(DataType.MultilineText)]
-        public string? CareerNotes { get; set; }
-
-
-        [DisplayName("الملاحظات")]
-        [DataType(DataType.MultilineText)]
-        public string? ServiceSummaryNotes { get; set; }
-
-        //------------------------------------------------Assignment info
-
-        [DisplayName("رقم كتاب التعيين")]
-        public string? AssignBookNumber { get; set; }
-
-        [DisplayName("تاريخ كتاب التعيين")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? AssignBookDate { get; set; }
-
-        [DisplayName("رقم كتاب المباشرة")]
-        public string? InitiationBookNumber { get; set; }
-
-        [DisplayName("تأريخ كتاب المباشرة")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? InitiationBookDate { get; set; }
-
-        [DisplayName("تأريخ المباشرة الفعلي")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? InitiationActualDate { get; set; }
-
-        [DisplayName("رقم كتاب المباشرة في المكتب")]
-        public string? InitiationAtOfficeBookNumber { get; set; }
-
-        [DisplayName("تأريخ كتاب المباشرة في المكتب")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? InitiationAtOfficeBookDate { get; set; }
-
-        [DisplayName("هل لديك خدمة مضافة")]
-        public string? AdditionalService { get; set; }
-
-        [DisplayName("من ذوي الشهداء")]
-        public string? MartyreRelated { get; set; }
-
-        [DisplayName("سجين سياسي")]
-        public string? PoliticalPrisoner { get; set; }
-
-        [DisplayName("فصل سياسي")]
-        public string? PoliticalIsolation { get; set; }
-
-        [DisplayName("تأريخ انتهاء الخدمة")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? EndOfServiceDate { get; set; }
-
-        [DisplayName("هل الموظف تارك للعمل سابقا")]
-        public string? HasLeftEarlier { get; set; }
-
-        [DisplayName("هل الموظف منقول")]
-        public string? Transferred { get; set; }
-
-        [DisplayName("رقم كتاب الحذف")]
-        public string? DeletionBookNumber { get; set; }
-
-        [DisplayName("رقم كتاب الاستحداث")]
-        public string? UpdateBookNumber { get; set; }
-
-        [DisplayName("الدائرة السابقة")]
-        public string? PreviousDirectorate { get; set; }
-
-        [DisplayName("رصيد الاعتيادية المدور")]
-        public string? NormalVacationCredit { get; set; }
-
-        [DisplayName("رصيد المرضية المدور")]
-        public string? IllnessVacationCredit { get; set; }
-
-        //-------------
-
-        [DisplayName("الرصيد النهائي للاعتيادية")]
-        [DefaultValue("0")]
-        public string? OrdinaryFinalTotal { get; set; }
-
-        [DisplayName("الرصيد النهائي للمرضية")]
-        [DefaultValue("0")]
-        public string? IllnessFinalTotal { get; set; }
-
-        [DisplayName("no_sal_vac")]
-        [DefaultValue("0")]
-        public string? NoSalaryVacation { get; set; }
-
-        [DisplayName("Other_vacs")]
-        [DefaultValue("0")]
-        public string? OtherVacations { get; set; }
-
-        [DisplayName("illness_vacs_consumed")]
-        [DefaultValue("0")]
-        public string? IllnessVacationsConsumed { get; set; }
-
-        [DisplayName("ordinary_vacs_consumed")]
-        [DefaultValue("0")]
-        public string? OrdinaryVacationsConsumed { get; set; }
-
-        //-----------------
-
-        [DisplayName("هل تم تدقيق البيانات؟")]
-        public string? DataValidated { get; set; }
-
-        //------------------------------------------------Certificate info
-
-        [DisplayName("الجهة المانحة")]
-        public Guid? CertificatePublisherId { get; set; }
-
-        [DisplayName("التخصص")]
-        [DefaultValue("لم يذكر")]
-        public string? Major { get; set; }
-
-        [DisplayName("سنة التخرج")]
-        public string? YearOfGraduate { get; set; }
-
-        [DisplayName("رقم صحة الصدور")]
-        public string? ApproveCertificateNumber { get; set; }
-
-        [DisplayName("تأريخ صحة الصدور")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? ApproveCertificateDate { get; set; }
-
-        [DisplayName("رابط ملف المرفقات")]
-        public string? FilePath { get; set; }
-
-        [DisplayName("years")]
-        [DefaultValue(0)]
-        public int? Years { get; set; }
-
-        [DisplayName("months")]
-        [DefaultValue(0)]
-        public int? Months { get; set; }
-
-        [DisplayName("days")]
-        [DefaultValue(0)]
-        public int? Days { get; set; }
-
-        [DisplayName("الاستحقاق القادم (علاوة/ ترفيع)")]
-        public string? NextRaisePromotion { get; set; }
-
-        //--------------------------Relationships----------------------------------------
-        [ForeignKey("EmployeeId")]
-        public virtual Employee? Employee { get; set; }
-
-        [ForeignKey("JobTitleId")]
-        public virtual JobTitle? JobTitle { get; set; }
-
-        [ForeignKey("PositionId")]
-        public virtual Position? Position { get; set; }
-
-        [ForeignKey("DirectorateId")]
-        public virtual Directorate? Directorate { get; set; }
-
-        [ForeignKey("DepartmentId")]
-        public virtual Department? Department { get; set; }
-
-        [ForeignKey("SectionId")]
-        public virtual Section? Section { get; set; }
-
-        [DisplayName("الرتبة ")]
-        public Guid? RankId { get; set; }
-
-        [ForeignKey("RankId")]
-        public virtual Rank? Rank { get; set; }
-
-        [DisplayName("الجهة المكلف منها ")]
-        public Guid? SideId { get; set; }
-
-        [ForeignKey("SideId")]
-        public virtual CommingFrom? CommingFrom { get; set; }
-
-        [DisplayName("لديه بصمة الكترونية")]
-        [DefaultValue(0)]
-        public int? HasFingerprint { get; set; }
-
-        [DisplayName("تأريخ تسجيل البصمة ")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? FingerprintDate { get; set; }
-
-        //------------------
-        [DisplayName("مصادقة وزارة المالية")]
-        public string? MinistryFinanceApproval { get; set; }
-
-        [DisplayName("نوع المصادقة")]
-        public string? ApprovalType { get; set; }
-
-        //-----------------
-
-        [DisplayName("حالة الاستثناء")]
-        public Guid? ExceptionTypeId { get; set; }
-
-        [ForeignKey("ExceptionTypeId")]
-        public virtual FingerPrintExceptionType? FingerPrintExceptionType { get; set; }
-
-        [ForeignKey("ContinuationId")]
-        public virtual ServiceContinuation? ServiceContinuation { get; set; }
-
-        [ForeignKey("GradeId")]
-        public virtual Grade? Grade { get; set; }
-
-        [ForeignKey("StepId")]
-        public virtual Step? Step { get; set; }
-
-        [ForeignKey("WorkCareerTypeId")]
-        public virtual WorkCareerType? WorkCareerType { get; set; }
-
-        //[ForeignKey("CertificatePublisherId")]
-        //public virtual CertificatePublisher? CertificatePublisher { get; set; }
+        public void UpdateNotes(string? notes, Guid userGuid)
+        {
+            Notes = notes?.Trim();
+            Touch(userGuid);
+        }
     }
 }

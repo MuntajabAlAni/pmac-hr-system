@@ -1,208 +1,440 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Domain.Enums;
+using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using HR_PMAC_BACK.Domain.Entities.Employees.Enums;
 
-namespace Domain.Models
+namespace HR_PMAC_BACK.Domain.Entities.Employees
 {
-    public class Employee
+    public class Employee : Base<Guid>
     {
-        [DisplayName("Id")]
-        [Key]
-        public Guid Id { get; set; }
+        // ======================================================
+        // Core Identity
+        // ======================================================
 
-        [DisplayName("Store_Emp_Id")]
-        public Guid StoreEmployeeId { get; set; }
+        /// <summary>
+        /// الرقم الوظيفي
+        /// </summary>
+        public string EmployeeNumber { get; private set; }
 
-        [DisplayName("الاسم الكامل")]
-        public string? FullName { get; set; } // Kept as cached full name usually needed
+        /// <summary>
+        /// رقم الأرشيف (رقم إضبارة الموظف)
+        /// </summary>
+        public string ArchiveNumber { get; private set; }
 
-        //------------------------------------------------Personal info
-        [DisplayName("الاسم الاول")]
-        [Required]
-        public required string FirstName { get; set; }
+        /// <summary>
+        /// الحالة الوظيفية (فعال، متقاعد، تارك العمل ...)
+        /// </summary>
+        public EmployeeStatus Status { get; private set; }
 
-        [DisplayName("الاسم الثاني")]
-        public string? SecondName { get; set; }
+        // ======================================================
+        // Hire Information
+        // ======================================================
 
-        [DisplayName("الاسم الثالث")]
-        public string? ThirdName { get; set; }
+        /// <summary>
+        /// تاريخ التعيين (Hire Date)
+        /// </summary>
+        public DateTime HireDate { get; private set; }
 
-        [DisplayName("الاسم الرابع")]
-        public string? FourthName { get; set; }
+        /// <summary>
+        /// رقم كتاب التعيين
+        /// </summary>
+        public string? HireBookNumber { get; private set; }
 
-        [DisplayName("اللقب")]
-        public string? LastName { get; set; }
+        public DateTime? HireBookDate { get; private set; }
 
-        [DisplayName("اسم الام الثلاثي")]
-        public string? MotherName { get; set; }
+        public string? HireBookFilePath { get; private set; }
 
-        [DisplayName("اسم الموظف الثلاثي  باللغة الانكليزية")]
-        public string? MotherNameEnglish { get; set; }
+        /// <summary>
+        /// تاريخ المباشرة
+        /// </summary>
+        public DateTime? StartWorkDate { get; private set; }
 
-        [DisplayName("الجنس")]
-        public Guid? GenderId { get; set; }
+        public DateTime? StartWorkBookDate { get; private set; }
 
-        //--------------------------Relationships----------------------------------------
-        [ForeignKey("GenderId")]
-        public virtual Gender? Gender { get; set; }
+        public string? StartWorkBookFilePath { get; private set; }
 
-        [DisplayName("فصيلة الدم")]
-        public string? BloodGroup { get; set; }
+        // ======================================================
+        // Special Employee Status (Enum)
+        // ======================================================
 
-        [DisplayName("القومية")]
-        public string? Nationality { get; set; }
+        /// <summary>
+        /// الحالات الخاصة للموظف
+        /// </summary>
+        /// مفصول سياسي,من ذوي الشهداء,لديه خدمة عسكرية
+        public SpecialEmpStatus SpecialEmpStatus { get; private set; }
 
-        [DisplayName("الديانة")]
-        public string? Religion { get; set; }
+        // ======================================================
+        // Arabic Name
+        // ======================================================
 
-        [DisplayName("محل الولادة")]
-        public string? PlaceOfBirth { get; set; }
+        public string FirstName { get; private set; }
+        public string SecondName { get; private set; }
+        public string ThirdName { get; private set; }
+        public string FourthName { get; private set; }
+        public string LastName { get; private set; }
+        public string SureName { get; private set; }
+        public string MotherName { get; private set; }
 
-        [DisplayName("تأريخ الولادة")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? BirthDate { get; set; }
+        // ======================================================
+        // English Name
+        // ======================================================
 
-        //----------------------------------------------------------
-        [DisplayName("الحالة الزوجية")]
-        public Guid? MaritalStatusId { get; set; }
+        public string? FullNameEnglish { get; private set; }
 
-        [ForeignKey("MaritalStatusId")]
-        public virtual MaritalStatus? MaritalStatus { get; set; }
+        // ======================================================
+        // Personal Attributes
+        // ======================================================
 
-        //-----------------------------------------------------------
+        public Gender Gender { get; private set; }
+        public Religion Religion { get; private set; }
+        public Ethnicity Ethnicity { get; private set; }
+        public BloodGroup? BloodGroup { get; private set; }
+        public DateTime? BirthDate { get; private set; }
 
-        [DisplayName("عدد الاطفال")]
-        public string? NumberOfChildren { get; set; }
+        // ======================================================
+        // Family Info
+        // ======================================================
 
-        [DisplayName("اسم الزوج/ الزوجة")]
-        public string? SpouseName { get; set; }
+        public MaritalStatus MaritalStatus { get; private set; }
 
-        [DisplayName("عمل الزوج/ الزوجة")]
-        public string? SpouseJob { get; set; }
+        // ======================================================
+        // Contact Info
+        // ======================================================
 
-        [DisplayName("رقم الهاتف")]
-        [DataType(DataType.PhoneNumber)]
-        public string? PhoneNumber { get; set; }
+        public string? PhoneNumber { get; private set; }
+        public string? Email { get; private set; }
 
-        [DisplayName("العنوان الكامل")]
-        public string? FullAddress { get; set; } // Merged address fields
+        private Employee() { }
 
-        //-------------------------معلومات هوية الاحوال او البطاقة الوطنية
+        // ======================================================
+        // Constructor
+        // ======================================================
 
-        [DisplayName("رقم هوية الاحوال المدنية")]
-        public string? CivilIdNumber { get; set; }
+        public Employee(
+            string employeeNumber,
+            string archiveNumber,
+            string firstName,
+            Gender gender,
+            Religion religion,
+            Ethnicity ethnicity,
+            DateTime hireDate,
+            Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(employeeNumber))
+                throw new ArgumentException("Employee number required.");
 
-        [DisplayName("رقم السجل")]
-        public string? RecordNumber { get; set; }
+            if (string.IsNullOrWhiteSpace(archiveNumber))
+                throw new ArgumentException("Archive number required.");
 
-        [DisplayName("رقم الصحيفة")]
-        public string? PageNumber { get; set; }
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new ArgumentException("First name required.");
 
-        [DisplayName("جهة الاصدار")]
-        public string? Publisher { get; set; }
+            if (hireDate == default)
+                throw new ArgumentException("Hire date is required.");
 
-        [DisplayName("تأريخ الاصدار")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? DateOfIssuance { get; set; }
+            Id = Guid.NewGuid();
 
-        [DisplayName("رقم البطاقة الوطنية")]
-        public string? NationalCardNumber { get; set; }
+            EmployeeNumber = employeeNumber.Trim();
+            ArchiveNumber = archiveNumber.Trim();
+            FirstName = firstName.Trim();
 
-        [DisplayName("تأريخ الاصدار")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? NationalCardIssuanceDate { get; set; }
+            Gender = gender;
+            Religion = religion;
+            Ethnicity = ethnicity;
 
-        //------------------------معلومات شهادة الجنسية
+            HireDate = hireDate;
 
-        [DisplayName("رقم الشهادة")]
-        public string? CertificateNumber { get; set; }
+            Status = EmployeeStatus.Active;
+            SpecialEmpStatus = SpecialEmpStatus.None;
 
-        [DisplayName("رقم المحفظة")]
-        public string? PocketNumber { get; set; }
+            SetCreated(userGuid);
+        }
 
-        [DisplayName("جهة الاصدار")]
-        public string? CertificatePublisher { get; set; }
+        // ======================================================
+        // Hire Info Update
+        // ======================================================
 
-        [DisplayName("تأريخ الاصدار")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? CertificateIssuanceDate { get; set; }
+        public void UpdateHireInfo(
+            DateTime hireDate,
+            string? hireBookNumber,
+            DateTime? hireBookDate,
+            string? hireBookFilePath,
+            DateTime? startWorkDate,
+            DateTime? startWorkBookDate,
+            string? startWorkBookFilePath,
+            Guid userGuid)
+        {
+            if (hireDate == default)
+                throw new ArgumentException("Hire date is required.");
 
-        //------------------------------------Housing info-----------------
+            HireDate = hireDate;
 
-        [DisplayName("اسم مكتب المعلومات")]
-        public string? InformationOfficeName { get; set; }
+            HireBookNumber = hireBookNumber?.Trim();
+            HireBookDate = hireBookDate;
+            HireBookFilePath = hireBookFilePath?.Trim();
 
-        [DisplayName("رقم البطاقة")]
-        public string? HousingCardNumber { get; set; }
+            StartWorkDate = startWorkDate;
+            StartWorkBookDate = startWorkBookDate;
+            StartWorkBookFilePath = startWorkBookFilePath?.Trim();
 
-        [DisplayName("تأريخ التنظيم")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime? HousingCardIssuanceDate { get; set; }
+            Touch(userGuid);
+        }
 
-        //-----------------------------supplying card info
+        // ======================================================
+        // Update Archive Number
+        // ======================================================
 
-        [DisplayName("رقم البطاقة")]
-        public string? SupplyingCardNumber { get; set; }
+        public void UpdateArchiveNumber(string archiveNumber, Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(archiveNumber))
+                throw new ArgumentException("Archive number required.");
 
-        [DisplayName("اسم مركز التموين")]
-        public string? SupplyCenterName { get; set; }
+            ArchiveNumber = archiveNumber.Trim();
+            Touch(userGuid);
+        }
 
-        [DisplayName("رقم مركز التموين")]
-        public string? SupplyCenterNumber { get; set; }
+        // ======================================================
+        // Special Employee Status Update
+        // ======================================================
 
-        [DisplayName("الملاحظات")]
-        public string? SupplyNotes { get; set; }
+        public void UpdateSpecialEmpStatus(
+            SpecialEmpStatus specialEmpStatus,
+            Guid userGuid)
+        {
+            if (!Enum.IsDefined(typeof(SpecialEmpStatus), specialEmpStatus))
+                throw new ArgumentException("Invalid special employee status.");
 
-        //--------------------------------------file path-------------------------
+            SpecialEmpStatus = specialEmpStatus;
+            Touch(userGuid);
+        }
 
-        [DisplayName("رابط ملف المرفقات")]
-        public string? FilePath { get; set; }
+        // ======================================================
+        // Change Employment Status
+        // ======================================================
 
-        //--------------------------------------Prof_Pic-------------------------
-
-        [DisplayName("الصورة الشخصية")]
-        public string? ProfilePicture { get; set; }
-
-        [DisplayName("البريد الالكتروني")]
-        public string? Email { get; set; }
-
-        [DisplayName("IsSelected")]
-        [DefaultValue(false)]
-        public bool IsSelected { get; set; }
-
-        [DisplayName("IsSelected_Thanks")]
-        [DefaultValue(false)]
-        public bool IsSelectedThanks { get; set; }
-
-        [DisplayName("IsSelected_Letters")]
-        [DefaultValue(false)]
-        public bool IsSelectedLetters { get; set; }
-
-        [DisplayName("Military")]
-        [DefaultValue(0)]
-        public int Military { get; set; }
-
-        //---------------------------relationships
-        public virtual ICollection<Career>? Careers { get; set; }
-        public virtual ICollection<VacationTotal>? VacationTotals { get; set; }
-        public virtual ICollection<Vacation>? Vacations { get; set; }
-        public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
-        public virtual ICollection<TrainingCourse>? TrainingCourses { get; set; }
-        public virtual ICollection<Committee>? Committees { get; set; }
-        public virtual ICollection<Deligation>? Deligations { get; set; }
-        public virtual ICollection<Reward>? Rewards { get; set; }
-        public virtual ICollection<Raise>? Raises { get; set; }
-        public virtual ICollection<AddedService>? AddedServices { get; set; }
-        public virtual ICollection<EducationCertificate>? EducationCertificates { get; set; }
-        public virtual ICollection<AdministrativeAction>? AdministrativeActions { get; set; }
-        public virtual ICollection<OfficialDocument>? OfficialDocuments { get; set; }
+        public void ChangeStatus(EmployeeStatus status, Guid userGuid)
+        {
+            Status = status;
+            Touch(userGuid);
+        }
     }
 }
+//using System;
+//using HR_PMAC_BACK.Domain.Common.BaseEntities;
+//using HR_PMAC_BACK.Domain.Entities.Employees.Enums;
+
+//namespace HR_PMAC_BACK.Domain.Entities.Employees
+//{
+//    public class Employee : Base<Guid>
+//    {
+//        // ======================================================
+//        // Core Identity
+//        // ======================================================
+
+//        /// <summary>
+//        /// الرقم الوظيفي
+//        /// </summary>
+//        public string EmployeeNumber { get; private set; }
+
+//        /// <summary>
+//        /// رقم الأرشيف (رقم إضبارة الموظف)
+//        /// </summary>
+//        public string ArchiveNumber { get; private set; }
+
+//        /// <summary>
+//        /// الحالة الوظيفية (فعال، متقاعد، تارك العمل ...)
+//        /// </summary>
+//        public EmployeeStatus Status { get; private set; }
+
+//        // ======================================================
+//        // Hire Information
+//        // ======================================================
+
+//        /// <summary>
+//        /// تاريخ التعيين (Hire Date)
+//        /// </summary>
+//        public DateTime HireDate { get; private set; }
+
+//        /// <summary>
+//        /// رقم كتاب التعيين
+//        /// </summary>
+//        public string? HireBookNumber { get; private set; }
+
+//        public DateTime? HireBookDate { get; private set; }
+
+//        public string? HireBookFilePath { get; private set; }
+
+//        /// <summary>
+//        /// تاريخ المباشرة
+//        /// </summary>
+//        public DateTime? StartWorkDate { get; private set; }
+
+//        public DateTime? StartWorkBookDate { get; private set; }
+
+//        public string? StartWorkBookFilePath { get; private set; }
+
+//        // ======================================================
+//        // Special Legal Status (Enum)
+//        // ======================================================
+
+//        /// <summary>
+//        /// الحالة القانونية الخاصة
+//        /// </summary>
+//        public SpecialEmpStatus SpecialEmpStatus { get; private set; }
+
+//        // ======================================================
+//        // Arabic Name
+//        // ======================================================
+
+//        public string FirstName { get; private set; }
+//        public string SecondName { get; private set; }
+//        public string ThirdName { get; private set; }
+//        public string FourthName { get; private set; }
+//        public string LastName { get; private set; }
+//        public string SureName { get; private set; }
+//        public string MotherName { get; private set; }
+
+//        // ======================================================
+//        // English Name
+//        // ======================================================
+
+//        public string? FullNameEnglish { get; private set; }
+
+//        // ======================================================
+//        // Personal Attributes
+//        // ======================================================
+
+//        public Gender Gender { get; private set; }
+//        public Religion Religion { get; private set; }
+//        public Ethnicity Ethnicity { get; private set; }
+//        public BloodGroup? BloodGroup { get; private set; }
+//        public DateTime? BirthDate { get; private set; }
+
+//        // ======================================================
+//        // Family Info
+//        // ======================================================
+
+//        public MaritalStatus MaritalStatus { get; private set; }
+
+//        // ======================================================
+//        // Contact Info
+//        // ======================================================
+
+//        public string? PhoneNumber { get; private set; }
+//        public string? Email { get; private set; }
+
+//        private Employee() { }
+
+//        // ======================================================
+//        // Constructor
+//        // ======================================================
+
+//        public Employee(
+//            string employeeNumber,
+//            string archiveNumber,
+//            string firstName,
+//            Gender gender,
+//            Religion religion,
+//            Ethnicity ethnicity,
+//            DateTime hireDate,
+//            Guid userGuid)
+//        {
+//            if (string.IsNullOrWhiteSpace(employeeNumber))
+//                throw new ArgumentException("Employee number required.");
+
+//            if (string.IsNullOrWhiteSpace(archiveNumber))
+//                throw new ArgumentException("Archive number required.");
+
+//            if (string.IsNullOrWhiteSpace(firstName))
+//                throw new ArgumentException("First name required.");
+
+//            if (hireDate == default)
+//                throw new ArgumentException("Hire date is required.");
+
+//            Id = Guid.NewGuid();
+
+//            EmployeeNumber = employeeNumber.Trim();
+//            ArchiveNumber = archiveNumber.Trim();
+//            FirstName = firstName.Trim();
+
+//            Gender = gender;
+//            Religion = religion;
+//            Ethnicity = ethnicity;
+
+//            HireDate = hireDate;
+//            Status = EmployeeStatus.Active;
+//            SpecialLegalStatus = SpecialEmpStatus.None;
+
+//            SetCreated(userGuid);
+//        }
+
+//        // ======================================================
+//        // Hire Info Update
+//        // ======================================================
+
+//        public void UpdateHireInfo(
+//            DateTime hireDate,
+//            string? hireBookNumber,
+//            DateTime? hireBookDate,
+//            string? hireBookFilePath,
+//            DateTime? startWorkDate,
+//            DateTime? startWorkBookDate,
+//            string? startWorkBookFilePath,
+//            Guid userGuid)
+//        {
+//            if (hireDate == default)
+//                throw new ArgumentException("Hire date is required.");
+
+//            HireDate = hireDate;
+
+//            HireBookNumber = hireBookNumber?.Trim();
+//            HireBookDate = hireBookDate;
+//            HireBookFilePath = hireBookFilePath?.Trim();
+
+//            StartWorkDate = startWorkDate;
+//            StartWorkBookDate = startWorkBookDate;
+//            StartWorkBookFilePath = startWorkBookFilePath?.Trim();
+
+//            Touch(userGuid);
+//        }
+
+//        // ======================================================
+//        // Update Archive Number
+//        // ======================================================
+
+//        public void UpdateArchiveNumber(string archiveNumber, Guid userGuid)
+//        {
+//            if (string.IsNullOrWhiteSpace(archiveNumber))
+//                throw new ArgumentException("Archive number required.");
+
+//            ArchiveNumber = archiveNumber.Trim();
+//            Touch(userGuid);
+//        }
+
+//        // ======================================================
+//        // Special Legal Status Update
+//        // ======================================================
+
+//        public void UpdateSpecialLegalStatus(
+//            SpecialEmpStatus specialLegalStatus,
+//            Guid userGuid)
+//        {
+//            if (!Enum.IsDefined(typeof(SpecialEmpStatus), specialLegalStatus))
+//                throw new ArgumentException("Invalid special legal status.");
+
+//            SpecialLegalStatus = specialLegalStatus;
+//            Touch(userGuid);
+//        }
+
+//        // ======================================================
+//        // Change Employment Status
+//        // ======================================================
+
+//        public void ChangeStatus(EmployeeStatus status, Guid userGuid)
+//        {
+//            Status = status;
+//            Touch(userGuid);
+//        }
+//    }
+//}
+
+

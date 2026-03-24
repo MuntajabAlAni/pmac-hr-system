@@ -1,19 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using HR_PMAC_BACK.Domain.Common.BaseEntities;
 
-namespace Domain.Models
+namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
 {
-    public class WorkNature
+    // طبيعة العمل (ميداني،هندسي ,إداري، مكتبي...)
+    public class WorkNature : Base<int>
     {
-        [DisplayName("Id")]
-        [Key]
-        public Guid Id { get; set; }
+        public string Name { get; private set; }
 
-        [DisplayName("طبيعة العمل")]
-        public required string Name { get; set; }
+        private WorkNature() { }
 
-        public virtual ICollection<ConsultantTask>? ConsultantTasks { get; set; }
+        public WorkNature(string name, Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Work nature name cannot be empty.");
+
+            Name = name.Trim();
+
+            SetCreated(userGuid);
+        }
+
+        public void Update(string name, Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Work nature name cannot be empty.");
+
+            Name = name.Trim();
+
+            Touch(userGuid);
+        }
     }
 }

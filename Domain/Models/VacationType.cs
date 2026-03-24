@@ -1,31 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using HR_PMAC_BACK.Domain.Common.BaseEntities;
 
-namespace Domain.Models
+namespace HR_PMAC_BACK.Domain.Entities.Vacations
 {
-    public class VacationType
+    /// <summary>
+    /// يمثل نوع الإجازة (اعتيادية، مرضية، أمومة، بدون راتب...)
+    /// </summary>
+    public class VacationType : Base<int>
     {
-        [DisplayName("Id")]
-        [Key]
-        public Guid Id { get; set; }
+        /// <summary>
+        /// اسم نوع الإجازة
+        /// </summary>
+        public string Name { get; private set; }
 
-        [DisplayName("نوع الاجازة ")]
-        public required string Name { get; set; }
+        /// <summary>
+        /// هل يتطلب هذا النوع شرطاً خاصاً؟
+        /// </summary>
+        public bool IsConditional { get; private set; }
 
-        [DisplayName("Is_Condition")]
-        [DefaultValue(false)]
-        public bool? IsCondition { get; set; }
+        /// <summary>
+        /// هل تحتسب خدمة فعلية مع تفعيل عداد الرصيد؟
+        /// </summary>
+        public bool IsCountedInBalance { get; private set; }
 
-        [DisplayName("خدمة فعلية مع تفعيل عداد الرصيد؟")]
-        [DefaultValue(false)]
-        public bool? Rsed { get; set; }
+        /// <summary>
+        /// هل تؤثر هذه الإجازة على العلاوة؟
+        /// </summary>
+        public bool BonusAffect { get; private set; }
 
-        [DisplayName("يؤثر على العلاوة؟")]
-        [DefaultValue(false)]
-        public bool? RaiseAffected { get; set; }
+        /// <summary>
+        /// هل تؤثر هذه الإجازة على الترفيع؟
+        /// </summary>
+        public bool PromotionAffect { get; private set; }
 
-        public virtual ICollection<Vacation>? Vacations { get; set; }
+        public ICollection<EmployeeVacation> EmployeeVacations { get; private set; }
+
+        private VacationType() { }
+
+        public VacationType(
+            string name,
+            bool isConditional,
+            bool isCountedInBalance,
+            bool bonusAffect,
+            bool promotionAffect,
+            Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("اسم نوع الإجازة مطلوب.");
+
+            Name = name.Trim();
+            IsConditional = isConditional;
+            IsCountedInBalance = isCountedInBalance;
+            BonusAffect = bonusAffect;
+            PromotionAffect = promotionAffect;
+
+            SetCreated(userGuid);
+        }
+
+        public void Update(
+            string name,
+            bool isConditional,
+            bool isCountedInBalance,
+            bool bonusAffect,
+            bool promotionAffect,
+            Guid userGuid)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("اسم نوع الإجازة مطلوب.");
+
+            Name = name.Trim();
+            IsConditional = isConditional;
+            IsCountedInBalance = isCountedInBalance;
+            BonusAffect = bonusAffect;
+            PromotionAffect = promotionAffect;
+
+            Touch(userGuid);
+        }
     }
 }

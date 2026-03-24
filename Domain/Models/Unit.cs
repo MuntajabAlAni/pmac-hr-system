@@ -4,14 +4,14 @@ using HR_PMAC_BACK.Domain.Common.BaseEntities;
 namespace HR_PMAC_BACK.Domain.Entities.Organizations
 {
     /// <summary>
-    /// تمثل الشعبة داخل الهيكل الإداري
+    /// تمثل الوحدة داخل الهيكل الإداري
     /// ترتبط بالجهة العليا بشكل إجباري
-    /// وبقية المستويات اختيارية مع تحقق هرمي
+    /// وبقية المستويات اختيارية مع تحقق هرمي كامل
     /// </summary>
-    public class Section : Base<int>
+    public class Unit : Base<int>
     {
         /// <summary>
-        /// اسم الشعبة
+        /// اسم الوحدة
         /// </summary>
         public string Name { get; private set; }
 
@@ -24,59 +24,45 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         /// </summary>
         public int HighAuthorityId { get; private set; }
 
-        /// <summary>
-        /// Navigation Property للجهة العليا
-        /// </summary>
         public HighAuthority HighAuthority { get; private set; }
 
         // ======================================================
         // العلاقات الاختيارية
         // ======================================================
 
-        /// <summary>
-        /// الجهة الفرعية (اختياري)
-        /// </summary>
         public int? SubHighAuthorityId { get; private set; }
         public SubHighAuthority? SubHighAuthority { get; private set; }
 
-        /// <summary>
-        /// الدائرة (اختياري)
-        /// </summary>
         public int? DirectorateId { get; private set; }
         public Directorate? Directorate { get; private set; }
 
-        /// <summary>
-        /// المديرية (اختياري)
-        /// </summary>
         public int? SubDirectorateId { get; private set; }
         public SubDirectorate? SubDirectorate { get; private set; }
 
-        /// <summary>
-        /// القسم (اختياري)
-        /// </summary>
         public int? DepartmentId { get; private set; }
         public Department? Department { get; private set; }
 
-        private Section() { }
+        public int? SectionId { get; private set; }
+        public Section? Section { get; private set; }
+
+        private Unit() { }
 
         // ======================================================
         // Constructor
         // ======================================================
 
-        /// <summary>
-        /// إنشاء شعبة جديدة
-        /// </summary>
-        public Section(
+        public Unit(
             string name,
             int highAuthorityId,
             int? subHighAuthorityId,
             int? directorateId,
             int? subDirectorateId,
             int? departmentId,
+            int? sectionId,
             Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("اسم الشعبة لا يمكن أن يكون فارغاً.");
+                throw new ArgumentException("اسم الوحدة لا يمكن أن يكون فارغاً.");
 
             if (highAuthorityId <= 0)
                 throw new ArgumentException("يجب تحديد الجهة العليا.");
@@ -87,6 +73,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
             DirectorateId = directorateId;
             SubDirectorateId = subDirectorateId;
             DepartmentId = departmentId;
+            SectionId = sectionId;
 
             SetCreated(userGuid);
         }
@@ -98,7 +85,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         public void Update(string name, Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("اسم الشعبة لا يمكن أن يكون فارغاً.");
+                throw new ArgumentException("اسم الوحدة لا يمكن أن يكون فارغاً.");
 
             Name = name.Trim();
             Touch(userGuid);
@@ -106,7 +93,6 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
 
         // ======================================================
         // تغيير الجهة العليا
-        // عند تغييرها يتم تصفير جميع المستويات الأدنى
         // ======================================================
 
         public void ChangeHighAuthority(int highAuthorityId, Guid userGuid)
@@ -116,11 +102,12 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
 
             HighAuthorityId = highAuthorityId;
 
-            // إعادة ضبط جميع العلاقات الأدنى
+            // إعادة ضبط كل المستويات الأدنى
             SubHighAuthorityId = null;
             DirectorateId = null;
             SubDirectorateId = null;
             DepartmentId = null;
+            SectionId = null;
 
             Touch(userGuid);
         }
@@ -130,18 +117,18 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignSubHighAuthority(
-            int subHighAuthorityId,
-            int subHighAuthorityHighAuthorityId,
+            int id,
+            int parentHighAuthorityId,
             Guid userGuid)
         {
-            if (subHighAuthorityId <= 0)
+            if (id <= 0)
                 throw new ArgumentException("معرف الجهة الفرعية غير صالح.");
 
-            if (subHighAuthorityHighAuthorityId != HighAuthorityId)
+            if (parentHighAuthorityId != HighAuthorityId)
                 throw new InvalidOperationException(
                     "الجهة الفرعية لا تتبع للجهة العليا المحددة.");
 
-            SubHighAuthorityId = subHighAuthorityId;
+            SubHighAuthorityId = id;
             Touch(userGuid);
         }
 
@@ -150,18 +137,18 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignDirectorate(
-            int directorateId,
-            int directorateHighAuthorityId,
+            int id,
+            int parentHighAuthorityId,
             Guid userGuid)
         {
-            if (directorateId <= 0)
+            if (id <= 0)
                 throw new ArgumentException("معرف الدائرة غير صالح.");
 
-            if (directorateHighAuthorityId != HighAuthorityId)
+            if (parentHighAuthorityId != HighAuthorityId)
                 throw new InvalidOperationException(
                     "الدائرة لا تتبع للجهة العليا المحددة.");
 
-            DirectorateId = directorateId;
+            DirectorateId = id;
             Touch(userGuid);
         }
 
@@ -170,18 +157,18 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignSubDirectorate(
-            int subDirectorateId,
-            int subDirectorateHighAuthorityId,
+            int id,
+            int parentHighAuthorityId,
             Guid userGuid)
         {
-            if (subDirectorateId <= 0)
+            if (id <= 0)
                 throw new ArgumentException("معرف المديرية غير صالح.");
 
-            if (subDirectorateHighAuthorityId != HighAuthorityId)
+            if (parentHighAuthorityId != HighAuthorityId)
                 throw new InvalidOperationException(
                     "المديرية لا تتبع للجهة العليا المحددة.");
 
-            SubDirectorateId = subDirectorateId;
+            SubDirectorateId = id;
             Touch(userGuid);
         }
 
@@ -190,18 +177,38 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignDepartment(
-            int departmentId,
-            int departmentHighAuthorityId,
+            int id,
+            int parentHighAuthorityId,
             Guid userGuid)
         {
-            if (departmentId <= 0)
+            if (id <= 0)
                 throw new ArgumentException("معرف القسم غير صالح.");
 
-            if (departmentHighAuthorityId != HighAuthorityId)
+            if (parentHighAuthorityId != HighAuthorityId)
                 throw new InvalidOperationException(
                     "القسم لا يتبع للجهة العليا المحددة.");
 
-            DepartmentId = departmentId;
+            DepartmentId = id;
+            Touch(userGuid);
+        }
+
+        // ======================================================
+        // ربط شعبة (مع تحقق هرمي)
+        // ======================================================
+
+        public void AssignSection(
+            int id,
+            int parentHighAuthorityId,
+            Guid userGuid)
+        {
+            if (id <= 0)
+                throw new ArgumentException("معرف الشعبة غير صالح.");
+
+            if (parentHighAuthorityId != HighAuthorityId)
+                throw new InvalidOperationException(
+                    "الشعبة لا تتبع للجهة العليا المحددة.");
+
+            SectionId = id;
             Touch(userGuid);
         }
 
@@ -230,6 +237,12 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         public void RemoveDepartment(Guid userGuid)
         {
             DepartmentId = null;
+            Touch(userGuid);
+        }
+
+        public void RemoveSection(Guid userGuid)
+        {
+            SectionId = null;
             Touch(userGuid);
         }
     }

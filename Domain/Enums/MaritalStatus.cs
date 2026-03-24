@@ -1,9 +1,10 @@
-namespace Domain.Enums;
-
-public enum MaritalStatus
+﻿namespace HR_PMAC_BACK.Domain.Entities.Employees.Enums
 {
-    Single,
-    Married,
-    Divorced,
-    Widowed
+    public enum MaritalStatus
+    {
+        Single = 1,      // أعزب
+        Married = 2,     // متزوج
+        Divorced = 3,    // مطلق
+        Widowed = 4      // أرمل
+    }
 }
