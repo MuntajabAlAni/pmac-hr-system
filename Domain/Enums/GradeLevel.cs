@@ -1,4 +1,4 @@
-﻿namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure.Enums
+﻿namespace Domain.Entities.EmploymentStructure.Enums
 {
     /// <summary>
     /// يمثل مستويات الدرجات الوظيفية الرسمية

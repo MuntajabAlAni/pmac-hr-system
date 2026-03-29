@@ -1,17 +1,17 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
-using HR_PMAC_BACK.Domain.Entities.EmploymentStructure;
-using HR_PMAC_BACK.Domain.Entities.EmployeeCertifications;
-using HR_PMAC_BACK.Domain.Entities.BonusPromotions.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
+using Domain.Entities.EmploymentStructure;
+using Domain.Entities.EmployeeCertifications;
+using Domain.Entities.BonusPromotions.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.BonusPromotions
+namespace Domain.Entities.BonusPromotions
 {
     /// <summary>
     /// يمثل حركة علاوة أو ترفيع تخص موظف
     /// يحتوي على Snapshot للحالة السابقة والحالية
     /// </summary>
-    public class EmployeeBonusPromotion : Base<int>
+    public class EmployeeBonusPromotion : Base<Guid>
     {
         // =====================================================
         // العلاقات الأساسية

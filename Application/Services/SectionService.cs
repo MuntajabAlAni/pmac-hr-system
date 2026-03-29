@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.Organizations;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -30,20 +30,30 @@ public class SectionService(IRepositoryManager repositoryManager, IMapper mapper
         return mapper.Map<SectionDto>(section);
     }
 
-    public async Task<Guid> Create(SectionForCreationDto sectionDto)
+    public async Task<Guid> Create(SectionForCreationDto dto)
     {
-        var section = mapper.Map<Section>(sectionDto);
+        // Use domain constructor (DDD)
+        var section = new Section(
+            name: dto.Name,
+            highAuthorityId: dto.HighAuthorityId,
+            subHighAuthorityId: dto.SubHighAuthorityId,
+            directorateId: dto.DirectorateId,
+            subDirectorateId: dto.SubDirectorateId,
+            departmentId: dto.DepartmentId,
+            userGuid: Guid.Empty
+        );
+
         return await repositoryManager.Section.Create(section);
     }
 
-    public async Task Update(Guid id, SectionForUpdateDto sectionDto)
+    public async Task Update(Guid id, SectionForUpdateDto dto)
     {
         var section = await repositoryManager.Section.FindById(id);
         if (section is null)
             throw new EntityNotFoundException("Section", "Id", id);
 
-        mapper.Map(sectionDto, section);
-        section.Id = id;
+        // Use domain Update method
+        section.Update(dto.Name, Guid.Empty);
         await repositoryManager.Section.Update(section);
     }
 

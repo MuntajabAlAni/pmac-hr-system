@@ -3,29 +3,31 @@ namespace Infrastructure.Queries;
 public class JobTitleQueries
 {
     public const string FindAllQuery = """
-        SELECT Job_Title_Id AS Id, Job_Title_Name AS Title
+        SELECT Id, Title, GradeId, JobTitleType
         FROM JobTitle
-        ORDER BY Job_Title_Name
+        ORDER BY Title
         """;
 
     public const string FindByIdQuery = """
-        SELECT Job_Title_Id AS Id, Job_Title_Name AS Title
+        SELECT Id, Title, GradeId, JobTitleType
         FROM JobTitle
-        WHERE Job_Title_Id = @Id
+        WHERE Id = @Id
         """;
 
     public const string InsertQuery = """
-        INSERT INTO JobTitle (Job_Title_Id, Job_Title_Name)
-        VALUES (@Id, @Title)
+        INSERT INTO JobTitle (Id, Title, GradeId, JobTitleType)
+        VALUES (@Id, @Title, @GradeId, @JobTitleType)
         """;
 
     public const string UpdateQuery = """
         UPDATE JobTitle SET
-            Job_Title_Name = @Title
-        WHERE Job_Title_Id = @Id
+            Title = @Title,
+            GradeId = @GradeId,
+            JobTitleType = @JobTitleType
+        WHERE Id = @Id
         """;
 
     public const string DeleteQuery = """
-        DELETE FROM JobTitle WHERE Job_Title_Id = @Id
+        DELETE FROM JobTitle WHERE Id = @Id
         """;
 }

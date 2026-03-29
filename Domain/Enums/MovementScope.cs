@@ -1,4 +1,4 @@
-﻿namespace HR_PMAC_BACK.Domain.Entities.Movements.Enums
+﻿namespace Domain.Entities.Movements.Enums
 {
     /// <summary>
     /// هل النقل او التنسيب او التكليف داخلي ام خارجي

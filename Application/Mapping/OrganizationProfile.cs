@@ -1,4 +1,6 @@
 using AutoMapper;
+using Domain.Entities.Organizations;
+using Domain.Entities.EmploymentStructure;
 using Domain.Models;
 using Application.DataTransferObjects;
 
@@ -9,24 +11,19 @@ public class OrganizationProfile : Profile
     public OrganizationProfile()
     {
         CreateMap<Directorate, DirectorateDto>();
-        CreateMap<DirectorateForCreationDto, Directorate>();
-        CreateMap<DirectorateForUpdateDto, Directorate>();
+        // No DTO → Entity maps for Directorate (DDD)
 
         CreateMap<Department, DepartmentDto>();
-        CreateMap<DepartmentForCreationDto, Department>();
-        CreateMap<DepartmentForUpdateDto, Department>();
+        // No DTO → Entity maps for Department (DDD)
 
         CreateMap<Section, SectionDto>();
-        CreateMap<SectionForCreationDto, Section>();
-        CreateMap<SectionForUpdateDto, Section>();
+        // No DTO → Entity maps for Section (DDD)
 
         CreateMap<Position, PositionDto>();
-        CreateMap<PositionForCreationDto, Position>();
-        CreateMap<PositionForUpdateDto, Position>();
+        // No DTO → Entity maps for Position (DDD)
 
         CreateMap<JobTitle, JobTitleDto>();
-        CreateMap<JobTitleForCreationDto, JobTitle>();
-        CreateMap<JobTitleForUpdateDto, JobTitle>();
+        // No DTO → Entity maps for JobTitle (DDD)
 
         CreateMap<Rank, RankDto>();
         CreateMap<RankForCreationDto, Rank>();

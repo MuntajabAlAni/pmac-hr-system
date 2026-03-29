@@ -3,29 +3,30 @@ namespace Infrastructure.Queries;
 public class GradeQueries
 {
     public const string FindAllQuery = """
-        SELECT Grade_Id AS Id, Grade_Name AS Name
+        SELECT Id, GradeName, GradeLevel
         FROM Grade
-        ORDER BY Grade_Name
+        ORDER BY GradeName
         """;
 
     public const string FindByIdQuery = """
-        SELECT Grade_Id AS Id, Grade_Name AS Name
+        SELECT Id, GradeName, GradeLevel
         FROM Grade
-        WHERE Grade_Id = @Id
+        WHERE Id = @Id
         """;
 
     public const string InsertQuery = """
-        INSERT INTO Grade (Grade_Id, Grade_Name)
-        VALUES (@Id, @Name)
+        INSERT INTO Grade (Id, GradeName, GradeLevel)
+        VALUES (@Id, @GradeName, @GradeLevel)
         """;
 
     public const string UpdateQuery = """
         UPDATE Grade SET
-            Grade_Name = @Name
-        WHERE Grade_Id = @Id
+            GradeName = @GradeName,
+            GradeLevel = @GradeLevel
+        WHERE Id = @Id
         """;
 
     public const string DeleteQuery = """
-        DELETE FROM Grade WHERE Grade_Id = @Id
+        DELETE FROM Grade WHERE Id = @Id
         """;
 }

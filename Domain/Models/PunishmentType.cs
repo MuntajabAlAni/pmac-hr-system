@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Punishments
+namespace Domain.Entities.Punishments
 {
     /// <summary>
     /// يمثل نوع العقوبة (تنبيه، إنذار، قطع راتب، توبيخ...)
     /// </summary>
-    public class PunishmentType : Base<int>
+    public class PunishmentType : Base<Guid>
     {
         /// <summary>
         /// اسم نوع العقوبة

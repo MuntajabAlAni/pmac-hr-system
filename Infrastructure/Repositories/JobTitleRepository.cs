@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.EmploymentStructure;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 
@@ -25,14 +25,26 @@ public class JobTitleRepository(DapperContext context) : IJobTitleRepository
             jobTitle.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(JobTitleQueries.InsertQuery, jobTitle);
+        await connection.ExecuteAsync(JobTitleQueries.InsertQuery, new
+        {
+            jobTitle.Id,
+            jobTitle.Title,
+            jobTitle.GradeId,
+            jobTitle.JobTitleType
+        });
         return jobTitle.Id;
     }
 
     public async Task Update(JobTitle jobTitle)
     {
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(JobTitleQueries.UpdateQuery, jobTitle);
+        await connection.ExecuteAsync(JobTitleQueries.UpdateQuery, new
+        {
+            jobTitle.Id,
+            jobTitle.Title,
+            jobTitle.GradeId,
+            jobTitle.JobTitleType
+        });
     }
 
     public async Task Delete(Guid id)

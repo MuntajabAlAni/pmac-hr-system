@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.AdministrativeOrders
+namespace Domain.Entities.AdministrativeOrders
 {
     /// <summary>
     /// يمثل نوع الأمر (إداري، ديواني، وزاري، أمر لجنة...)
     /// </summary>
-    public class AdministrativeOrderType : Base<int>
+    public class AdministrativeOrderType : Base<Guid>
     {
         /// <summary>
         /// اسم نوع الأمر

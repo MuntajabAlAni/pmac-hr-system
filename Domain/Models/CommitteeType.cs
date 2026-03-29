@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Committees
+namespace Domain.Entities.Committees
 {
     /// <summary>
     /// يمثل نوع اللجنة (داخلية / خارجية)
     /// </summary>
-    public class CommitteeType : Base<int>
+    public class CommitteeType : Base<Guid>
     {
         public string Name { get; private set; }
 

@@ -1,4 +1,4 @@
-﻿namespace HR_PMAC_BACK.Domain.Entities.Certifications.Enums
+﻿namespace Domain.Entities.Certifications.Enums
 {
     // مستوى الشهادة
     public enum CertificationLevel

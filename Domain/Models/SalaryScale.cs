@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
+namespace Domain.Entities.EmploymentStructure
 {
     /// <summary>
     /// يمثل سلم الرواتب المرتبط بدرجة وظيفية
     /// كل سلم راتب يجب أن يكون مرتبطاً بدرجة (إجباري)
     /// </summary>
-    public class SalaryScale : Base<int>
+    public class SalaryScale : Base<Guid>
     {
         // ======================================================
         // العلاقة الإلزامية مع الدرجة
@@ -16,7 +16,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
         /// <summary>
         /// معرف الدرجة الوظيفية (إجباري)
         /// </summary>
-        public int GradeId { get; private set; }
+        public Guid GradeId { get; private set; }
 
         /// <summary>
         /// Navigation Property للدرجة
@@ -44,12 +44,12 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
         // ======================================================
 
         public SalaryScale(
-            int gradeId,
+            Guid gradeId,
             int step,
             decimal basicSalary,
             Guid userGuid)
         {
-            if (gradeId <= 0)
+            if (gradeId == Guid.Empty)
                 throw new ArgumentException("معرف الدرجة غير صالح.");
 
             if (step <= 0)
@@ -95,9 +95,9 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
         // تغيير الدرجة (اختياري إذا أردت السماح بذلك)
         // ======================================================
 
-        public void ChangeGrade(int gradeId, Guid userGuid)
+        public void ChangeGrade(Guid gradeId, Guid userGuid)
         {
-            if (gradeId <= 0)
+            if (gradeId == Guid.Empty)
                 throw new ArgumentException("معرف الدرجة غير صالح.");
 
             GradeId = gradeId;

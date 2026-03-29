@@ -1,14 +1,14 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.EmploymentStructure.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.EmploymentStructure.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
+namespace Domain.Entities.EmploymentStructure
 {
     /// <summary>
     /// يمثل المنصب الإداري داخل النظام
     /// (وزير، مستشار، مدير عام، ...)
     /// </summary>
-    public class Position : Base<int>
+    public class Position : Base<Guid>
     {
         /// <summary>
         /// اسم المنصب

@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.EmploymentStructure;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -24,20 +24,26 @@ public class PositionService(IRepositoryManager repositoryManager, IMapper mappe
         return mapper.Map<PositionDto>(position);
     }
 
-    public async Task<Guid> Create(PositionForCreationDto positionDto)
+    public async Task<Guid> Create(PositionForCreationDto dto)
     {
-        var position = mapper.Map<Position>(positionDto);
+        // Use domain constructor (DDD)
+        var position = new Position(
+            positionName: dto.PositionName,
+            positionLevel: dto.PositionLevel,
+            userGuid: Guid.Empty
+        );
+
         return await repositoryManager.Position.Create(position);
     }
 
-    public async Task Update(Guid id, PositionForUpdateDto positionDto)
+    public async Task Update(Guid id, PositionForUpdateDto dto)
     {
         var position = await repositoryManager.Position.FindById(id);
         if (position is null)
             throw new EntityNotFoundException("Position", "Id", id);
 
-        mapper.Map(positionDto, position);
-        position.Id = id;
+        // Use domain Update method
+        position.Update(dto.PositionName, dto.PositionLevel, Guid.Empty);
         await repositoryManager.Position.Update(position);
     }
 

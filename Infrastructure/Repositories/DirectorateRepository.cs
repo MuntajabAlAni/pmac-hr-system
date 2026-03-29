@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.Organizations;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 
@@ -25,14 +25,24 @@ public class DirectorateRepository(DapperContext context) : IDirectorateReposito
             directorate.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(DirectorateQueries.InsertQuery, directorate);
+        await connection.ExecuteAsync(DirectorateQueries.InsertQuery, new
+        {
+            directorate.Id,
+            directorate.Name,
+            directorate.HighAuthorityId,
+            directorate.SubHighAuthorityId
+        });
         return directorate.Id;
     }
 
     public async Task Update(Directorate directorate)
     {
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(DirectorateQueries.UpdateQuery, directorate);
+        await connection.ExecuteAsync(DirectorateQueries.UpdateQuery, new
+        {
+            directorate.Id,
+            directorate.Name
+        });
     }
 
     public async Task Delete(Guid id)

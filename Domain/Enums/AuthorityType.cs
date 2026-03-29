@@ -1,4 +1,4 @@
-﻿namespace HR_PMAC_BACK.Domain.Entities.Organizations.Enums
+﻿namespace Domain.Entities.Organizations.Enums
 {
     /// <summary>
     /// يمثل نوع الجهة العليا داخل النظام

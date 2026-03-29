@@ -1,4 +1,6 @@
 using AutoMapper;
+using Domain.Entities.Career;
+using Domain.Entities.EmploymentStructure;
 using Domain.Models;
 using Application.DataTransferObjects;
 
@@ -9,8 +11,7 @@ public class CareerProfile : Profile
     public CareerProfile()
     {
         CreateMap<Grade, GradeDto>();
-        CreateMap<GradeForCreationDto, Grade>();
-        CreateMap<GradeForUpdateDto, Grade>();
+        // No DTO → Entity maps for Grade (DDD)
 
         CreateMap<Step, StepDto>();
         CreateMap<StepForCreationDto, Step>();
@@ -33,7 +34,6 @@ public class CareerProfile : Profile
         CreateMap<FingerPrintExceptionTypeForUpdateDto, FingerPrintExceptionType>();
 
         CreateMap<Career, CareerDto>();
-        CreateMap<CareerForCreationDto, Career>();
-        CreateMap<CareerForUpdateDto, Career>();
+        // No DTO → Entity maps for Career (DDD)
     }
 }

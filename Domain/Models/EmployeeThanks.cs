@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Thanks
+namespace Domain.Entities.Thanks
 {
     /// <summary>
     /// يمثل كتاب شكر ممنوح لموظف
     /// </summary>
-    public class EmployeeThanks : Base<int>
+    public class EmployeeThanks : Base<Guid>
     {
         // =====================================================
         // العلاقات
@@ -22,7 +22,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Thanks
         /// <summary>
         /// نوع كتاب الشكر
         /// </summary>
-        public int ThanksTypeId { get; private set; }
+        public Guid ThanksTypeId { get; private set; }
         public ThanksType ThanksType { get; private set; }
 
         // =====================================================
@@ -87,7 +87,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Thanks
 
         public EmployeeThanks(
             Guid employeeId,
-            int thanksTypeId,
+            Guid thanksTypeId,
             string donor,
             string orderType,
             string orderNumber,

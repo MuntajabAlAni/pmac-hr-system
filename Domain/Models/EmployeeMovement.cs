@@ -1,17 +1,17 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
-using HR_PMAC_BACK.Domain.Entities.Organizations;
-using HR_PMAC_BACK.Domain.Entities.Movements.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
+using Domain.Entities.Organizations;
+using Domain.Entities.Movements.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.Movements
+namespace Domain.Entities.Movements
 {
     /// <summary>
     /// يمثل حركة إدارية للموظف
     /// (تكليف / تنسيب / نقل / منصب)
     /// ويغطي النقل الداخلي والخارجي
     /// </summary>
-    public class EmployeeMovement : Base<int>
+    public class EmployeeMovement : Base<Guid>
     {
         // =====================================================
         // الموظف
@@ -197,18 +197,18 @@ namespace HR_PMAC_BACK.Domain.Entities.Movements
     }
 }
 //using System;
-//using HR_PMAC_BACK.Domain.Common.BaseEntities;
-//using HR_PMAC_BACK.Domain.Entities.Employees;
-//using HR_PMAC_BACK.Domain.Entities.Organizations;
-//using HR_PMAC_BACK.Domain.Entities.Movements.Enums;
+//using Domain.Common.BaseEntities;
+//using Domain.Entities.Employees;
+//using Domain.Entities.Organizations;
+//using Domain.Entities.Movements.Enums;
 
-//namespace HR_PMAC_BACK.Domain.Entities.Movements
+//namespace Domain.Entities.Movements
 //{
 //    /// <summary>
 //    /// يمثل حركة إدارية للموظف
 //    /// (تكليف / تنسيب / نقل)
 //    /// </summary>
-//    public class EmployeeMovement : Base<int>
+//    public class EmployeeMovement : Base<Guid>
 //    {
 //        // =====================================================
 //        // الموظف

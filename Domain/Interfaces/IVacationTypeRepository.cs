@@ -1,4 +1,4 @@
-using Domain.Models;
+using Domain.Entities.Vacations;
 
 namespace Domain.Interfaces;
 

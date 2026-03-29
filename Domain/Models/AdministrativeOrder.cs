@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.AdministrativeOrders
+namespace Domain.Entities.AdministrativeOrders
 {
     /// <summary>
     /// يمثل أمر إداري رسمي في النظام
     /// يمكن أن يرتبط بلجنة، مكافأة، عقوبة، خدمة مضافة...
     /// </summary>
-    public class AdministrativeOrder : Base<int>
+    public class AdministrativeOrder : Base<Guid>
     {
         // =====================================================
         // العلاقات
@@ -18,7 +18,7 @@ namespace HR_PMAC_BACK.Domain.Entities.AdministrativeOrders
         public Guid EmployeeId { get; private set; }
         public Employee Employee { get; private set; }
 
-        public int AdministrativeOrderTypeId { get; private set; }
+        public Guid AdministrativeOrderTypeId { get; private set; }
         public AdministrativeOrderType AdministrativeOrderType { get; private set; }
 
         // =====================================================
@@ -64,7 +64,7 @@ namespace HR_PMAC_BACK.Domain.Entities.AdministrativeOrders
 
         public AdministrativeOrder(
             Guid employeeId,
-            int administrativeOrderTypeId,
+            Guid administrativeOrderTypeId,
             string orderNumber,
             string filePath,
             Guid userGuid)

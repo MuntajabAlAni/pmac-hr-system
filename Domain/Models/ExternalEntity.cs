@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Organizations
+namespace Domain.Entities.Organizations
 {
     /// <summary>
     /// يمثل جهة خارجية (لا نملك هيكلها الإداري الداخلي)
     /// تستخدم في التكليف / التنسيب / النقل الخارجي
     /// </summary>
-    public class ExternalEntity : Base<int>
+    public class ExternalEntity : Base<Guid>
     {
         /// <summary>
         /// اسم الجهة الخارجية

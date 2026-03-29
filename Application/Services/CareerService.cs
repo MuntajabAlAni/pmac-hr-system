@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.Career;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -30,20 +30,38 @@ public class CareerService(IRepositoryManager repositoryManager, IMapper mapper)
         return mapper.Map<IEnumerable<CareerDto>>(careers);
     }
 
-    public async Task<Guid> Create(CareerForCreationDto careerDto)
+    public async Task<Guid> Create(CareerForCreationDto dto)
     {
-        var career = mapper.Map<Career>(careerDto);
+        // Use domain constructor (DDD)
+        var career = new Career(
+            employeeId: dto.EmployeeId,
+            movementDate: dto.MovementDate,
+            movementType: dto.MovementType,
+            authorityName: dto.AuthorityName,
+            directorateName: dto.DirectorateName,
+            departmentName: dto.DepartmentName,
+            sectionName: dto.SectionName,
+            jobTitle: dto.JobTitle,
+            gradeName: dto.GradeName,
+            basicSalary: dto.BasicSalary,
+            userGuid: Guid.Empty,
+            subAuthorityName: dto.SubAuthorityName,
+            subDirectorateName: dto.SubDirectorateName,
+            unitName: dto.UnitName,
+            notes: dto.Notes
+        );
+
         return await repositoryManager.Career.Create(career);
     }
 
-    public async Task Update(Guid id, CareerForUpdateDto careerDto)
+    public async Task Update(Guid id, CareerForUpdateDto dto)
     {
         var career = await repositoryManager.Career.FindById(id);
         if (career is null)
             throw new EntityNotFoundException("Career", "Id", id);
 
-        mapper.Map(careerDto, career);
-        career.Id = id; // Ensure ID is preserved
+        // Career only allows updating notes (DDD)
+        career.UpdateNotes(dto.Notes, Guid.Empty);
         await repositoryManager.Career.Update(career);
     }
 

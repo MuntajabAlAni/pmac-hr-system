@@ -1,10 +1,10 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
+namespace Domain.Entities.EmploymentStructure
 {
     // طبيعة العمل (ميداني،هندسي ,إداري، مكتبي...)
-    public class WorkNature : Base<int>
+    public class WorkNature : Base<Guid>
     {
         public string Name { get; private set; }
 

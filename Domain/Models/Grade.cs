@@ -1,14 +1,14 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.EmploymentStructure.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.EmploymentStructure.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
+namespace Domain.Entities.EmploymentStructure
 {
     /// <summary>
     /// يمثل الدرجة الوظيفية الرسمية
     /// (عليا أ – عليا ب – الأولى – الثانية – ... )
     /// </summary>
-    public class Grade : Base<int>
+    public class Grade : Base<Guid>
     {
         /// <summary>
         /// الاسم الوصفي للدرجة (مثلاً: الدرجة الأولى / عليا أ)

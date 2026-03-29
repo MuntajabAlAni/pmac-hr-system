@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.Employees;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 using Domain.RequestFeatures;
@@ -66,7 +66,8 @@ public class EmployeeRepository(DapperContext context) : IEmployeeRepository
     {
         const string query = EmployeeQueries.InsertQuery;
 
-        employee.Id = Guid.CreateVersion7();
+        if (employee.Id == Guid.Empty)
+            employee.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
         connection.Open();

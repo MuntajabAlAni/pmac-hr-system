@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.Vacations;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 
@@ -25,14 +25,30 @@ public class VacationTypeRepository(DapperContext context) : IVacationTypeReposi
             vacationType.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(VacationTypeQueries.InsertQuery, vacationType);
+        await connection.ExecuteAsync(VacationTypeQueries.InsertQuery, new
+        {
+            vacationType.Id,
+            vacationType.Name,
+            vacationType.IsConditional,
+            vacationType.IsCountedInBalance,
+            vacationType.BonusAffect,
+            vacationType.PromotionAffect
+        });
         return vacationType.Id;
     }
 
     public async Task Update(VacationType vacationType)
     {
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(VacationTypeQueries.UpdateQuery, vacationType);
+        await connection.ExecuteAsync(VacationTypeQueries.UpdateQuery, new
+        {
+            vacationType.Id,
+            vacationType.Name,
+            vacationType.IsConditional,
+            vacationType.IsCountedInBalance,
+            vacationType.BonusAffect,
+            vacationType.PromotionAffect
+        });
     }
 
     public async Task Delete(Guid id)

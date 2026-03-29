@@ -1,14 +1,14 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentHistory
+namespace Domain.Entities.EmploymentHistory
 {
     /// <summary>
     /// يمثل خدمة مضافة لموظف يتم احتسابها ضمن الخدمة الفعلية
     /// ولا يمكن اعتمادها بدون مستند رسمي مرفق
     /// </summary>
-    public class EmployeeAddedService : Base<int>
+    public class EmployeeAddedService : Base<Guid>
     {
         // =====================================================
         // العلاقات
@@ -23,7 +23,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentHistory
         /// <summary>
         /// نوع الخدمة المضافة
         /// </summary>
-        public int AddedServiceTypeId { get; private set; }
+        public Guid AddedServiceTypeId { get; private set; }
         public AddedServiceType AddedServiceType { get; private set; }
 
         // =====================================================
@@ -106,7 +106,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentHistory
         /// </summary>
         public EmployeeAddedService(
             Guid employeeId,
-            int addedServiceTypeId,
+            Guid addedServiceTypeId,
             string orderNumber,
             string employeeAddedServiceFilePath,
             int totalDays,
@@ -118,7 +118,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentHistory
             if (employeeId == Guid.Empty)
                 throw new ArgumentException("رقم الموظف غير صالح.");
 
-            if (addedServiceTypeId <= 0)
+            if (addedServiceTypeId == Guid.Empty)
                 throw new ArgumentException("نوع الخدمة غير صالح.");
 
             if (string.IsNullOrWhiteSpace(orderNumber))

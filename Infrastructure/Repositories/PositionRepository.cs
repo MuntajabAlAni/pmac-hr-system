@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.EmploymentStructure;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 
@@ -25,14 +25,24 @@ public class PositionRepository(DapperContext context) : IPositionRepository
             position.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(PositionQueries.InsertQuery, position);
+        await connection.ExecuteAsync(PositionQueries.InsertQuery, new
+        {
+            position.Id,
+            position.PositionName,
+            position.PositionLevel
+        });
         return position.Id;
     }
 
     public async Task Update(Position position)
     {
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(PositionQueries.UpdateQuery, position);
+        await connection.ExecuteAsync(PositionQueries.UpdateQuery, new
+        {
+            position.Id,
+            position.PositionName,
+            position.PositionLevel
+        });
     }
 
     public async Task Delete(Guid id)

@@ -1,14 +1,14 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Organizations
+namespace Domain.Entities.Organizations
 {
     /// <summary>
     /// تمثل الدائرة داخل الهيكل الإداري
     /// ترتبط بالجهة العليا بشكل إجباري
     /// ويمكن أن ترتبط بجهة فرعية بشكل اختياري
     /// </summary>
-    public class Directorate : Base<int>
+    public class Directorate : Base<Guid>
     {
         /// <summary>
         /// اسم الدائرة
@@ -22,7 +22,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         /// <summary>
         /// معرف الجهة العليا (إجباري)
         /// </summary>
-        public int HighAuthorityId { get; private set; }
+        public Guid HighAuthorityId { get; private set; }
 
         /// <summary>
         /// Navigation Property للجهة العليا
@@ -36,7 +36,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         /// <summary>
         /// الجهة الفرعية (اختياري)
         /// </summary>
-        public int? SubHighAuthorityId { get; private set; }
+        public Guid? SubHighAuthorityId { get; private set; }
         public SubHighAuthority? SubHighAuthority { get; private set; }
 
         private Directorate() { }
@@ -46,17 +46,17 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         /// </summary>
         public Directorate(
             string name,
-            int highAuthorityId,
-            int? subHighAuthorityId,
+            Guid highAuthorityId,
+            Guid? subHighAuthorityId,
             Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("اسم الدائرة لا يمكن أن يكون فارغاً.");
 
-            if (highAuthorityId <= 0)
+            if (highAuthorityId == Guid.Empty)
                 throw new ArgumentException("يجب تحديد الجهة العليا.");
 
-            if (subHighAuthorityId.HasValue && subHighAuthorityId <= 0)
+            if (subHighAuthorityId.HasValue && subHighAuthorityId == Guid.Empty)
                 throw new ArgumentException("معرف الجهة الفرعية غير صالح.");
 
             Name = name.Trim();
@@ -83,9 +83,9 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // عند تغييرها يتم إلغاء أي ارتباط فرعي
         // ======================================================
 
-        public void ChangeHighAuthority(int highAuthorityId, Guid userGuid)
+        public void ChangeHighAuthority(Guid highAuthorityId, Guid userGuid)
         {
-            if (highAuthorityId <= 0)
+            if (highAuthorityId == Guid.Empty)
                 throw new ArgumentException("معرف الجهة العليا غير صالح.");
 
             HighAuthorityId = highAuthorityId;
@@ -102,11 +102,11 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignSubAuthority(
-            int subHighAuthorityId,
-            int subHighAuthorityHighAuthorityId,
+            Guid subHighAuthorityId,
+            Guid subHighAuthorityHighAuthorityId,
             Guid userGuid)
         {
-            if (subHighAuthorityId <= 0)
+            if (subHighAuthorityId == Guid.Empty)
                 throw new ArgumentException("معرف الجهة الفرعية غير صالح.");
 
             // تحقق هرمي: يجب أن تكون الجهة الفرعية تابعة لنفس الجهة العليا

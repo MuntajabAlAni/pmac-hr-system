@@ -1,8 +1,8 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.Employees
+namespace Domain.Entities.Employees
 {
     public class Employee : Base<Guid>
     {
@@ -219,10 +219,10 @@ namespace HR_PMAC_BACK.Domain.Entities.Employees
     }
 }
 //using System;
-//using HR_PMAC_BACK.Domain.Common.BaseEntities;
-//using HR_PMAC_BACK.Domain.Entities.Employees.Enums;
+//using Domain.Common.BaseEntities;
+//using Domain.Entities.Employees.Enums;
 
-//namespace HR_PMAC_BACK.Domain.Entities.Employees
+//namespace Domain.Entities.Employees
 //{
 //    public class Employee : Base<Guid>
 //    {

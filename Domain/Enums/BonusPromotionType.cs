@@ -1,4 +1,4 @@
-﻿namespace HR_PMAC_BACK.Domain.Entities.BonusPromotions.Enums
+﻿namespace Domain.Entities.BonusPromotions.Enums
 {
     /// <summary>
     /// يمثل نوع الإجراء الوظيفي

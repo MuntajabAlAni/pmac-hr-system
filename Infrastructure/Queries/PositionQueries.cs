@@ -3,29 +3,30 @@ namespace Infrastructure.Queries;
 public class PositionQueries
 {
     public const string FindAllQuery = """
-        SELECT Position_Id AS Id, Position_Name AS Title
+        SELECT Id, PositionName, PositionLevel
         FROM Position
-        ORDER BY Position_Name
+        ORDER BY PositionName
         """;
 
     public const string FindByIdQuery = """
-        SELECT Position_Id AS Id, Position_Name AS Title
+        SELECT Id, PositionName, PositionLevel
         FROM Position
-        WHERE Position_Id = @Id
+        WHERE Id = @Id
         """;
 
     public const string InsertQuery = """
-        INSERT INTO Position (Position_Id, Position_Name)
-        VALUES (@Id, @Title)
+        INSERT INTO Position (Id, PositionName, PositionLevel)
+        VALUES (@Id, @PositionName, @PositionLevel)
         """;
 
     public const string UpdateQuery = """
         UPDATE Position SET
-            Position_Name = @Title
-        WHERE Position_Id = @Id
+            PositionName = @PositionName,
+            PositionLevel = @PositionLevel
+        WHERE Id = @Id
         """;
 
     public const string DeleteQuery = """
-        DELETE FROM Position WHERE Position_Id = @Id
+        DELETE FROM Position WHERE Id = @Id
         """;
 }

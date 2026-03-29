@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Vacations
+namespace Domain.Entities.Vacations
 {
     /// <summary>
     /// يمثل إجازة ممنوحة لموظف
     /// </summary>
-    public class EmployeeVacation : Base<int>
+    public class EmployeeVacation : Base<Guid>
     {
         // =====================================================
         // العلاقات
@@ -16,7 +16,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Vacations
         public Guid EmployeeId { get; private set; }
         public Employee Employee { get; private set; }
 
-        public int VacationTypeId { get; private set; }
+        public Guid VacationTypeId { get; private set; }
         public VacationType VacationType { get; private set; }
 
         // =====================================================
@@ -87,7 +87,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Vacations
 
         public EmployeeVacation(
             Guid employeeId,
-            int vacationTypeId,
+            Guid vacationTypeId,
             string orderNumber,
             string vacationFilePath,
             Guid userGuid)

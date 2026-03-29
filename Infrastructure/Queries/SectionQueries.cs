@@ -3,41 +3,40 @@ namespace Infrastructure.Queries;
 public class SectionQueries
 {
     public const string FindAllQuery = """
-        SELECT S.Section_Id AS Id, S.Section_Name AS Name, S.Department_Id AS DepartmentId,
-               D.Deptartment_Name AS DepartmentName, D.Directorate_Id AS DirectorateId
+        SELECT S.Id, S.Name, S.HighAuthorityId, S.SubHighAuthorityId,
+               S.DirectorateId, S.SubDirectorateId, S.DepartmentId
         FROM Section S
-        LEFT JOIN Department D ON S.Department_Id = D.Deptartment_Id
-        ORDER BY S.Section_Name
+        WHERE S.IsDeleted = 0
+        ORDER BY S.Name
         """;
 
     public const string FindByIdQuery = """
-        SELECT S.Section_Id AS Id, S.Section_Name AS Name, S.Department_Id AS DepartmentId,
-               D.Deptartment_Name AS DepartmentName, D.Directorate_Id AS DirectorateId
+        SELECT S.Id, S.Name, S.HighAuthorityId, S.SubHighAuthorityId,
+               S.DirectorateId, S.SubDirectorateId, S.DepartmentId
         FROM Section S
-        LEFT JOIN Department D ON S.Department_Id = D.Deptartment_Id
-        WHERE S.Section_Id = @Id
+        WHERE S.Id = @Id
         """;
 
     public const string FindByDepartmentIdQuery = """
-        SELECT Section_Id AS Id, Section_Name AS Name, Department_Id AS DepartmentId
+        SELECT Id, Name, HighAuthorityId, SubHighAuthorityId,
+               DirectorateId, SubDirectorateId, DepartmentId
         FROM Section
-        WHERE Department_Id = @DepartmentId
-        ORDER BY Section_Name
+        WHERE DepartmentId = @DepartmentId AND IsDeleted = 0
+        ORDER BY Name
         """;
 
     public const string InsertQuery = """
-        INSERT INTO Section (Section_Id, Section_Name, Department_Id)
-        VALUES (@Section_Id, @Section_Name, @Department_Id)
+        INSERT INTO Section (Id, Name, HighAuthorityId, SubHighAuthorityId, DirectorateId, SubDirectorateId, DepartmentId)
+        VALUES (@Id, @Name, @HighAuthorityId, @SubHighAuthorityId, @DirectorateId, @SubDirectorateId, @DepartmentId)
         """;
 
     public const string UpdateQuery = """
         UPDATE Section SET
-            Section_Name = @Section_Name,
-            Department_Id = @Department_Id
-        WHERE Section_Id = @Section_Id
+            Name = @Name
+        WHERE Id = @Id
         """;
 
     public const string DeleteQuery = """
-        DELETE FROM Section WHERE Section_Id = @Id
+        UPDATE Section SET IsDeleted = 1 WHERE Id = @Id
         """;
 }

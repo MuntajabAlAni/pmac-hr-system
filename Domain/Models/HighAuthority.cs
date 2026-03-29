@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Organizations.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Organizations.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.Organizations
+namespace Domain.Entities.Organizations
 {
     // الجهات العليا (وزارة / هيئة / مجلس / أمانة عامة)
-    public class HighAuthority : Base<int>
+    public class HighAuthority : Base<Guid>
     {
         public string AuthorityName { get; private set; }
 
@@ -53,13 +53,13 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
 }
 
 //using System;
-//using HR_PMAC_BACK.Domain.Common.BaseEntities;
-//using HR_PMAC_BACK.Domain.Entities.Organizations.Enums;
+//using Domain.Common.BaseEntities;
+//using Domain.Entities.Organizations.Enums;
 
-//namespace HR_PMAC_BACK.Domain.Entities.Organizations
+//namespace Domain.Entities.Organizations
 //{
 //    // الجهات العليا (وزارة / هيئة / مجلس / أمانة عامة)
-//    public class HighAuthority : Base<int>
+//    public class HighAuthority : Base<Guid>
 //    {
 //        public string AuthorityName { get; private set; }
 //        //Enum

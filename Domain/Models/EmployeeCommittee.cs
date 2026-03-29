@@ -1,8 +1,8 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Committees
+namespace Domain.Entities.Committees
 {
     /// <summary>
     /// يمثل اشتراك موظف في لجنة
@@ -10,7 +10,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Committees
     /// ويحتوي على رقم وتاريخ الكتاب الرسمي
     /// ولا يمكن إنشاء لجنة بدون ملف رسمي مرفق
     /// </summary>
-    public class EmployeeCommittee : Base<int>
+    public class EmployeeCommittee : Base<Guid>
     {
         // =====================================================
         // العلاقات
@@ -19,7 +19,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Committees
         public Guid EmployeeId { get; private set; }
         public Employee Employee { get; private set; }
 
-        public int CommitteeTypeId { get; private set; }
+        public Guid CommitteeTypeId { get; private set; }
         public CommitteeType CommitteeType { get; private set; }
 
         // =====================================================
@@ -82,7 +82,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Committees
 
         public EmployeeCommittee(
             Guid employeeId,
-            int committeeTypeId,
+            Guid committeeTypeId,
             string bookNumber,
             DateTime bookDate,
             string durationType,
@@ -92,7 +92,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Committees
             if (employeeId == Guid.Empty)
                 throw new ArgumentException("رقم الموظف غير صالح.");
 
-            if (committeeTypeId <= 0)
+            if (committeeTypeId == Guid.Empty)
                 throw new ArgumentException("نوع اللجنة غير صالح.");
 
             if (string.IsNullOrWhiteSpace(bookNumber))

@@ -1,11 +1,11 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Organizations
+namespace Domain.Entities.Organizations
 {
     // الجهات الفرعية التابعة للجهة العليا
     //مثل الجامعات او الهيئة ضمن المكتب
-    public class SubHighAuthority : Base<int>
+    public class SubHighAuthority : Base<Guid>
     {
         public string SubAuthorityName { get; private set; }
 
@@ -13,7 +13,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // Foreign Key
         // =============================
 
-        public int HighAuthorityId { get; private set; }
+        public Guid HighAuthorityId { get; private set; }
 
         // Navigation
         public HighAuthority HighAuthority { get; private set; }
@@ -22,13 +22,13 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
 
         public SubHighAuthority(
             string name,
-            int highAuthorityId,
+            Guid highAuthorityId,
             Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("Sub authority name cannot be empty.");
 
-            if (highAuthorityId <= 0)
+            if (highAuthorityId == Guid.Empty)
                 throw new ArgumentException("Invalid HighAuthorityId.");
 
             SubAuthorityName = name.Trim();

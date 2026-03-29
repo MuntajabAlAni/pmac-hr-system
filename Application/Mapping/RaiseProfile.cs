@@ -19,8 +19,8 @@ public class RaiseProfile : Profile
         CreateMap<Raise, RaiseDto>()
             .ForMember(d => d.RaiseTypeName, opt => opt.MapFrom(s => s.RaiseType != null ? s.RaiseType.Name : null))
             .ForMember(d => d.EmployeeName, opt => opt.MapFrom(s => s.Employee != null ? s.Employee.FirstName + " " + s.Employee.LastName : null))
-            .ForMember(d => d.OldGradeName, opt => opt.MapFrom(s => s.OldGrade != null ? s.OldGrade.Name : null))
-            .ForMember(d => d.NewGradeName, opt => opt.MapFrom(s => s.NewGrade != null ? s.NewGrade.Name : null))
+            .ForMember(d => d.OldGradeName, opt => opt.MapFrom(s => s.OldGrade != null ? s.OldGrade.GradeName : null))
+            .ForMember(d => d.NewGradeName, opt => opt.MapFrom(s => s.NewGrade != null ? s.NewGrade.GradeName : null))
             .ForMember(d => d.OldStepName, opt => opt.MapFrom(s => s.OldStep != null ? s.OldStep.Name : null))
             .ForMember(d => d.NewStepName, opt => opt.MapFrom(s => s.NewStep != null ? s.NewStep.Name : null));
 

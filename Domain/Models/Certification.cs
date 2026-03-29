@@ -1,14 +1,14 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Certifications.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Certifications.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.Certifications
+namespace Domain.Entities.Certifications
 {
     /// <summary>
     /// Represents an academic or professional certification.
     /// تمثل شهادة أكاديمية أو مهنية داخل النظام
     /// </summary>
-    public class Certification : Base<int>
+    public class Certification : Base<Guid>
     {
         // =====================================================
         // Core Properties

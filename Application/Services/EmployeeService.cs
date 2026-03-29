@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.Employees;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -39,28 +39,51 @@ public class EmployeeService(IRepositoryManager repositoryManager, IMapper mappe
         return (employeeDtos, count);
     }
 
-    public async Task<Guid> Create(EmployeeForCreationDto employeeDto)
+    public async Task<Guid> Create(EmployeeForCreationDto dto)
     {
-        var employee = mapper.Map<Employee>(employeeDto);
-
-        // Set defaults
-        employee.IsSelected = false;
-        employee.IsSelectedThanks = false;
-        employee.IsSelectedLetters = false;
+        // Use domain constructor (DDD)
+        var employee = new Employee(
+            employeeNumber: dto.EmployeeNumber,
+            archiveNumber: dto.ArchiveNumber,
+            firstName: dto.FirstName,
+            gender: dto.Gender,
+            religion: dto.Religion,
+            ethnicity: dto.Ethnicity,
+            hireDate: dto.HireDate,
+            userGuid: Guid.Empty // System user
+        );
 
         var id = await repositoryManager.Employee.Create(employee);
         return id;
     }
 
-    public async Task Update(Guid id, EmployeeForUpdateDto employeeDto)
+    public async Task Update(Guid id, EmployeeForUpdateDto dto)
     {
         var employee = await repositoryManager.Employee.FindById(id);
 
         if (employee is null)
             throw new EntityNotFoundException("Employee", "Id", id);
 
-        mapper.Map(employeeDto, employee);
-        employee.Id = id;
+        // Use domain methods for updates
+        if (dto.HireDate.HasValue)
+        {
+            employee.UpdateHireInfo(
+                dto.HireDate.Value,
+                dto.HireBookNumber,
+                dto.HireBookDate,
+                dto.HireBookFilePath,
+                dto.StartWorkDate,
+                dto.StartWorkBookDate,
+                dto.StartWorkBookFilePath,
+                Guid.Empty
+            );
+        }
+
+        if (dto.SpecialEmpStatus.HasValue)
+            employee.UpdateSpecialEmpStatus(dto.SpecialEmpStatus.Value, Guid.Empty);
+
+        if (dto.Status.HasValue)
+            employee.ChangeStatus(dto.Status.Value, Guid.Empty);
 
         await repositoryManager.Employee.Update(employee);
     }

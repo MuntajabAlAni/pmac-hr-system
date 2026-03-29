@@ -1,8 +1,8 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.EmploymentStructure.Enums;
+using Domain.Common.BaseEntities;
+using Domain.Entities.EmploymentStructure.Enums;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
+namespace Domain.Entities.EmploymentStructure
 {
     /// <summary>
     /// يمثل العنوان الوظيفي
@@ -22,7 +22,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
         /// <summary>
         /// معرف الدرجة الوظيفية (إجباري)
         /// </summary>
-        public int GradeId { get; private set; }
+        public Guid GradeId { get; private set; }
 
         /// <summary>
         /// Navigation Property للدرجة
@@ -46,14 +46,14 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
 
         public JobTitle(
             string title,
-            int gradeId,
+            Guid gradeId,
             JobTitleType jobTitleType,
             Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("اسم العنوان الوظيفي لا يمكن أن يكون فارغاً.");
 
-            if (gradeId <= 0)
+            if (gradeId == Guid.Empty)
                 throw new ArgumentException("معرف الدرجة غير صالح.");
 
             if (!Enum.IsDefined(typeof(JobTitleType), jobTitleType))
@@ -73,14 +73,14 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
 
         public void Update(
             string title,
-            int gradeId,
+            Guid gradeId,
             JobTitleType jobTitleType,
             Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("اسم العنوان الوظيفي لا يمكن أن يكون فارغاً.");
 
-            if (gradeId <= 0)
+            if (gradeId == Guid.Empty)
                 throw new ArgumentException("معرف الدرجة غير صالح.");
 
             if (!Enum.IsDefined(typeof(JobTitleType), jobTitleType))
@@ -97,9 +97,9 @@ namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
         // تغيير الدرجة فقط
         // ======================================================
 
-        public void ChangeGrade(int gradeId, Guid userGuid)
+        public void ChangeGrade(Guid gradeId, Guid userGuid)
         {
-            if (gradeId <= 0)
+            if (gradeId == Guid.Empty)
                 throw new ArgumentException("معرف الدرجة غير صالح.");
 
             GradeId = gradeId;

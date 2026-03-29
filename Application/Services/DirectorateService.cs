@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.Organizations;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -24,20 +24,27 @@ public class DirectorateService(IRepositoryManager repositoryManager, IMapper ma
         return mapper.Map<DirectorateDto>(directorate);
     }
 
-    public async Task<Guid> Create(DirectorateForCreationDto directorateDto)
+    public async Task<Guid> Create(DirectorateForCreationDto dto)
     {
-        var directorate = mapper.Map<Directorate>(directorateDto);
+        // Use domain constructor (DDD)
+        var directorate = new Directorate(
+            name: dto.Name,
+            highAuthorityId: dto.HighAuthorityId,
+            subHighAuthorityId: dto.SubHighAuthorityId,
+            userGuid: Guid.Empty
+        );
+
         return await repositoryManager.Directorate.Create(directorate);
     }
 
-    public async Task Update(Guid id, DirectorateForUpdateDto directorateDto)
+    public async Task Update(Guid id, DirectorateForUpdateDto dto)
     {
         var directorate = await repositoryManager.Directorate.FindById(id);
         if (directorate is null)
             throw new EntityNotFoundException("Directorate", "Id", id);
 
-        mapper.Map(directorateDto, directorate);
-        directorate.Id = id;
+        // Use domain Update method
+        directorate.Update(dto.Name, Guid.Empty);
         await repositoryManager.Directorate.Update(directorate);
     }
 

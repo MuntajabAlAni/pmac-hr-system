@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.EmploymentStructure;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 
@@ -25,14 +25,24 @@ public class GradeRepository(DapperContext context) : IGradeRepository
             grade.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(GradeQueries.InsertQuery, grade);
+        await connection.ExecuteAsync(GradeQueries.InsertQuery, new
+        {
+            grade.Id,
+            grade.GradeName,
+            grade.GradeLevel
+        });
         return grade.Id;
     }
 
     public async Task Update(Grade grade)
     {
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(GradeQueries.UpdateQuery, grade);
+        await connection.ExecuteAsync(GradeQueries.UpdateQuery, new
+        {
+            grade.Id,
+            grade.GradeName,
+            grade.GradeLevel
+        });
     }
 
     public async Task Delete(Guid id)

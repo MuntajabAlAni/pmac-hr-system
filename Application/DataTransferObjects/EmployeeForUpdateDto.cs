@@ -1,16 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using Domain.Entities.Employees.Enums;
 
 namespace Application.DataTransferObjects;
 
 public class EmployeeForUpdateDto
 {
-    [Required(ErrorMessage = "Full name is required")]
-    [MaxLength(500)]
-    public string? FullName { get; set; }
-
-    [Required(ErrorMessage = "First name is required")]
     [MaxLength(100)]
-    public string FirstName { get; set; } = null!;
+    public string? FirstName { get; set; }
 
     [MaxLength(100)]
     public string? SecondName { get; set; }
@@ -24,14 +20,30 @@ public class EmployeeForUpdateDto
     [MaxLength(100)]
     public string? LastName { get; set; }
 
+    [MaxLength(100)]
+    public string? SureName { get; set; }
+
     [MaxLength(200)]
     public string? MotherName { get; set; }
 
-    public Guid? GenderId { get; set; }
+    [MaxLength(500)]
+    public string? FullNameEnglish { get; set; }
 
+    public Gender? Gender { get; set; }
+    public Religion? Religion { get; set; }
+    public Ethnicity? Ethnicity { get; set; }
+    public BloodGroup? BloodGroup { get; set; }
     public DateTime? BirthDate { get; set; }
+    public MaritalStatus? MaritalStatus { get; set; }
 
-    public Guid? MaritalStatusId { get; set; }
+    // Hire Info
+    public DateTime? HireDate { get; set; }
+    public string? HireBookNumber { get; set; }
+    public DateTime? HireBookDate { get; set; }
+    public string? HireBookFilePath { get; set; }
+    public DateTime? StartWorkDate { get; set; }
+    public DateTime? StartWorkBookDate { get; set; }
+    public string? StartWorkBookFilePath { get; set; }
 
     [Phone]
     [MaxLength(50)]
@@ -41,37 +53,6 @@ public class EmployeeForUpdateDto
     [MaxLength(250)]
     public string? Email { get; set; }
 
-    public string? FullAddress { get; set; }
-
-    [MaxLength(50)]
-    public string? CivilIdNumber { get; set; }
-
-    [MaxLength(50)]
-    public string? NationalCardNumber { get; set; }
-
-    [MaxLength(50)]
-    public string? RecordNumber { get; set; }
-
-    [MaxLength(50)]
-    public string? PageNumber { get; set; }
-
-    [MaxLength(200)]
-    public string? Publisher { get; set; }
-
-    public DateTime? DateOfIssuance { get; set; }
-
-    public DateTime? NationalCardIssuanceDate { get; set; }
-
-    [MaxLength(100)]
-    public string? CertificateNumber { get; set; }
-
-    [MaxLength(100)]
-    public string? PocketNumber { get; set; }
-
-    [MaxLength(200)]
-    public string? CertificatePublisher { get; set; }
-
-    public DateTime? CertificateIssuanceDate { get; set; }
-
-    public int Military { get; set; } = 0;
+    public SpecialEmpStatus? SpecialEmpStatus { get; set; }
+    public EmployeeStatus? Status { get; set; }
 }

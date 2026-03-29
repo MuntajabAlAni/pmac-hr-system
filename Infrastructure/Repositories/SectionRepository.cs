@@ -1,5 +1,5 @@
 using Dapper;
-using Domain.Models;
+using Domain.Entities.Organizations;
 using Domain.Interfaces;
 using Infrastructure.Queries;
 
@@ -31,14 +31,27 @@ public class SectionRepository(DapperContext context) : ISectionRepository
             section.Id = Guid.CreateVersion7();
 
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(SectionQueries.InsertQuery, section);
+        await connection.ExecuteAsync(SectionQueries.InsertQuery, new
+        {
+            section.Id,
+            section.Name,
+            section.HighAuthorityId,
+            section.SubHighAuthorityId,
+            section.DirectorateId,
+            section.SubDirectorateId,
+            section.DepartmentId
+        });
         return section.Id;
     }
 
     public async Task Update(Section section)
     {
         using var connection = context.CreateConnection();
-        await connection.ExecuteAsync(SectionQueries.UpdateQuery, section);
+        await connection.ExecuteAsync(SectionQueries.UpdateQuery, new
+        {
+            section.Id,
+            section.Name
+        });
     }
 
     public async Task Delete(Guid id)

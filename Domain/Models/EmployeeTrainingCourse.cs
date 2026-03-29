@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Trainings
+namespace Domain.Entities.Trainings
 {
     /// <summary>
     /// يمثل دورة تدريبية شارك بها الموظف
     /// </summary>
-    public class EmployeeTrainingCourse : Base<int>
+    public class EmployeeTrainingCourse : Base<Guid>
     {
         // =====================================================
         // العلاقات

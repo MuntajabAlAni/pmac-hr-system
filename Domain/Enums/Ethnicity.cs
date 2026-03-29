@@ -1,5 +1,5 @@
 ﻿//القومية
-namespace HR_PMAC_BACK.Domain.Entities.Employees.Enums
+namespace Domain.Entities.Employees.Enums
 {
     public enum Ethnicity
     {

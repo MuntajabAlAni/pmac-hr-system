@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Rewards
+namespace Domain.Entities.Rewards
 {
     /// <summary>
     /// يمثل مكافأة مالية ممنوحة لموظف
     /// </summary>
-    public class EmployeeReward : Base<int>
+    public class EmployeeReward : Base<Guid>
     {
         // =====================================================
         // العلاقات

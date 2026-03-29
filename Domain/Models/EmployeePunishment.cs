@@ -1,13 +1,13 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Punishments
+namespace Domain.Entities.Punishments
 {
     /// <summary>
     /// يمثل عقوبة ممنوحة لموظف
     /// </summary>
-    public class EmployeePunishment : Base<int>
+    public class EmployeePunishment : Base<Guid>
     {
         // =====================================================
         // العلاقات
@@ -22,7 +22,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Punishments
         /// <summary>
         /// نوع العقوبة
         /// </summary>
-        public int PunishmentTypeId { get; private set; }
+        public Guid PunishmentTypeId { get; private set; }
         public PunishmentType PunishmentType { get; private set; }
 
         // =====================================================
@@ -77,7 +77,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Punishments
 
         public EmployeePunishment(
             Guid employeeId,
-            int punishmentTypeId,
+            Guid punishmentTypeId,
             string issuer,
             string orderNumber,
             int deductedDaysSnapshot,

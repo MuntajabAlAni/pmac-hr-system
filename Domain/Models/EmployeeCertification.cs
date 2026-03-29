@@ -1,15 +1,15 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
-using HR_PMAC_BACK.Domain.Entities.Certifications;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
+using Domain.Entities.Certifications;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmployeeCertifications
+namespace Domain.Entities.EmployeeCertifications
 {
     /// <summary>
     /// يمثل شهادة تخص موظف معين داخل النظام
     /// (كيان رابط يحتوي بيانات أكاديمية وإدارية إضافية)
     /// </summary>
-    public class EmployeeCertification : Base<int>
+    public class EmployeeCertification : Base<Guid>
     {
         // =====================================================
         // العلاقات (Foreign Keys)
@@ -28,7 +28,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmployeeCertifications
         /// <summary>
         /// رقم نوع الشهادة (من جدول الشهادات العام)
         /// </summary>
-        public int CertificationId { get; private set; }
+        public Guid CertificationId { get; private set; }
 
         /// <summary>
         /// كيان نوع الشهادة
@@ -144,7 +144,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmployeeCertifications
 
         public EmployeeCertification(
             Guid employeeId,
-            int certificationId,
+            Guid certificationId,
             string institutionName,
             string documentNumber,
             string originalCertificateFilePath,
@@ -155,7 +155,7 @@ namespace HR_PMAC_BACK.Domain.Entities.EmployeeCertifications
             if (employeeId == Guid.Empty)
                 throw new ArgumentException("رقم الموظف غير صالح.");
 
-            if (certificationId <= 0)
+            if (certificationId == Guid.Empty)
                 throw new ArgumentException("نوع الشهادة غير صالح.");
 
             if (string.IsNullOrWhiteSpace(institutionName))

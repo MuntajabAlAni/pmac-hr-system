@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.EmploymentStructure;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -24,20 +24,27 @@ public class JobTitleService(IRepositoryManager repositoryManager, IMapper mappe
         return mapper.Map<JobTitleDto>(jobTitle);
     }
 
-    public async Task<Guid> Create(JobTitleForCreationDto jobTitleDto)
+    public async Task<Guid> Create(JobTitleForCreationDto dto)
     {
-        var jobTitle = mapper.Map<JobTitle>(jobTitleDto);
+        // Use domain constructor (DDD)
+        var jobTitle = new JobTitle(
+            title: dto.Title,
+            gradeId: dto.GradeId,
+            jobTitleType: dto.JobTitleType,
+            userGuid: Guid.Empty
+        );
+
         return await repositoryManager.JobTitle.Create(jobTitle);
     }
 
-    public async Task Update(Guid id, JobTitleForUpdateDto jobTitleDto)
+    public async Task Update(Guid id, JobTitleForUpdateDto dto)
     {
         var jobTitle = await repositoryManager.JobTitle.FindById(id);
         if (jobTitle is null)
             throw new EntityNotFoundException("JobTitle", "Id", id);
 
-        mapper.Map(jobTitleDto, jobTitle);
-        jobTitle.Id = id;
+        // Use domain Update method
+        jobTitle.Update(dto.Title, dto.GradeId, dto.JobTitleType, Guid.Empty);
         await repositoryManager.JobTitle.Update(jobTitle);
     }
 

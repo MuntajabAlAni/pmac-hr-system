@@ -1,14 +1,14 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Organizations
+namespace Domain.Entities.Organizations
 {
     /// <summary>
     /// تمثل الوحدة داخل الهيكل الإداري
     /// ترتبط بالجهة العليا بشكل إجباري
     /// وبقية المستويات اختيارية مع تحقق هرمي كامل
     /// </summary>
-    public class Unit : Base<int>
+    public class Unit : Base<Guid>
     {
         /// <summary>
         /// اسم الوحدة
@@ -22,7 +22,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         /// <summary>
         /// معرف الجهة العليا (إجباري دائماً)
         /// </summary>
-        public int HighAuthorityId { get; private set; }
+        public Guid HighAuthorityId { get; private set; }
 
         public HighAuthority HighAuthority { get; private set; }
 
@@ -30,19 +30,19 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // العلاقات الاختيارية
         // ======================================================
 
-        public int? SubHighAuthorityId { get; private set; }
+        public Guid? SubHighAuthorityId { get; private set; }
         public SubHighAuthority? SubHighAuthority { get; private set; }
 
-        public int? DirectorateId { get; private set; }
+        public Guid? DirectorateId { get; private set; }
         public Directorate? Directorate { get; private set; }
 
-        public int? SubDirectorateId { get; private set; }
+        public Guid? SubDirectorateId { get; private set; }
         public SubDirectorate? SubDirectorate { get; private set; }
 
-        public int? DepartmentId { get; private set; }
+        public Guid? DepartmentId { get; private set; }
         public Department? Department { get; private set; }
 
-        public int? SectionId { get; private set; }
+        public Guid? SectionId { get; private set; }
         public Section? Section { get; private set; }
 
         private Unit() { }
@@ -53,18 +53,18 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
 
         public Unit(
             string name,
-            int highAuthorityId,
-            int? subHighAuthorityId,
-            int? directorateId,
-            int? subDirectorateId,
-            int? departmentId,
-            int? sectionId,
+            Guid highAuthorityId,
+            Guid? subHighAuthorityId,
+            Guid? directorateId,
+            Guid? subDirectorateId,
+            Guid? departmentId,
+            Guid? sectionId,
             Guid userGuid)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentException("اسم الوحدة لا يمكن أن يكون فارغاً.");
 
-            if (highAuthorityId <= 0)
+            if (highAuthorityId == Guid.Empty)
                 throw new ArgumentException("يجب تحديد الجهة العليا.");
 
             Name = name.Trim();
@@ -95,9 +95,9 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // تغيير الجهة العليا
         // ======================================================
 
-        public void ChangeHighAuthority(int highAuthorityId, Guid userGuid)
+        public void ChangeHighAuthority(Guid highAuthorityId, Guid userGuid)
         {
-            if (highAuthorityId <= 0)
+            if (highAuthorityId == Guid.Empty)
                 throw new ArgumentException("معرف الجهة العليا غير صالح.");
 
             HighAuthorityId = highAuthorityId;
@@ -117,11 +117,11 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignSubHighAuthority(
-            int id,
-            int parentHighAuthorityId,
+            Guid id,
+            Guid parentHighAuthorityId,
             Guid userGuid)
         {
-            if (id <= 0)
+            if (id == Guid.Empty)
                 throw new ArgumentException("معرف الجهة الفرعية غير صالح.");
 
             if (parentHighAuthorityId != HighAuthorityId)
@@ -137,11 +137,11 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignDirectorate(
-            int id,
-            int parentHighAuthorityId,
+            Guid id,
+            Guid parentHighAuthorityId,
             Guid userGuid)
         {
-            if (id <= 0)
+            if (id == Guid.Empty)
                 throw new ArgumentException("معرف الدائرة غير صالح.");
 
             if (parentHighAuthorityId != HighAuthorityId)
@@ -157,11 +157,11 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignSubDirectorate(
-            int id,
-            int parentHighAuthorityId,
+            Guid id,
+            Guid parentHighAuthorityId,
             Guid userGuid)
         {
-            if (id <= 0)
+            if (id == Guid.Empty)
                 throw new ArgumentException("معرف المديرية غير صالح.");
 
             if (parentHighAuthorityId != HighAuthorityId)
@@ -177,11 +177,11 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignDepartment(
-            int id,
-            int parentHighAuthorityId,
+            Guid id,
+            Guid parentHighAuthorityId,
             Guid userGuid)
         {
-            if (id <= 0)
+            if (id == Guid.Empty)
                 throw new ArgumentException("معرف القسم غير صالح.");
 
             if (parentHighAuthorityId != HighAuthorityId)
@@ -197,11 +197,11 @@ namespace HR_PMAC_BACK.Domain.Entities.Organizations
         // ======================================================
 
         public void AssignSection(
-            int id,
-            int parentHighAuthorityId,
+            Guid id,
+            Guid parentHighAuthorityId,
             Guid userGuid)
         {
-            if (id <= 0)
+            if (id == Guid.Empty)
                 throw new ArgumentException("معرف الشعبة غير صالح.");
 
             if (parentHighAuthorityId != HighAuthorityId)

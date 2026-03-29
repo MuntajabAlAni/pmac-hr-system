@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentHistory
+namespace Domain.Entities.EmploymentHistory
 {
     /// <summary>
     /// يمثل نوع الخدمة المضافة للموظف
     /// مثل: خدمة عسكرية، خدمة عقد سابق، خدمة فصل سياسي...
     /// </summary>
-    public class AddedServiceType : Base<int>
+    public class AddedServiceType : Base<Guid>
     {
         /// <summary>
         /// اسم نوع الخدمة المضافة

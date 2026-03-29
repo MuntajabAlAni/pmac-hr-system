@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.Vacations;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -24,20 +24,36 @@ public class VacationTypeService(IRepositoryManager repositoryManager, IMapper m
         return mapper.Map<VacationTypeDto>(vacationType);
     }
 
-    public async Task<Guid> Create(VacationTypeForCreationDto vacationTypeDto)
+    public async Task<Guid> Create(VacationTypeForCreationDto dto)
     {
-        var vacationType = mapper.Map<VacationType>(vacationTypeDto);
+        // Use domain constructor (DDD)
+        var vacationType = new VacationType(
+            name: dto.Name,
+            isConditional: dto.IsConditional,
+            isCountedInBalance: dto.IsCountedInBalance,
+            bonusAffect: dto.BonusAffect,
+            promotionAffect: dto.PromotionAffect,
+            userGuid: Guid.Empty
+        );
+
         return await repositoryManager.VacationType.Create(vacationType);
     }
 
-    public async Task Update(Guid id, VacationTypeForUpdateDto vacationTypeDto)
+    public async Task Update(Guid id, VacationTypeForUpdateDto dto)
     {
         var vacationType = await repositoryManager.VacationType.FindById(id);
         if (vacationType is null)
             throw new EntityNotFoundException("VacationType", "Id", id);
 
-        mapper.Map(vacationTypeDto, vacationType);
-        vacationType.Id = id;
+        // Use domain Update method
+        vacationType.Update(
+            dto.Name,
+            dto.IsConditional,
+            dto.IsCountedInBalance,
+            dto.BonusAffect,
+            dto.PromotionAffect,
+            Guid.Empty
+        );
         await repositoryManager.VacationType.Update(vacationType);
     }
 

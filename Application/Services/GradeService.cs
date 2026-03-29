@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Exceptions;
-using Domain.Models;
+using Domain.Entities.EmploymentStructure;
 using Domain.Interfaces;
 using Application.Interfaces;
 using Application.DataTransferObjects;
@@ -24,20 +24,26 @@ public class GradeService(IRepositoryManager repositoryManager, IMapper mapper) 
         return mapper.Map<GradeDto>(grade);
     }
 
-    public async Task<Guid> Create(GradeForCreationDto gradeDto)
+    public async Task<Guid> Create(GradeForCreationDto dto)
     {
-        var grade = mapper.Map<Grade>(gradeDto);
+        // Use domain constructor (DDD)
+        var grade = new Grade(
+            gradeName: dto.GradeName,
+            gradeLevel: dto.GradeLevel,
+            userGuid: Guid.Empty
+        );
+
         return await repositoryManager.Grade.Create(grade);
     }
 
-    public async Task Update(Guid id, GradeForUpdateDto gradeDto)
+    public async Task Update(Guid id, GradeForUpdateDto dto)
     {
         var grade = await repositoryManager.Grade.FindById(id);
         if (grade is null)
             throw new EntityNotFoundException("Grade", "Id", id);
 
-        mapper.Map(gradeDto, grade);
-        grade.Id = id;
+        // Use domain Update method
+        grade.Update(dto.GradeName, dto.GradeLevel, Guid.Empty);
         await repositoryManager.Grade.Update(grade);
     }
 

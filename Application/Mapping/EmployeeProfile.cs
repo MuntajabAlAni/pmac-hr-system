@@ -1,5 +1,5 @@
 using AutoMapper;
-using Domain.Models;
+using Domain.Entities.Employees;
 using Application.DataTransferObjects;
 
 namespace Application.Mapping;
@@ -10,7 +10,6 @@ public class EmployeeProfile : Profile
     {
         CreateMap<Employee, EmployeeDto>();
         CreateMap<Employee, EmployeeDetailsDto>();
-        CreateMap<EmployeeForCreationDto, Employee>();
-        CreateMap<EmployeeForUpdateDto, Employee>();
+        // No DTO → Entity maps: entity construction is manual (DDD)
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
-using HR_PMAC_BACK.Domain.Entities.Employees;
+using Domain.Common.BaseEntities;
+using Domain.Entities.Employees;
 
-namespace HR_PMAC_BACK.Domain.Entities.Career
+namespace Domain.Entities.Career
 {
     /// <summary>
     /// يمثل السيرة الوظيفية للموظف
@@ -10,7 +10,7 @@ namespace HR_PMAC_BACK.Domain.Entities.Career
     /// يسجل كل حركة أو تغيير تنظيمي أو وظيفي
     /// Snapshot كامل للهيكل الوظيفي وقت الحركة
     /// </summary>
-    public class Career : Base<int>
+    public class Career : Base<Guid>
     {
         // =====================================================
         // العلاقة مع الموظف

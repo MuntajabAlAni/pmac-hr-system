@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Thanks
+namespace Domain.Entities.Thanks
 {
     /// <summary>
     /// يمثل نوع كتاب الشكر
     /// مثل: شكر وزاري، شكر من رئيس الهيئة، شكر مدير عام...
     /// </summary>
-    public class ThanksType : Base<int>
+    public class ThanksType : Base<Guid>
     {
         /// <summary>
         /// اسم نوع كتاب الشكر

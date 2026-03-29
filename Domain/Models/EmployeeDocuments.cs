@@ -1,7 +1,7 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Employees
+namespace Domain.Entities.Employees
 {
     /// <summary>
     /// يمثل مستمسكات الموظف (منفصلة عن جدول الموظف)

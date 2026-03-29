@@ -4,45 +4,38 @@ public class VacationTypeQueries
 {
     public const string FindAllQuery = """
         SELECT 
-            Vacation_Type_Id AS Id,
-            Vacation_Type_Name AS Name,
-            Is_Condition AS IsCondition,
-            Rsed,
-            RaiseAffected
-        FROM Vacation_Type
-        ORDER BY Vacation_Type_Name
+            Id, Name, IsConditional, IsCountedInBalance, BonusAffect, PromotionAffect
+        FROM VacationType
+        ORDER BY Name
         """;
 
     public const string FindByIdQuery = """
         SELECT 
-            Vacation_Type_Id AS Id,
-            Vacation_Type_Name AS Name,
-            Is_Condition AS IsCondition,
-            Rsed,
-            RaiseAffected
-        FROM Vacation_Type
-        WHERE Vacation_Type_Id = @Id
+            Id, Name, IsConditional, IsCountedInBalance, BonusAffect, PromotionAffect
+        FROM VacationType
+        WHERE Id = @Id
         """;
 
     public const string InsertQuery = """
-        INSERT INTO Vacation_Type (
-            Vacation_Type_Id, Vacation_Type_Name, Is_Condition, Rsed, RaiseAffected
+        INSERT INTO VacationType (
+            Id, Name, IsConditional, IsCountedInBalance, BonusAffect, PromotionAffect
         )
         VALUES (
-            @Id, @Name, @IsCondition, @Rsed, @RaiseAffected
+            @Id, @Name, @IsConditional, @IsCountedInBalance, @BonusAffect, @PromotionAffect
         )
         """;
 
     public const string UpdateQuery = """
-        UPDATE Vacation_Type SET
-            Vacation_Type_Name = @Name,
-            Is_Condition = @IsCondition,
-            Rsed = @Rsed,
-            RaiseAffected = @RaiseAffected
-        WHERE Vacation_Type_Id = @Id
+        UPDATE VacationType SET
+            Name = @Name,
+            IsConditional = @IsConditional,
+            IsCountedInBalance = @IsCountedInBalance,
+            BonusAffect = @BonusAffect,
+            PromotionAffect = @PromotionAffect
+        WHERE Id = @Id
         """;
 
     public const string DeleteQuery = """
-        DELETE FROM Vacation_Type WHERE Vacation_Type_Id = @Id
+        DELETE FROM VacationType WHERE Id = @Id
         """;
 }

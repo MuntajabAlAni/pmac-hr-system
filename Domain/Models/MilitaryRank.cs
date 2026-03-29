@@ -1,10 +1,10 @@
 ﻿using System;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.EmploymentStructure
+namespace Domain.Entities.EmploymentStructure
 {
     // الرتب العسكرية
-    public class MilitaryRank : Base<int>
+    public class MilitaryRank : Base<Guid>
     {
         public string RankName { get; private set; }
 

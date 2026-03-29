@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using HR_PMAC_BACK.Domain.Common.BaseEntities;
+using Domain.Common.BaseEntities;
 
-namespace HR_PMAC_BACK.Domain.Entities.Vacations
+namespace Domain.Entities.Vacations
 {
     /// <summary>
     /// يمثل نوع الإجازة (اعتيادية، مرضية، أمومة، بدون راتب...)
     /// </summary>
-    public class VacationType : Base<int>
+    public class VacationType : Base<Guid>
     {
         /// <summary>
         /// اسم نوع الإجازة
